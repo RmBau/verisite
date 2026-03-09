@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BuildProof — Real-Time Field Verification for Construction</title>
+<link rel="canonical" href="https://www.getbuildproof.com">
 <meta name="description" content="Know exactly what got built today. BuildProof uses NFC tags to log real-time work verification directly from the field to your dashboard.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -590,23 +591,23 @@
         <div class="field-row">
           <div class="field-group">
             <label class="field-label">First Name</label>
-            <input type="text" class="field-input" id="f-first" placeholder="Russell">
+            <input type="text" class="field-input" id="f-first" placeholder="John">
           </div>
           <div class="field-group">
             <label class="field-label">Last Name</label>
-            <input type="text" class="field-input" id="f-last" placeholder="Baugh">
+            <input type="text" class="field-input" id="f-last" placeholder="Smith">
           </div>
         </div>
 
         <div class="field-group">
           <label class="field-label">Company Name</label>
-          <input type="text" class="field-input" id="f-company" placeholder="Baugh and Company LLC">
+          <input type="text" class="field-input" id="f-company" placeholder="ABC Company, INC">
         </div>
 
         <div class="field-row">
           <div class="field-group">
             <label class="field-label">Phone</label>
-            <input type="tel" class="field-input" id="f-phone" placeholder="(256) 555-0100">
+            <input type="tel" class="field-input" id="f-phone" placeholder="(555) 555-0100">
           </div>
           <div class="field-group">
             <label class="field-label">Email</label>
@@ -664,7 +665,7 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
 // ── Lead form submission ──
 // Replace this URL with a FormSpree endpoint, Google Form, or your own webhook
-const LEAD_WEBHOOK = 'YOUR_LEAD_WEBHOOK_URL';
+const LEAD_WEBHOOK = 'https://script.google.com/macros/s/AKfycbzYNKWs31VwrqwB4ZRKoK5cCZDOpZhYNi8i5FAC9kJAysJaFlDgZ9Nn7oDoBV39MC9LSg/exec';
 
 async function submitLead() {
   const first   = document.getElementById('f-first').value.trim();
@@ -690,7 +691,8 @@ async function submitLead() {
     Email: email,
     Role: role,
     Notes: notes,
-    Source: 'Landing Page'
+    Source: 'Landing Page',
+    action: 'submitLead'
   };
 
   try {
