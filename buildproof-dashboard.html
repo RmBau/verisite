@@ -668,6 +668,9 @@ async function loadData() {
     allData = json.data
       .map(row => ({ ...row, _ts: new Date(row['Timestamp'] || 0) }))
       .filter(r => r._ts > new Date('2000-01-01'));
+    // DEBUG — remove after confirming field names
+    if (allData.length > 0) console.log('DATA KEYS:', Object.keys(allData[allData.length-1]));
+    if (allData.length > 0) console.log('LAST ROW:', JSON.stringify(allData[allData.length-1]));
     populateFilters();
     applyFilters();
     document.getElementById('last-update').textContent =
