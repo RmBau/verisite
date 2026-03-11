@@ -256,7 +256,10 @@
   .kpi-card:nth-child(3){animation-delay:0.15s} .kpi-card:nth-child(4){animation-delay:0.20s}
 
   @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
-  @media(max-width:500px){.main{padding:16px}.header{padding:0 16px}.header-center{display:none}}
+  @media(max-width:700px){.header-center{display:none}}
+  @media(max-width:700px){.header-right .mobile-company{display:flex!important}}
+  @media(min-width:701px){.mobile-company{display:none!important}}
+  @media(max-width:500px){.main{padding:16px}.header{padding:0 16px}}
 </style>
 </head>
 <body>
@@ -379,8 +382,10 @@
   </div>
 
   <div class="header-right">
+    <div class="mobile-company" id="mobile-company-pill" style="display:none;align-items:center;gap:6px;background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.3);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:1px;color:#f5a623;"></div>
     <div class="live-dot"></div>
     <span class="last-update" id="last-update">—</span>
+    <button class="icon-btn" id="export-btn" onclick="exportCSV()" title="Export to CSV" style="font-size:11px;padding:0 8px;letter-spacing:0.5px;">⬇ CSV</button>
     <button class="icon-btn" id="refresh-btn" onclick="loadData()" title="Refresh data">↻</button>
     <button class="icon-btn" onclick="openSettings()" title="Dashboard settings">⚙</button>
   </div>
@@ -564,6 +569,7 @@ function initURL() {
   lockedCompany = params.get('company') || '';
   lockedProject = params.get('project') || '';
 
+  const mobilePill = document.getElementById('mobile-company-pill');
   const center = document.getElementById('header-center');
 
   if (lockedCompany || lockedProject) {
@@ -575,6 +581,7 @@ function initURL() {
         🏗&nbsp;${label}
         ${sub ? `<span class="client-pill-sub">· ${sub}</span>` : ''}
       </div>`;
+    if (mobilePill) mobilePill.textContent = '🏗 ' + label;
     // Show share section with pre-built URL
     const base = window.location.href.split('?')[0];
     let url = `${base}?company=${encodeURIComponent(lockedCompany)}`;
@@ -613,6 +620,30 @@ function closeSettings() {
 // ═══════════════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════════════
+function exportCSV() {
+  if (!allData || allData.length === 0) { alert('No data to export.'); return; }
+  const filtered = allData.filter(r =>
+    (!lockedCompany || r['CompanyID'] === lockedCompany) &&
+    (!lockedProject || r['Project'] === lockedProject)
+  );
+  const headers = ['Timestamp','CompanyID','Project','Location','TagID','SelectTrade','Task','Status','VerifiedBy','Notes'];
+  const rows = filtered.map(r => headers.map(h => {
+    const val = (r[h] || '').toString().replace(/"/g, '""');
+    return `"${val}"`;
+  }).join(','));
+  const csv = [headers.join(','), ...rows].join('
+');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const date = new Date().toISOString().slice(0,10);
+  const name = lockedProject || lockedCompany || 'buildproof';
+  a.href = url;
+  a.download = `buildproof-${name}-${date}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 async function loadClients() {
   try {
     const res  = await fetch(`${WEBHOOK_URL}?action=getClients`);
@@ -750,7 +781,7 @@ function renderLocations() {
           <div style="padding:14px 16px;border-bottom:1px solid var(--border);background:var(--steel);display:flex;justify-content:space-between;align-items:center;">
             <div>
               <div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div>
-              <div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${r['CompanyID']||''}</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div>
             </div>
             ${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(245,166,35,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(245,166,35,0.3)">STALE</span>':''}
           </div>
