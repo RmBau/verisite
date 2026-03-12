@@ -888,9 +888,11 @@ let logStatusFilter   = '';
 let logDateFilter     = '';
 
 function populateScanLogFilters() {
-  const locs     = [...new Set(filtered.map(r=>r['Location']).filter(Boolean))].sort();
-  const trades   = [...new Set(filtered.map(r=>r['SelectTrade']).filter(Boolean))].sort();
-  const statuses = [...new Set(filtered.map(r=>r['Status']).filter(Boolean))].sort();
+  // Use allData so options never disappear when filters are active
+  const source   = (filtered && filtered.length > 0) ? filtered : allData;
+  const locs     = [...new Set(source.map(r=>r['Location']).filter(Boolean))].sort();
+  const trades   = [...new Set(source.map(r=>r['SelectTrade']).filter(Boolean))].sort();
+  const statuses = [...new Set(source.map(r=>r['Status']).filter(Boolean))].sort();
 
   const lf = document.getElementById('log-location-filter');
   const tf = document.getElementById('log-trade-filter');
