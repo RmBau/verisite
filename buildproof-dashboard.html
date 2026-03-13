@@ -610,6 +610,7 @@
               </select>
             </th>
             <th class="col-notes">Notes</th>
+            <th style="min-width:60px;">Photo</th>
           </tr>
         </thead>
         <tbody id="log-table-body">
@@ -1088,6 +1089,7 @@ function renderScanLog() {
       <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
       <td>${r['VerifiedBy']||'—'}</td>
       <td style="color:var(--muted);font-size:11px;">${r['Notes']||''}</td>
+      <td>${r['Photo'] ? `<a href="${r['Photo']}" target="_blank" style="color:var(--accent);font-size:11px;text-decoration:none;">📷 View</a>` : ''}</td>
     </tr>`;
   }).join('');
 }

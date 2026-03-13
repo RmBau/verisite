@@ -258,6 +258,8 @@
       <div class="photo-hint">Tap to take or upload a photo</div>
       <div class="photo-name" id="photo-name"></div>
     </div>
+    <img id="photo-preview" src="" alt="Preview"
+      style="display:none;width:100%;max-height:180px;object-fit:cover;border-radius:8px;margin-top:8px;border:1px solid var(--border);">
   </div>
 
   <input type="hidden" id="h-timestamp">
@@ -386,9 +388,26 @@ function setStatus(btn) {
   document.getElementById('status').value = btn.dataset.value;
 }
 
+let photoBase64 = '';
+let photoMime   = '';
+
 function photoSelected(input) {
-  const nameEl = document.getElementById('photo-name');
-  if (input.files && input.files[0]) { nameEl.textContent = '📎 ' + input.files[0].name; nameEl.style.display = 'block'; }
+  const nameEl    = document.getElementById('photo-name');
+  const previewEl = document.getElementById('photo-preview');
+  photoBase64 = ''; photoMime = '';
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  nameEl.textContent = '📎 ' + file.name;
+  nameEl.style.display = 'block';
+  const reader = new FileReader();
+  reader.onload = e => {
+    const result = e.target.result; // data:image/jpeg;base64,....
+    const comma  = result.indexOf(',');
+    photoMime   = result.substring(5, result.indexOf(';'));
+    photoBase64 = result.substring(comma + 1);
+    if (previewEl) { previewEl.src = result; previewEl.style.display = 'block'; }
+  };
+  reader.readAsDataURL(file);
 }
 
 function validate() {
@@ -513,7 +532,7 @@ async function submitForm() {
     Status:      document.getElementById('status').value,
     VerifiedBy:  document.getElementById('scanner').value.trim(),
     Notes:       document.getElementById('notes').value.trim(),
-    Photo:       ''
+    Photo:       photoBase64 ? JSON.stringify({data: photoBase64, mime: photoMime}) : ''
   };
 
   if (!isOnline) {
@@ -562,6 +581,11 @@ function resetForm() {
   document.getElementById('status').value = '';
   document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('photo-name').style.display = 'none';
+  const prev = document.getElementById('photo-preview');
+  if (prev) { prev.src = ''; prev.style.display = 'none'; }
+  photoBase64 = ''; photoMime = '';
+  const photoInput = document.getElementById('photo');
+  if (photoInput) photoInput.value = '';
   document.getElementById('h-timestamp').value = new Date().toISOString();
 }
 
