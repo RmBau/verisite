@@ -102,11 +102,11 @@
   .status-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 7px; }
   .status-btn {
     background: var(--input-bg); border: 1.5px solid var(--border); border-radius: var(--radius);
-    color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600;
-    padding: 7px 2px 6px; cursor: pointer; text-align: center;
+    color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 12px 4px; cursor: pointer; text-align: center;
     transition: all 0.15s; -webkit-tap-highlight-color: transparent; line-height: 1.2;
   }
-  .status-btn .dot { display: block; width: 8px; height: 8px; border-radius: 50%; margin: 0 auto 4px; background: var(--border); transition: background 0.15s; }
+  .status-btn .dot { display: none; }
   .status-btn:hover { border-color: var(--muted); color: var(--text); }
   .status-btn[data-value="In Progress"].active          { border-color: var(--blue);   color: var(--blue);   background: rgba(52,152,219,0.1); }
   .status-btn[data-value="In Progress"].active .dot     { background: var(--blue); }
@@ -237,10 +237,10 @@
   <div class="field">
     <label>Status <span class="req">*</span></label>
     <div class="status-grid">
-      <button type="button" class="status-btn" data-value="In Progress" onclick="setStatus(this)"><span class="dot"></span>In Progress</button>
-      <button type="button" class="status-btn" data-value="Inspection Ready" onclick="setStatus(this)"><span class="dot"></span>Inspection Ready</button>
-      <button type="button" class="status-btn" data-value="Passed Inspection" onclick="setStatus(this)"><span class="dot"></span>Passed Inspection</button>
-      <button type="button" class="status-btn" data-value="Punch Complete" onclick="setStatus(this)"><span class="dot"></span>Punch Complete</button>
+      <button type="button" class="status-btn" data-value="In Progress" onclick="setStatus(this)">In Progress</button>
+      <button type="button" class="status-btn" data-value="Inspection Ready" onclick="setStatus(this)">Inspection Ready</button>
+      <button type="button" class="status-btn" data-value="Passed Inspection" onclick="setStatus(this)">Passed Inspection</button>
+      <button type="button" class="status-btn" data-value="Punch Complete" onclick="setStatus(this)">Punch Complete</button>
     </div>
     <input type="hidden" id="status" value="">
   </div>
