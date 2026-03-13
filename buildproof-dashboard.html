@@ -500,10 +500,49 @@
 
   <!-- Location grid -->
   <div id="sec-wrap-locations">
-    <div class="section-title">LATEST STATUS BY LOCATION</div>
-    <div id="location-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:28px;">
-      <div class="card"><div class="card-body"><div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">Loading…</div></div></div></div>
+    <div class="section-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      LATEST STATUS BY LOCATION
+      <div style="display:flex;gap:8px;margin-left:auto;align-items:center;">
+        <input type="text" id="loc-search" placeholder="Search locations…"
+          oninput="renderLocations()"
+          style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
+                 color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;
+                 padding:5px 10px;outline:none;width:160px;">
+        <select id="loc-status-filter" onchange="renderLocations()"
+          style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
+                 color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;
+                 padding:5px 10px;outline:none;cursor:pointer;">
+          <option value="">All Statuses</option>
+        </select>
+        <button id="loc-view-toggle" onclick="toggleLocView()"
+          style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
+                 color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;
+                 padding:5px 12px;cursor:pointer;letter-spacing:0.5px;">
+          ⊞ Cards
+        </button>
+      </div>
     </div>
+    <div id="location-table-wrap" style="margin-bottom:28px;">
+      <div class="log-table-wrap">
+        <table class="log-table">
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Trade</th>
+              <th>Task</th>
+              <th>Last Scan</th>
+              <th>Verified By</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="location-table-body">
+            <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="location-grid" style="display:none;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:28px;"></div>
   </div>
 
   <!-- ── Scan Log ── -->
@@ -566,15 +605,13 @@ let CLIENT_NAMES = {};
 const clientDisplay = (id) => CLIENT_NAMES[id] || id;
 
 const STATUS_CONFIG = {
-  'In Progress':          { color:'#3498db', bg:'rgba(52,152,219,0.15)',  order:1 },
-  'Ready for Inspection': { color:'#f5a623', bg:'rgba(245,166,35,0.15)', order:2 },
-  'Passed Inspection':    { color:'#2ecc71', bg:'rgba(46,204,113,0.15)', order:3 },
-  'Failed Inspection':    { color:'#e74c3c', bg:'rgba(231,76,60,0.15)',  order:4 },
-  'Correction Complete':  { color:'#9b59b6', bg:'rgba(155,89,182,0.15)', order:5 },
-  'Final Complete':       { color:'#1abc9c', bg:'rgba(26,188,156,0.15)', order:6 },
+  'In Progress':       { color:'#3498db', bg:'rgba(52,152,219,0.15)',  order:1 },
+  'Inspection Ready':  { color:'#f5a623', bg:'rgba(245,166,35,0.15)', order:2 },
+  'Passed Inspection': { color:'#2ecc71', bg:'rgba(46,204,113,0.15)', order:3 },
+  'Punch Complete':    { color:'#1abc9c', bg:'rgba(26,188,156,0.15)', order:4 },
 };
-const DONE_STATUSES   = ['Final Complete','Passed Inspection'];
-const FAILED_STATUSES = ['Failed Inspection'];
+const DONE_STATUSES   = ['Punch Complete','Passed Inspection'];
+const FAILED_STATUSES = [];
 
 let allData  = [];
 let filtered = [];
@@ -843,32 +880,97 @@ function renderActivity() {
     : items.map(r=>{const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)'};return `<div class="activity-item"><div class="activity-dot" style="background:${cfg.color};box-shadow:0 0 5px ${cfg.color}40"></div><div class="activity-content"><div class="activity-main">${r['SelectTrade']||'—'} · ${r['Task']||'—'}</div><div class="activity-meta">${r['Location']||'—'} · ${r['VerifiedBy']||'—'}</div></div><div class="activity-time">${timeAgo(r._ts)}</div></div>`;}).join('');
 }
 
+let locViewMode = 'table'; // 'table' or 'cards'
+
+function toggleLocView() {
+  locViewMode = locViewMode === 'table' ? 'cards' : 'table';
+  const btn = document.getElementById('loc-view-toggle');
+  const tableWrap = document.getElementById('location-table-wrap');
+  const grid = document.getElementById('location-grid');
+  if (locViewMode === 'cards') {
+    tableWrap.style.display = 'none';
+    grid.style.display = 'grid';
+    btn.textContent = '☰ Table';
+  } else {
+    tableWrap.style.display = 'block';
+    grid.style.display = 'none';
+    btn.textContent = '⊞ Cards';
+  }
+  renderLocations();
+}
+
 function renderLocations() {
-  const sd=parseInt(document.getElementById('stale-days').value)||3;
-  const locs=latestPerLoc(filtered).sort((a,b)=>b._ts-a._ts);
-  document.getElementById('location-grid').innerHTML = locs.length===0
-    ? '<div class="card"><div class="card-body"><div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No location data yet</div></div></div></div>'
-    : locs.map(r=>{
-        const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)',bg:'rgba(122,150,168,0.1)'};
-        const age=Math.floor((new Date()-r._ts)/86400000), stale=age>=sd;
-        return `<div class="card" style="border-color:${stale?'rgba(245,166,35,0.3)':'var(--border)'};cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans for ${r['Location']}">
-          <div style="padding:14px 16px;border-bottom:1px solid var(--border);background:var(--steel);display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div>
-              <div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div>
+  const sd = parseInt(document.getElementById('stale-days').value) || 3;
+  const search = (document.getElementById('loc-search')?.value || '').toLowerCase();
+  const statusF = document.getElementById('loc-status-filter')?.value || '';
+
+  // Populate status filter options
+  const sf = document.getElementById('loc-status-filter');
+  if (sf) {
+    const cur = sf.value;
+    const statuses = [...new Set(filtered.map(r=>r['Status']).filter(Boolean))].sort();
+    sf.innerHTML = '<option value="">All Statuses</option>' +
+      statuses.map(s=>`<option value="${s}"${s===cur?' selected':''}>${s}</option>`).join('');
+  }
+
+  let locs = latestPerLoc(filtered).sort((a,b) => b._ts - a._ts);
+
+  // Apply search + status filter
+  if (search)  locs = locs.filter(r => (r['Location']||'').toLowerCase().includes(search));
+  if (statusF) locs = locs.filter(r => r['Status'] === statusF);
+
+  if (locViewMode === 'table') {
+    const tbody = document.getElementById('location-table-body');
+    if (!tbody) return;
+    if (locs.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">No locations match</td></tr>';
+      return;
+    }
+    tbody.innerHTML = locs.map(r => {
+      const cfg   = STATUS_CONFIG[r['Status']] || {color:'var(--muted)', bg:'rgba(122,150,168,0.1)'};
+      const age   = Math.floor((new Date() - r._ts) / 86400000);
+      const stale = age >= sd;
+      return `<tr style="cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans">
+        <td>
+          <span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span>
+          ${stale ? '<span style="margin-left:6px;font-size:9px;font-weight:700;color:var(--accent);background:rgba(245,166,35,0.1);padding:1px 6px;border-radius:8px;border:1px solid rgba(245,166,35,0.3)">STALE</span>' : ''}
+          <div style="font-size:10px;color:var(--muted);margin-top:1px">${r['Project']||''}</div>
+        </td>
+        <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
+        <td style="color:var(--accent)">${r['SelectTrade']||'—'}</td>
+        <td style="color:var(--muted);font-size:11px">${r['Task']||'—'}</td>
+        <td style="color:var(--muted);font-size:11px;white-space:nowrap">${timeAgo(r._ts)}</td>
+        <td style="font-size:11px">${r['VerifiedBy']||'—'}</td>
+        <td style="font-size:11px;color:var(--muted)">›</td>
+      </tr>`;
+    }).join('');
+  } else {
+    // Card view
+    document.getElementById('location-grid').innerHTML = locs.length === 0
+      ? '<div class="card"><div class="card-body"><div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No locations match</div></div></div></div>'
+      : locs.map(r => {
+          const cfg   = STATUS_CONFIG[r['Status']] || {color:'var(--muted)', bg:'rgba(122,150,168,0.1)'};
+          const age   = Math.floor((new Date() - r._ts) / 86400000);
+          const stale = age >= sd;
+          return `<div class="card" style="border-color:${stale?'rgba(245,166,35,0.3)':'var(--border)'};cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans for ${r['Location']}">
+            <div style="padding:14px 16px;border-bottom:1px solid var(--border);background:var(--steel);display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div>
+                <div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div>
+              </div>
+              ${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(245,166,35,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(245,166,35,0.3)">STALE</span>':''}
             </div>
-            ${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(245,166,35,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(245,166,35,0.3)">STALE</span>':''}
-          </div>
-          <div style="padding:12px 16px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-              <span style="font-size:12px;color:${cfg.color};font-weight:600;background:${cfg.bg};padding:3px 10px;border-radius:10px">${r['Status']||'—'}</span>
-              <span style="font-size:11px;color:var(--muted)">${timeAgo(r._ts)}</span>
+            <div style="padding:12px 16px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                <span style="font-size:12px;color:${cfg.color};font-weight:600;background:${cfg.bg};padding:3px 10px;border-radius:10px">${r['Status']||'—'}</span>
+                <span style="font-size:11px;color:var(--muted)">${timeAgo(r._ts)}</span>
+              </div>
+              <div style="font-size:12px;color:var(--text)">${r['SelectTrade']||'—'} · <span style="color:var(--muted)">${r['Task']||'—'}</span></div>
+              <div style="font-size:11px;color:var(--muted);margin-top:4px">👤 ${r['VerifiedBy']||'—'} · 🏷️ ${r['TagID']||'—'}</div>
             </div>
-            <div style="font-size:12px;color:var(--text)">${r['SelectTrade']||'—'} · <span style="color:var(--muted)">${r['Task']||'—'}</span></div>
-            <div style="font-size:11px;color:var(--muted);margin-top:4px">👤 ${r['VerifiedBy']||'—'} · 🏷️ ${r['TagID']||'—'}</div>
-          </div>
-        </div>`;
-      }).join('');
+          </div>`;
+        }).join('');
+  }
 }
 
 function timeAgo(d) {
