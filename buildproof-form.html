@@ -409,8 +409,6 @@ function photoSelected(input) {
   photoBase64 = '';
   if (!input.files || !input.files[0]) return;
   const file = input.files[0];
-  nameEl.textContent = '📎 ' + file.name;
-  nameEl.style.display = 'block';
 
   const MAX_BYTES = 3.5 * 1024 * 1024; // 3.5MB raw file limit
 
