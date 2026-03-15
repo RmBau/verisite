@@ -550,16 +550,12 @@ function updateConnUI() {
 }
 
 async function sendPayload(payload) {
-  const bodyStr = JSON.stringify(payload);
-  const kb = Math.round(bodyStr.length / 1024);
-  console.log('Payload size:', kb + 'KB', '| Has photo:', !!payload.Photo);
   const res = await fetch(WEBHOOK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
-    body: bodyStr
+    body: JSON.stringify(payload)
   });
   const result = await res.json();
-  console.log('Server response:', JSON.stringify(result));
   if (result.result !== 'success') throw new Error(result.error || 'Unknown error');
 }
 
