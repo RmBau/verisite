@@ -256,6 +256,29 @@
   .kpi-card:nth-child(3){animation-delay:0.15s} .kpi-card:nth-child(4){animation-delay:0.20s}
 
   @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
+  /* ── Photo Modal ── */
+  .photo-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85);
+    z-index:1000; align-items:center; justify-content:center; padding:20px; }
+  .photo-modal-overlay.open { display:flex; }
+  .photo-modal { background:var(--card); border:1px solid var(--border); border-radius:12px;
+    max-width:860px; width:100%; max-height:90vh; overflow:hidden; display:flex; flex-direction:column; }
+  .photo-modal-header { display:flex; justify-content:space-between; align-items:center;
+    padding:14px 18px; border-bottom:1px solid var(--border); background:var(--steel); }
+  .photo-modal-title { font-size:13px; font-weight:700; color:var(--white); }
+  .photo-modal-meta { font-size:11px; color:var(--muted); margin-top:2px; }
+  .photo-modal-close { background:none; border:none; color:var(--muted); font-size:22px;
+    cursor:pointer; padding:0 4px; line-height:1; }
+  .photo-modal-close:hover { color:var(--white); }
+  .photo-modal-body { flex:1; overflow:auto; display:flex; align-items:center;
+    justify-content:center; padding:16px; background:var(--navy); }
+  .photo-modal-body img { max-width:100%; max-height:70vh; border-radius:6px;
+    object-fit:contain; }
+  .photo-modal-footer { padding:12px 18px; border-top:1px solid var(--border);
+    display:flex; justify-content:flex-end; gap:10px; }
+  .photo-btn { background:var(--accent); color:#000; border:none; border-radius:6px;
+    font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
+    padding:8px 16px; cursor:pointer; text-decoration:none; display:inline-block; }
+  .photo-btn.secondary { background:var(--steel); color:var(--text); border:1px solid var(--border); }
   /* ── Scan Log ── */
   .th-filter, .th-search { display:block; width:100%; margin-top:6px;
     background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08);
@@ -620,6 +643,26 @@
     </div>
   </div>
 
+</div>
+
+<!-- ── Photo Modal ── -->
+<div class="photo-modal-overlay" id="photo-modal" onclick="closePhotoModal(event)">
+  <div class="photo-modal">
+    <div class="photo-modal-header">
+      <div>
+        <div class="photo-modal-title" id="modal-title">Photo</div>
+        <div class="photo-modal-meta" id="modal-meta"></div>
+      </div>
+      <button class="photo-modal-close" onclick="document.getElementById('photo-modal').classList.remove('open')">✕</button>
+    </div>
+    <div class="photo-modal-body">
+      <img id="modal-img" src="" alt="Site photo">
+    </div>
+    <div class="photo-modal-footer">
+      <button class="photo-btn secondary" onclick="document.getElementById('photo-modal').classList.remove('open')">Close</button>
+      <a class="photo-btn" id="modal-open-link" href="" target="_blank">Open in Drive ↗</a>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1089,7 +1132,7 @@ function renderScanLog() {
       <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
       <td>${r['VerifiedBy']||'—'}</td>
       <td style="color:var(--muted);font-size:11px;">${r['Notes']||''}</td>
-      <td>${r['Photo'] ? `<a href="${r['Photo']}" target="_blank" style="color:var(--accent);font-size:11px;text-decoration:none;">📷 View</a>` : ''}</td>
+      <td>${r['Photo'] ? `<div onclick="openPhotoModal('${r['Photo']}','${(r['Location']||'').replace(/'/g,"\\'")}','${(r['SelectTrade']||'').replace(/'/g,"\\'")}','${(r['Timestamp']||'').toString().replace(/'/g,"\\'")}' )" style="cursor:pointer;width:44px;height:44px;border-radius:4px;overflow:hidden;border:1px solid var(--border);background:var(--steel);display:flex;align-items:center;justify-content:center;" title="View photo"><img src="${r['Photo'].replace('view','preview')}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;\'>📷</span>'"></div>` : ''}</td>
     </tr>`;
   }).join('');
 }
@@ -1126,6 +1169,39 @@ function filterLogByLocation(location) {
   if (lf) { lf.value = location; logLocationFilter = location; }
   renderScanLog();
   document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ═══════════════════════════════════════════════
+// PHOTO MODAL
+// ═══════════════════════════════════════════════
+function openPhotoModal(url, location, trade, timestamp) {
+  const modal = document.getElementById('photo-modal');
+  const img   = document.getElementById('modal-img');
+  const title = document.getElementById('modal-title');
+  const meta  = document.getElementById('modal-meta');
+  const link  = document.getElementById('modal-open-link');
+
+  // Convert Drive view URL to direct image URL for embedding
+  // Drive URL format: https://drive.google.com/file/d/FILE_ID/view?usp=drivesdk
+  const match = url.match(/\/file\/d\/([^\/]+)\//);
+  const embedUrl = match
+    ? 'https://drive.google.com/thumbnail?id=' + match[1] + '&sz=w1200'
+    : url;
+
+  img.src        = embedUrl;
+  title.textContent = location + (trade ? ' · ' + trade : '');
+  meta.textContent  = timestamp ? new Date(timestamp).toLocaleString('en-US',{
+    month:'short', day:'numeric', year:'numeric',
+    hour:'numeric', minute:'2-digit', hour12:true
+  }) : '';
+  link.href = url;
+  modal.classList.add('open');
+}
+
+function closePhotoModal(e) {
+  if (e.target === document.getElementById('photo-modal')) {
+    document.getElementById('photo-modal').classList.remove('open');
+  }
 }
 
 // ═══════════════════════════════════════════════
