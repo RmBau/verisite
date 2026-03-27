@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>VeriSite – Field Verification</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --steel: #1c2630;
+    --mid: #2e3d4a;
+    --border: #3a4d5c;
+    --accent: #f5a623;
+    --text: #e8edf0;
+    --muted: #7a96a8;
+    --white: #ffffff;
+    --input-bg: #162028;
+    --radius: 8px;
+    --green: #2ecc71;
+    --blue: #3498db;
+    --orange: #f5a623;
+    --red: #e74c3c;
+    --purple: #9b59b6;
+    --teal: #1abc9c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  .header {
+    background: var(--steel);
+    border-bottom: 2px solid var(--accent);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 14px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo-mark {
+    width: 40px; height: 40px;
+    background: var(--accent); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .logo-mark svg { width: 24px; height: 24px; }
+  .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--white); line-height: 1; }
+  .logo-sub { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-top: 2px; }
+  .header-ts { margin-left: auto; font-size: 11px; color: var(--muted); text-align: right; line-height: 1.5; }
+
+  .context-bar {
+    background: var(--mid);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
+  }
+  .ctx-item { display: flex; flex-direction: column; gap: 2px; }
+  .ctx-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .ctx-value { font-size: 13px; font-weight: 600; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ctx-value.tag { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; color: var(--accent); }
+
+  .no-tag-warning {
+    background: rgba(231,76,60,0.12); border: 1px solid var(--red);
+    border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--red);
+    margin: 12px 16px 0; display: none;
+  }
+
+  .form-wrap { max-width: 540px; margin: 0 auto; padding: 20px 16px; }
+
+  .section-label {
+    font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 3px;
+    color: var(--accent); margin: 24px 0 10px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-label:first-of-type { margin-top: 4px; }
+
+  .field { margin-bottom: 14px; }
+  label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  label .req { color: var(--accent); margin-left: 2px; }
+
+  input[type="text"], select, textarea {
+    width: 100%; background: var(--input-bg); border: 1.5px solid var(--border);
+    border-radius: var(--radius); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 15px; padding: 12px 14px;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  input[type="text"]:focus, select:focus, textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(245,166,35,0.12);
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a96a8' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer;
+  }
+  select option { background: var(--steel); color: var(--text); }
+  select:disabled { opacity: 0.4; cursor: not-allowed; }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+  .status-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 7px; }
+  .status-btn {
+    background: var(--input-bg); border: 1.5px solid var(--border); border-radius: var(--radius);
+    color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    padding: 12px 4px; cursor: pointer; text-align: center;
+    transition: all 0.15s; -webkit-tap-highlight-color: transparent; line-height: 1.2;
+  }
+  .status-btn .dot { display: none; }
+  .status-btn:hover { border-color: var(--muted); color: var(--text); }
+  .status-btn[data-value="In Progress"].active          { border-color: var(--blue);   color: var(--blue);   background: rgba(52,152,219,0.1); }
+  .status-btn[data-value="In Progress"].active .dot     { background: var(--blue); }
+  .status-btn[data-value="Inspection Ready"].active     { border-color: var(--orange); color: var(--orange); background: rgba(245,166,35,0.1); }
+  .status-btn[data-value="Inspection Ready"].active .dot{ background: var(--orange); }
+  .status-btn[data-value="Passed Inspection"].active    { border-color: var(--green); color: var(--green); background: rgba(46,204,113,0.1); }
+  .status-btn[data-value="Passed Inspection"].active .dot { background: var(--green); }
+  .status-btn[data-value="Punch Complete"].active       { border-color: var(--teal); color: var(--teal); background: rgba(26,188,156,0.1); }
+  .status-btn[data-value="Punch Complete"].active .dot  { background: var(--teal); }
+
+  .photo-drop {
+    background: var(--input-bg); border: 1.5px dashed var(--border);
+    border-radius: var(--radius); padding: 18px; text-align: center;
+    cursor: pointer; position: relative; transition: border-color 0.2s;
+  }
+  .photo-drop:hover { border-color: var(--accent); }
+  .photo-drop input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; padding: 0; border: none; background: none; }
+  .photo-icon { font-size: 24px; margin-bottom: 5px; }
+  .photo-hint { font-size: 12px; color: var(--muted); }
+  .photo-name { font-size: 12px; color: var(--accent); margin-top: 5px; display: none; }
+
+  .submit-btn {
+    width: 100%; background: var(--accent); border: none; border-radius: var(--radius);
+    color: var(--black); font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+    letter-spacing: 3px; padding: 16px; cursor: pointer; margin-top: 28px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .submit-btn:hover { background: #e8981a; }
+  .submit-btn:active { transform: scale(0.98); }
+  .submit-btn:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; transform: none; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--steel); border: 1.5px solid var(--border); border-radius: 50px;
+    padding: 12px 24px; font-size: 13px; font-weight: 600; white-space: nowrap;
+    transition: transform 0.3s ease, opacity 0.3s; opacity: 0; z-index: 999; pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .toast.success { border-color: var(--green); color: var(--green); }
+  .toast.error   { border-color: var(--red);   color: var(--red); }
+
+  .success-screen { display: none; text-align: center; padding: 60px 20px; }
+  .success-screen.visible { display: block; }
+  .form-wrap.hidden { display: none; }
+  .checkmark { width: 70px; height: 70px; background: rgba(46,204,113,0.12); border: 2px solid var(--green); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 20px; }
+  .success-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 3px; color: var(--white); margin-bottom: 6px; }
+  .success-meta { font-size: 13px; color: var(--muted); margin-bottom: 6px; line-height: 1.8; }
+  .success-meta strong { color: var(--text); }
+  .new-scan-btn { background: transparent; border: 1.5px solid var(--accent); border-radius: var(--radius); color: var(--accent); font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; padding: 12px 32px; cursor: pointer; margin-top: 28px; transition: background 0.2s; display: inline-block; }
+  .new-scan-btn:hover { background: rgba(245,166,35,0.1); }
+
+  @media (max-width: 480px) { .status-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-mark">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C7.5 2 4 6 4 11H20C20 6 16.5 2 12 2Z" fill="#0a0a0a"/>
+      <rect x="3" y="11" width="18" height="3" rx="1.5" fill="#0a0a0a"/>
+      <path d="M7 18l3.5 3.5L17 15" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div>
+    <div class="logo-text">VeriSite</div>
+    <div class="logo-sub">Field Verification</div>
+  </div>
+  <div class="header-ts" id="header-ts"></div>
+</div>
+
+<!-- Connection status bar -->
+<div id="conn-bar" style="
+  background:#1a2736;border-bottom:1px solid #2e4258;
+  padding:5px 20px;display:flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:1px;
+  transition:background 0.3s;
+">
+  <span id="conn-dot" style="width:8px;height:8px;border-radius:50%;background:#2ecc71;box-shadow:0 0 6px #2ecc71;flex-shrink:0;transition:background 0.3s;"></span>
+  <span id="conn-text" style="color:#a0bcd0;">ONLINE — Data will sync immediately</span>
+  <span id="queue-badge" style="
+    display:none;margin-left:auto;
+    background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.4);
+    color:#f5a623;padding:2px 10px;border-radius:10px;font-size:10px;
+  "></span>
+</div>
+
+<div class="context-bar">
+  <div class="ctx-item">
+    <span class="ctx-label">Client</span>
+    <span class="ctx-value" id="ctx-company">—</span>
+  </div>
+  <div class="ctx-item">
+    <span class="ctx-label">Tag ID</span>
+    <span class="ctx-value tag" id="ctx-tagid">—</span>
+  </div>
+  <div class="ctx-item">
+    <span class="ctx-label">Project</span>
+    <span class="ctx-value" id="ctx-project">—</span>
+  </div>
+  <div class="ctx-item">
+    <span class="ctx-label">Location</span>
+    <span class="ctx-value" id="ctx-location">—</span>
+  </div>
+</div>
+
+<div class="no-tag-warning" id="no-tag-warning">
+  ⚠ No tag data detected. Scan a VeriSite NFC tag to auto-fill project info.
+</div>
+
+<div class="form-wrap" id="main-form">
+
+  <div class="section-label">Who's Scanning</div>
+  <div class="field">
+    <label>Your Name <span class="req">*</span></label>
+    <input type="text" id="scanner" placeholder="First Last" autocomplete="name" autocorrect="off">
+  </div>
+
+  <div class="section-label">Work Being Verified</div>
+  <div class="field">
+    <label>Trade <span class="req">*</span></label>
+    <select id="trade"><option value="">Select trade…</option></select>
+  </div>
+  <div class="field">
+    <label>Task <span class="req">*</span></label>
+    <select id="task" disabled><option value="">Select trade first…</option></select>
+  </div>
+  <div class="field">
+    <label>Status <span class="req">*</span></label>
+    <div class="status-grid">
+      <button type="button" class="status-btn" data-value="In Progress" onclick="setStatus(this)">In Progress</button>
+      <button type="button" class="status-btn" data-value="Inspection Ready" onclick="setStatus(this)">Inspection Ready</button>
+      <button type="button" class="status-btn" data-value="Passed Inspection" onclick="setStatus(this)">Passed Inspection</button>
+      <button type="button" class="status-btn" data-value="Punch Complete" onclick="setStatus(this)">Punch Complete</button>
+    </div>
+    <input type="hidden" id="status" value="">
+  </div>
+
+  <div class="section-label">Documentation</div>
+  <div class="field">
+    <label>Notes</label>
+    <textarea id="notes" placeholder="Observations, issues, or comments…"></textarea>
+  </div>
+  <div class="field">
+    <label>Photo</label>
+    <div class="photo-drop">
+      <input type="file" id="photo" accept="image/*" capture="environment" onchange="photoSelected(this)">
+      <div class="photo-icon">📷</div>
+      <div class="photo-hint">Tap to take or upload a photo</div>
+      <div class="photo-name" id="photo-name"></div>
+    </div>
+    <img id="photo-preview" src="" alt="Preview"
+      style="display:none;width:100%;max-height:180px;object-fit:cover;border-radius:8px;margin-top:8px;border:1px solid var(--border);">
+    <div id="photo-warning" style="display:none;margin-top:8px;padding:10px 12px;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);border-radius:6px;">
+      <div style="color:#e74c3c;font-size:12px;font-weight:600;margin-bottom:4px;">⚠ Photo could not be saved</div>
+      <div style="color:#c8d8e8;font-size:11px;line-height:1.5;">Your scan will still submit without the photo.<br>To enable photos: iPhone <b>Settings → Camera → Formats → Most Compatible</b></div>
+    </div>
+  </div>
+
+  <input type="hidden" id="h-timestamp">
+  <input type="hidden" id="h-company">
+  <input type="hidden" id="h-project">
+  <input type="hidden" id="h-location">
+  <input type="hidden" id="h-tagid">
+
+  <button class="submit-btn" id="submit-btn" onclick="submitForm()">SUBMIT VERIFICATION</button>
+</div>
+
+<div class="success-screen" id="success-screen">
+  <div class="checkmark">✓</div>
+  <div class="success-title">Verification Logged</div>
+  <div class="success-meta" id="success-meta"></div>
+  <button class="new-scan-btn" onclick="resetForm()">LOG ANOTHER SCAN</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzYNKWs31VwrqwB4ZRKoK5cCZDOpZhYNi8i5FAC9kJAysJaFlDgZ9Nn7oDoBV39MC9LSg/exec';
+
+const TRADE_TASKS = {
+  "Access Control":["Install Device","Run Cabling","Terminate Connections","Program System","System Test"],
+  "Acoustical Ceilings":["Install Grid","Install Ceiling Tile","Install Access Panels","Adjust Ceiling System"],
+  "Appliances":["Deliver Appliance","Install Appliance","Connect Utilities","Operational Test"],
+  "Asphalt Paving":["Prepare Subgrade","Place Asphalt","Compact Surface","Stripe Pavement"],
+  "Blinds / Window Treatments":["Measure Opening","Install Mounting Hardware","Install Blinds","Adjust Operation"],
+  "Building Automation Systems (BAS)":["Install Controllers","Run Control Wiring","Program System","Functional Test"],
+  "Cabinetry":["Deliver Cabinets","Install Base Cabinets","Install Wall Cabinets","Adjust Doors"],
+  "Carpentry – Finish":["Install Trim","Install Doors","Install Hardware","Adjust Components"],
+  "Carpentry – Framing":["Layout Walls","Install Framing","Install Blocking","Frame Openings"],
+  "Caulking / Sealants":["Surface Preparation","Apply Sealant","Tool Joint","Cure Verification"],
+  "Cleaning":["Rough Clean","Pre-Clean","Final Clean","Punch Clean"],
+  "Concrete":["Formwork Setup","Install Reinforcement","Concrete Placement","Concrete Finishing","Cutting / Coring","Curb & Gutter","Sidewalk","Paving"],
+  "Countertops":["Measure Area","Deliver Countertop","Install Countertop","Seal Joints"],
+  "Demolition":["Protect Area","Remove Materials","Sort Debris","Dispose Waste"],
+  "Doors – Commercial":["Install Frame","Hang Door","Install Hardware","Adjust Door"],
+  "Doors – Overhead":["Install Track","Install Door Panels","Install Motor","Operational Test"],
+  "Drywall":["Hang Drywall","Tape Joints","Apply Joint Compound","Apply Texture","Sand Surface"],
+  "Electrical":["Install Conduit","Pull Wire","Install Devices","Terminate Connections","Operational Test"],
+  "Fencing":["Install Posts","Install Panels","Install Gates","Adjust Alignment"],
+  "Fire Alarm":["Install Devices","Run Wiring","Program System","System Test"],
+  "Fire Protection – Fireproofing":["Surface Preparation","Apply Fireproofing","Thickness Check","Repair Areas"],
+  "Fire Sprinkler":["Install Piping","Install Heads","Hydrostatic Test","Flush System"],
+  "Flooring":["Prepare Subfloor","Install Flooring","Apply Finish","Clean Surface"],
+  "Gas Lines":["Install Piping","Pressure Test","Connect Equipment","Leak Check"],
+  "Glazing / Storefront":["Install Frames","Install Glass","Seal System","Adjust Panels"],
+  "Granite / Stone":["Measure Area","Deliver Material","Install Stone","Seal Surface"],
+  "Gutters":["Install Gutters","Install Downspouts","Seal Joints","Water Test"],
+  "HVAC":["Install Equipment","Install Ductwork","Connect Systems","Start Up System","Operational Test"],
+  "HVAC Controls":["Install Controllers","Run Wiring","Program Controls","Functional Test"],
+  "Insulation":["Install Insulation","Seal Gaps","Install Vapor Barrier"],
+  "Landscaping":["Site Preparation","Install Planting","Install Irrigation","Install Sod"],
+  "Low Voltage":["Install Cabling","Terminate Connections","Install Devices","System Test"],
+  "Masonry":["Layout Work","Install Masonry","Install Lintels","Tool Joints","Clean Surface"],
+  "Mechanical":["Install Equipment","Install Piping","Connect Systems","System Test"],
+  "Millwork / Finish Hardware":["Install Components","Adjust Components","Secure Assemblies","Touch Up"],
+  "Painting":["Surface Preparation","Prime Surface","Apply Paint","Touch Up"],
+  "Plumbing":["Install Piping","Install Fixtures","Pressure Test","Connect Systems"],
+  "Post-Tension":["Install Tendons","Stress Tendons","Grout Anchors"],
+  "Precast":["Install Bearing Pads","Erect Columns","Install Beams","Set Deck Panels","Grout Connections","Install Expansion Joints"],
+  "Roofing":["Install Underlayment","Install Roofing System","Seal Penetrations","Water Test"],
+  "Sheet Metal":["Install Ductwork","Install Supports","Seal Joints","Pressure Test"],
+  "Siding":["Install Panels","Install Trim","Seal Joints","Adjust Panels"],
+  "Signage":["Install Mounts","Install Sign","Connect Power","Test Lighting"],
+  "Site Work":["Site Clearing","Excavation","Grading","Utility Installation","Backfill","Compaction"],
+  "Solar":["Install Racking","Install Panels","Run Wiring","System Test"],
+  "Structural Steel":["Fabrication","Erect Steel","Bolt Connections","Weld Connections","Alignment Check"],
+  "Stucco / EIFS":["Install Lath","Apply Scratch Coat","Apply Finish Coat","Cure Surface"],
+  "Surveying":["Establish Control","Layout Points","Verify Elevations","As-Built Survey"],
+  "Tiling":["Prepare Surface","Install Tile","Grout Joints","Seal Surface"],
+  "Waterproofing":["Surface Preparation","Apply Membrane","Seal Penetrations","Water Test"],
+  "Welding":["Prepare Joint","Perform Weld","Grind Surface","Quality Check"],
+  "Windows":["Install Frames","Install Glass","Seal Perimeter","Adjust Operation"]
+};
+
+(function init() {
+  const params = new URLSearchParams(window.location.search);
+  const decode = (val) => { try { return decodeURIComponent(val || ''); } catch(e) { return val || ''; } };
+  const company  = decode(params.get('company')  || params.get('CompanyID') || '');
+  const project  = decode(params.get('project')  || params.get('Project')   || '');
+  const location = decode(params.get('location') || params.get('Location')  || '');
+  const tagid    = decode(params.get('tagid')    || params.get('TagID')     || params.get('tag') || '');
+
+  document.getElementById('ctx-company').textContent  = company  || '—';
+  document.getElementById('ctx-project').textContent  = project  || '—';
+  document.getElementById('ctx-location').textContent = location || '—';
+  document.getElementById('ctx-tagid').textContent    = tagid    || '—';
+  document.getElementById('h-company').value  = company;
+  document.getElementById('h-project').value  = project;
+  document.getElementById('h-location').value = location;
+  document.getElementById('h-tagid').value    = tagid;
+  document.getElementById('h-timestamp').value = new Date().toISOString();
+
+  if (!company && !project && !tagid)
+    document.getElementById('no-tag-warning').style.display = 'block';
+
+  // Look up display name for company ID
+  if (company) {
+    fetch(WEBHOOK_URL + '?action=getClients')
+      .then(r => r.json())
+      .then(data => {
+        if (data.clients && data.clients[company]) {
+          document.getElementById('ctx-company').textContent = data.clients[company];
+        }
+      })
+      .catch(() => {}); // silently fail — CompanyID fallback stays
+  }
+
+  const now = new Date();
+  document.getElementById('header-ts').innerHTML =
+    now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) +
+    '<br>' + now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+
+  const tradeEl = document.getElementById('trade');
+  Object.keys(TRADE_TASKS).sort().forEach(t => {
+    const o = document.createElement('option');
+    o.value = t; o.textContent = t; tradeEl.appendChild(o);
+  });
+})();
+
+document.getElementById('trade').addEventListener('change', function() {
+  const taskEl = document.getElementById('task');
+  const tasks = TRADE_TASKS[this.value];
+  taskEl.innerHTML = '';
+  if (!tasks) { taskEl.disabled = true; taskEl.innerHTML = '<option value="">Select trade first…</option>'; return; }
+  const ph = document.createElement('option'); ph.value = ''; ph.textContent = 'Select task…';
+  taskEl.appendChild(ph);
+  tasks.forEach(t => { const o = document.createElement('option'); o.value = t; o.textContent = t; taskEl.appendChild(o); });
+  taskEl.disabled = false;
+});
+
+function setStatus(btn) {
+  document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('status').value = btn.dataset.value;
+}
+
+let photoBase64 = '';
+let photoMime   = 'image/jpeg';
+
+function photoSelected(input) {
+  const nameEl    = document.getElementById('photo-name');
+  const previewEl = document.getElementById('photo-preview');
+  photoBase64 = '';
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+
+  const MAX_BYTES = 3.5 * 1024 * 1024;
+
+  const sizeMB = (file.size / (1024*1024)).toFixed(1);
+  nameEl.textContent = '📎 ' + file.name + ' (' + sizeMB + 'MB)';
+  nameEl.style.color = '';
+  nameEl.style.display = 'block';
+
+  if (file.size > MAX_BYTES) {
+    nameEl.textContent = '⚠ Photo too large (' + sizeMB + 'MB) — please retake';
+    nameEl.style.color = '#e74c3c';
+    showToast('⚠ Photo too large. Go to iPhone Settings → Camera → Formats → Most Compatible', 'error');
+    photoBase64 = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const raw   = e.target.result;
+    const comma = raw.indexOf(',');
+    const mime  = raw.substring(5, raw.indexOf(';'));
+
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const MAX = 1200;
+        let w = img.width, h = img.height;
+        if (w > MAX || h > MAX) {
+          if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+          else       { w = Math.round(w * MAX / h); h = MAX; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        const compressed = canvas.toDataURL('image/jpeg', 0.7);
+        if (compressed.length < 100) throw new Error('canvas export failed');
+        const c2 = compressed.indexOf(',');
+        photoBase64 = compressed.substring(c2 + 1);
+        photoMime   = 'image/jpeg';
+        const kb = Math.round(photoBase64.length * 0.75 / 1024);
+        nameEl.textContent = '✓ Photo ready (' + kb + 'KB)';
+        nameEl.style.color = '#2ecc71';
+        if (previewEl) { previewEl.src = compressed; previewEl.style.display = 'block'; }
+      } catch(err) {
+        const supported = mime === 'image/jpeg' || mime === 'image/png' || mime === 'image/webp';
+        if (supported) {
+          photoBase64 = raw.substring(comma + 1);
+          photoMime   = mime;
+          const kb = Math.round(photoBase64.length * 0.75 / 1024);
+          nameEl.textContent = '✓ Photo ready (' + kb + 'KB)';
+          nameEl.style.color = '#2ecc71';
+          if (previewEl) { previewEl.src = raw; previewEl.style.display = 'block'; }
+        } else {
+          nameEl.textContent = '⚠ Photo format not supported — scan will submit without photo';
+          nameEl.style.color = '#e74c3c';
+          const warn = document.getElementById('photo-warning');
+          if (warn) warn.style.display = 'block';
+          photoBase64 = '';
+        }
+      }
+    };
+    img.onerror = () => {
+      nameEl.textContent = '⚠ Photo format not supported — scan will submit without photo';
+      nameEl.style.color = '#e74c3c';
+      const warn = document.getElementById('photo-warning');
+      if (warn) warn.style.display = 'block';
+      photoBase64 = '';
+    };
+    img.src = raw;
+  };
+  reader.readAsDataURL(file);
+}
+
+function validate() {
+  const checks = [{ id:'scanner', label:'Your Name' }, { id:'trade', label:'Trade' }, { id:'task', label:'Task' }];
+  for (const c of checks) {
+    if (!document.getElementById(c.id).value.trim()) { showToast('⚠ ' + c.label + ' is required', 'error'); document.getElementById(c.id).focus(); return false; }
+  }
+  if (!document.getElementById('status').value) { showToast('⚠ Select a Status', 'error'); return false; }
+  return true;
+}
+
+// ═══════════════════════════════════════════
+// OFFLINE QUEUE
+// ═══════════════════════════════════════════
+const QUEUE_KEY = 'verisite_offline_queue';
+
+function getQueue() {
+  try { return JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+function saveQueue(q) {
+  localStorage.setItem(QUEUE_KEY, JSON.stringify(q));
+}
+function addToQueue(payload) {
+  const q = getQueue();
+  q.push({ ...payload, _queued: new Date().toISOString() });
+  saveQueue(q);
+  updateConnUI();
+}
+function clearFromQueue(idx) {
+  const q = getQueue();
+  q.splice(idx, 1);
+  saveQueue(q);
+  updateConnUI();
+}
+
+// ── Connection detection ──
+let isOnline = navigator.onLine;
+
+function updateConnUI() {
+  const dot  = document.getElementById('conn-dot');
+  const text = document.getElementById('conn-text');
+  const badge = document.getElementById('queue-badge');
+  const q = getQueue();
+
+  if (!isOnline) {
+    dot.style.background = '#e74c3c';
+    dot.style.boxShadow  = '0 0 6px #e74c3c';
+    text.style.color = '#e74c3c';
+    text.textContent = 'OFFLINE — Submissions will be saved and sent when reconnected';
+    document.getElementById('conn-bar').style.background = 'rgba(231,76,60,0.1)';
+  } else if (q.length > 0) {
+    dot.style.background = '#f5a623';
+    dot.style.boxShadow  = '0 0 6px #f5a623';
+    text.style.color = '#f5a623';
+    text.textContent = 'ONLINE — Syncing queued submissions…';
+    document.getElementById('conn-bar').style.background = 'rgba(245,166,35,0.08)';
+  } else {
+    dot.style.background = '#2ecc71';
+    dot.style.boxShadow  = '0 0 6px #2ecc71';
+    text.style.color = '#a0bcd0';
+    text.textContent = 'ONLINE — Data will sync immediately';
+    document.getElementById('conn-bar').style.background = '#1a2736';
+  }
+
+  if (q.length > 0) {
+    badge.style.display = 'inline-block';
+    badge.textContent = q.length + ' pending submission' + (q.length > 1 ? 's' : '');
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+async function sendPayload(payload) {
+  const res = await fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  });
+  const result = await res.json();
+  if (result.result !== 'success') throw new Error(result.error || 'Unknown error');
+}
+
+async function flushQueue() {
+  const q = getQueue();
+  if (q.length === 0 || !isOnline) return;
+  for (let i = q.length - 1; i >= 0; i--) {
+    try {
+      const item = { ...q[i] };
+      delete item._queued;
+      await sendPayload(item);
+      clearFromQueue(i);
+    } catch(err) {
+      console.warn('Queue flush failed for item', i, err);
+      break;
+    }
+  }
+  updateConnUI();
+}
+
+window.addEventListener('online',  () => { isOnline = true;  updateConnUI(); flushQueue(); });
+window.addEventListener('offline', () => { isOnline = false; updateConnUI(); });
+
+setInterval(() => { if (isOnline) flushQueue(); }, 30000);
+
+// ── Submit ──
+async function submitForm() {
+  if (!validate()) return;
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'SUBMITTING…';
+
+  const payload = {
+    Timestamp:   new Date().toISOString(),
+    CompanyID:   document.getElementById('h-company').value,
+    Project:     document.getElementById('h-project').value,
+    Location:    document.getElementById('h-location').value,
+    TagID:       document.getElementById('h-tagid').value,
+    SelectTrade: document.getElementById('trade').value,
+    Task:        document.getElementById('task').value,
+    Status:      document.getElementById('status').value,
+    VerifiedBy:  document.getElementById('scanner').value.trim(),
+    Notes:       document.getElementById('notes').value.trim(),
+    Photo:       photoBase64 ? JSON.stringify({data: photoBase64, mime: photoMime}) : ''
+  };
+
+  if (!isOnline) {
+    addToQueue(payload);
+    btn.disabled = false; btn.textContent = 'SUBMIT VERIFICATION';
+    showSuccessOffline(payload);
+    return;
+  }
+
+  try {
+    await sendPayload(payload);
+    showSuccess(payload);
+  } catch(err) {
+    addToQueue(payload);
+    btn.disabled = false; btn.textContent = 'SUBMIT VERIFICATION';
+    showSuccessOffline(payload);
+    console.warn('Submit failed, queued:', err);
+  }
+}
+
+function showSuccessOffline(p) {
+  document.getElementById('main-form').classList.add('hidden');
+  document.getElementById('success-screen').classList.add('visible');
+  document.getElementById('success-meta').innerHTML =
+    `<strong>${p.SelectTrade}</strong> · ${p.Task}<br>Status: <strong>${p.Status}</strong><br>${p.Project} · ${p.Location}<br><span style="color:#f5a623;font-size:12px;">📶 Saved offline — will sync when connected</span>`;
+}
+
+function showSuccess(p) {
+  document.getElementById('main-form').classList.add('hidden');
+  document.getElementById('success-screen').classList.add('visible');
+  document.getElementById('success-meta').innerHTML =
+    `<strong>${p.SelectTrade}</strong> · ${p.Task}<br>Status: <strong>${p.Status}</strong><br>${p.Project} · ${p.Location}`;
+}
+
+function resetForm() {
+  document.getElementById('main-form').classList.remove('hidden');
+  document.getElementById('success-screen').classList.remove('visible');
+  const btn = document.getElementById('submit-btn'); btn.disabled = false; btn.textContent = 'SUBMIT VERIFICATION';
+  document.getElementById('scanner').value = '';
+  document.getElementById('notes').value = '';
+  document.getElementById('trade').selectedIndex = 0;
+  document.getElementById('task').innerHTML = '<option value="">Select trade first…</option>';
+  document.getElementById('task').disabled = true;
+  document.getElementById('status').value = '';
+  document.querySelectorAll('.status-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('photo-name').style.display = 'none';
+  const prev = document.getElementById('photo-preview');
+  if (prev) { prev.src = ''; prev.style.display = 'none'; }
+  const warn = document.getElementById('photo-warning');
+  if (warn) warn.style.display = 'none';
+  photoBase64 = ''; photoMime = '';
+  const photoInput = document.getElementById('photo');
+  if (photoInput) photoInput.value = '';
+  document.getElementById('h-timestamp').value = new Date().toISOString();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  isOnline = navigator.onLine;
+  updateConnUI();
+  if (isOnline) flushQueue();
+});
+
+let toastTimer;
+function showToast(msg, type='success') {
+  const t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast ' + type + ' show';
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+}
+</script>
+
+<!--
+╔══════════════════════════════════════════════════════╗
+║         GOOGLE SHEETS SETUP — 5 MINUTES             ║
+╠══════════════════════════════════════════════════════╣
+║                                                      ║
+║  1. Open your Google Sheet (RAW_FormResponses tab)   ║
+║  2. Extensions → Apps Script → paste this code:     ║
+║                                                      ║
+║  function doPost(e) {                                ║
+║    const ss = SpreadsheetApp.getActiveSpreadsheet(); ║
+║    const sheet = ss.getSheetByName('RAW_FormResponses'); ║
+║    const d = JSON.parse(e.postData.contents);        ║
+║    sheet.appendRow([                                 ║
+║      d.Timestamp, d.CompanyID, d.Project,            ║
+║      d.Location,  d.TagID,     d.SelectTrade,        ║
+║      d.Task,      d.Status,    d.VerifiedBy,         ║
+║      d.Notes,     d.Photo                            ║
+║    ]);                                               ║
+║    return ContentService.createTextOutput('OK');     ║
+║  }                                                   ║
+║                                                      ║
+║  3. Deploy → New Deployment → Web App                ║
+║     Execute as: Me | Who has access: Anyone          ║
+║  4. Copy URL → replace WEBHOOK_URL above             ║
+║                                                      ║
+╠══════════════════════════════════════════════════════╣
+║              NFC TAG URL FORMAT                      ║
+╠══════════════════════════════════════════════════════╣
+║                                                      ║
+║  TAG_REGISTRY NFC_URL formula:                       ║
+║  ="https://verisite.build/verisite-form.html"        ║
+║  &"?company="&A2                                     ║
+║  &"&project="&ENCODEURL(B2)                          ║
+║  &"&location="&ENCODEURL(D2)                         ║
+║  &"&tagid="&E2                                       ║
+║                                                      ║
+╚══════════════════════════════════════════════════════╝
+-->
+</body>
+</html>
