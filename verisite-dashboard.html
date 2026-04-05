@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VeriSite — Operations Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black:   #080c10;
-    --navy:    #0f1923;
-    --steel:   #1a2736;
-    --mid:     #243447;
-    --border:  #2e4258;
-    --accent:  #f5a623;
+    --black:   #1A1B1E;
+    --navy:    #222326;
+    --steel:   #2a2b2f;
+    --mid:     #333438;
+    --border:  #3a3b40;
+    --accent:  #F0AE3C;
     --text:    #dde6ed;
     --muted:   #6b8fa8;
     --white:   #ffffff;
@@ -22,10 +22,10 @@
     --radius:  10px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--black); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
+  body { background: var(--black); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 14px; min-height: 100vh; overflow-x: hidden; }
   body::before {
     content: ''; position: fixed; inset: 0;
-    background: radial-gradient(ellipse at 20% 20%, rgba(245,166,35,0.04) 0%, transparent 50%),
+    background: radial-gradient(ellipse at 20% 20%, rgba(240,174,60,0.04) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 80%, rgba(41,128,185,0.04) 0%, transparent 50%);
     pointer-events: none; z-index: 0;
   }
@@ -40,17 +40,17 @@
   }
   .logo-mark { width: 36px; height: 36px; background: var(--accent); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .logo-mark svg { width: 20px; height: 20px; }
-  .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); line-height: 1; }
+  .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); text-transform: uppercase; line-height: 1; }
   .logo-sub  { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 600; }
   .header-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
   .client-pill {
-    background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.3);
+    background: rgba(240,174,60,0.1); border: 1px solid rgba(240,174,60,0.3);
     border-radius: 20px; padding: 6px 16px;
     font-size: 12px; font-weight: 600; color: var(--accent);
     display: flex; align-items: center; gap: 8px;
   }
-  .client-pill-sub { font-size: 10px; color: rgba(245,166,35,0.6); font-weight: 400; }
+  .client-pill-sub { font-size: 10px; color: rgba(240,174,60,0.6); font-weight: 400; }
 
   .filter-pill {
     background: var(--steel); border: 1px solid var(--border); border-radius: 20px;
@@ -94,20 +94,20 @@
     display: flex; align-items: center; justify-content: space-between;
     background: var(--steel); flex-shrink: 0;
   }
-  .drawer-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: var(--white); }
+  .drawer-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 2px; color: var(--white); }
   .drawer-close {
     background: none; border: none; color: var(--muted); font-size: 18px;
     cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
     border-radius: 5px; transition: all 0.15s;
   }
-  .drawer-close:hover { color: var(--accent); background: rgba(245,166,35,0.1); }
+  .drawer-close:hover { color: var(--accent); background: rgba(240,174,60,0.1); }
 
   .drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
   .drawer-section { margin-bottom: 24px; }
   .drawer-section-title {
     font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
     color: var(--accent); margin-bottom: 10px; padding-bottom: 6px;
-    border-bottom: 1px solid rgba(245,166,35,0.15);
+    border-bottom: 1px solid rgba(240,174,60,0.15);
   }
 
   .toggle-row {
@@ -116,7 +116,7 @@
     margin-bottom: 5px; border: 1px solid var(--border);
     transition: border-color 0.15s; cursor: pointer; user-select: none;
   }
-  .toggle-row:hover { border-color: rgba(245,166,35,0.3); }
+  .toggle-row:hover { border-color: rgba(240,174,60,0.3); }
   .toggle-label { font-size: 12px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 8px; }
   .toggle-icon { font-size: 13px; width: 20px; text-align: center; }
 
@@ -124,7 +124,7 @@
   .toggle-switch input { opacity: 0; width: 0; height: 0; }
   .toggle-slider { position: absolute; inset: 0; background: var(--mid); border-radius: 10px; cursor: pointer; transition: background 0.2s; }
   .toggle-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: var(--muted); border-radius: 50%; transition: transform 0.2s, background 0.2s; }
-  .toggle-switch input:checked + .toggle-slider { background: rgba(245,166,35,0.25); border: 1px solid rgba(245,166,35,0.4); }
+  .toggle-switch input:checked + .toggle-slider { background: rgba(240,174,60,0.25); border: 1px solid rgba(240,174,60,0.4); }
   .toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); background: var(--accent); }
 
   .setting-row {
@@ -136,7 +136,7 @@
   .setting-input {
     width: 56px; background: var(--mid); border: 1px solid var(--border);
     border-radius: 5px; color: var(--text); font-size: 12px; font-weight: 600;
-    padding: 4px 8px; text-align: center; outline: none; font-family: 'DM Sans', sans-serif;
+    padding: 4px 8px; text-align: center; outline: none; font-family: 'Poppins', sans-serif;
   }
   .setting-input:focus { border-color: var(--accent); }
 
@@ -147,17 +147,17 @@
     font-family: monospace;
   }
   .copy-btn {
-    width: 100%; background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.3);
+    width: 100%; background: rgba(240,174,60,0.08); border: 1px solid rgba(240,174,60,0.3);
     border-radius: 7px; color: var(--accent); font-size: 12px; font-weight: 600;
-    padding: 9px; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+    padding: 9px; cursor: pointer; transition: all 0.15s; font-family: 'Poppins', sans-serif;
   }
-  .copy-btn:hover { background: rgba(245,166,35,0.18); }
+  .copy-btn:hover { background: rgba(240,174,60,0.18); }
 
   /* ── Main layout ── */
   .main { position: relative; z-index: 1; padding: 24px; max-width: 1400px; margin: 0 auto; }
 
   .section-title {
-    font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 3px;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 3px;
     color: var(--accent); margin-bottom: 14px;
     display: flex; align-items: center; gap: 10px;
   }
@@ -177,7 +177,7 @@
   .kpi-card.red::before   { background: var(--red-l); }
   .kpi-card.blue::before  { background: var(--blue-l); }
   .kpi-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .kpi-value { font-family: 'Bebas Neue', sans-serif; font-size: 42px; line-height: 1; }
+  .kpi-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 42px; line-height: 1; }
   .kpi-value.amber { color: var(--accent); }
   .kpi-value.green { color: var(--green-l); }
   .kpi-value.red   { color: var(--red-l); }
@@ -188,10 +188,10 @@
 
   .card { background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; animation: fadeUp 0.5s ease both; }
   .card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--steel); }
-  .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 2px; color: var(--white); }
+  .card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--white); }
   .card-badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 10px; letter-spacing: 1px; }
   .card-badge.red   { background: rgba(231,76,60,0.15);   color: var(--red-l); }
-  .card-badge.amber { background: rgba(245,166,35,0.15);  color: var(--accent); }
+  .card-badge.amber { background: rgba(240,174,60,0.15);  color: var(--accent); }
   .card-badge.blue  { background: rgba(52,152,219,0.15);  color: var(--blue-l); }
   .card-badge.muted { background: rgba(107,143,168,0.15); color: var(--muted); }
   .card-body { padding: 16px 18px; }
@@ -207,10 +207,10 @@
   .stale-table th { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
   .stale-table td { padding: 10px; font-size: 12px; color: var(--text); border-bottom: 1px solid rgba(46,66,88,0.5); vertical-align: middle; }
   .stale-table tr:last-child td { border-bottom: none; }
-  .stale-table tr:hover td { background: rgba(245,166,35,0.03); }
+  .stale-table tr:hover td { background: rgba(240,174,60,0.03); }
   .age-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
   .age-badge.critical { background: rgba(231,76,60,0.15);  color: var(--red-l); }
-  .age-badge.warning  { background: rgba(245,166,35,0.15); color: var(--accent); }
+  .age-badge.warning  { background: rgba(240,174,60,0.15); color: var(--accent); }
   .age-badge.ok       { background: rgba(46,204,113,0.15); color: var(--green-l); }
 
   .activity-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid rgba(46,66,88,0.5); }
@@ -234,7 +234,7 @@
 
   .loading-overlay { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; transition: opacity 0.4s; }
   .loading-overlay.hidden { opacity: 0; pointer-events: none; }
-  .loading-logo { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 4px; color: var(--white); margin-bottom: 24px; }
+  .loading-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: 4px; color: var(--white); margin-bottom: 24px; }
   .loading-logo span { color: var(--accent); }
   .loading-bar-track { width: 200px; height: 3px; background: var(--steel); border-radius: 2px; overflow: hidden; }
   .loading-bar-fill  { height: 100%; background: var(--accent); border-radius: 2px; animation: loadBar 1.2s ease forwards; }
@@ -243,7 +243,7 @@
 
   .threshold-control { display: flex; align-items: center; gap: 8px; }
   .threshold-control label { font-size: 11px; color: var(--muted); }
-  .threshold-input { width: 48px; background: var(--mid); border: 1px solid var(--border); border-radius: 5px; color: var(--text); font-size: 12px; font-weight: 600; padding: 4px 8px; text-align: center; outline: none; font-family: 'DM Sans', sans-serif; }
+  .threshold-input { width: 48px; background: var(--mid); border: 1px solid var(--border); border-radius: 5px; color: var(--text); font-size: 12px; font-weight: 600; padding: 4px 8px; text-align: center; outline: none; font-family: 'Poppins', sans-serif; }
   .threshold-input:focus { border-color: var(--accent); }
 
   .error-banner { background: rgba(231,76,60,0.1); border: 1px solid var(--red-l); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: var(--red-l); display: none; }
@@ -277,9 +277,9 @@
   .pin-dot.error  { background:var(--red-l); }
   .pin-keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
   .pin-key { background:var(--steel); border:1px solid var(--border); border-radius:10px;
-    color:var(--white); font-family:'DM Sans',sans-serif; font-size:20px; font-weight:600;
+    color:var(--white); font-family:'Poppins',sans-serif; font-size:20px; font-weight:600;
     padding:16px; cursor:pointer; transition:all 0.1s; -webkit-tap-highlight-color:transparent; }
-  .pin-key:hover  { border-color:var(--accent); background:rgba(245,166,35,0.08); }
+  .pin-key:hover  { border-color:var(--accent); background:rgba(240,174,60,0.08); }
   .pin-key:active { transform:scale(0.95); }
   .pin-key.del    { font-size:16px; color:var(--muted); }
   .pin-key.empty  { background:transparent; border-color:transparent; cursor:default; }
@@ -305,13 +305,13 @@
   .photo-modal-footer { padding:12px 18px; border-top:1px solid var(--border);
     display:flex; justify-content:flex-end; gap:10px; }
   .photo-btn { background:var(--accent); color:#000; border:none; border-radius:6px;
-    font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
+    font-family:'Poppins',sans-serif; font-size:12px; font-weight:700;
     padding:8px 16px; cursor:pointer; text-decoration:none; display:inline-block; }
   .photo-btn.secondary { background:var(--steel); color:var(--text); border:1px solid var(--border); }
   /* ── Scan Log ── */
   .th-filter, .th-search { display:block; width:100%; margin-top:6px;
     background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08);
-    border-radius:4px; color:var(--text); font-family:'DM Sans',sans-serif;
+    border-radius:4px; color:var(--text); font-family:'Poppins',sans-serif;
     font-size:11px; font-weight:400; padding:4px 6px; outline:none;
     letter-spacing:0; text-transform:none; box-sizing:border-box; }
   .th-filter { cursor:pointer; }
@@ -321,7 +321,7 @@
   .scan-log-wrap { margin-top: 28px; }
   .scan-log-filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
   .scan-filter { background:var(--steel); border:1px solid var(--border); border-radius:6px;
-    color:var(--text); font-family:'DM Sans',sans-serif; font-size:12px; padding:7px 12px;
+    color:var(--text); font-family:'Poppins',sans-serif; font-size:12px; padding:7px 12px;
     outline:none; cursor:pointer; transition:border-color 0.2s; }
   .scan-filter:focus { border-color:var(--accent); }
   .scan-filter option { background:var(--steel); }
@@ -347,10 +347,10 @@
   .log-table .td-trade { color:var(--accent); }
   .log-count { font-size:11px; color:var(--muted); margin-left:auto; }
   .active-filter-pill { display:inline-flex; align-items:center; gap:6px;
-    background:rgba(245,166,35,0.12); border:1px solid rgba(245,166,35,0.3);
+    background:rgba(240,174,60,0.12); border:1px solid rgba(240,174,60,0.3);
     border-radius:12px; padding:3px 10px; font-size:11px; color:var(--accent);
     cursor:pointer; }
-  .active-filter-pill:hover { background:rgba(245,166,35,0.2); }
+  .active-filter-pill:hover { background:rgba(240,174,60,0.2); }
   @media(max-width:700px){.header-center{display:none}}
   @media(max-width:700px){.header-right .mobile-company{display:flex!important}}
   @media(min-width:701px){.mobile-company{display:none!important}}
@@ -468,7 +468,7 @@
     </svg>
   </div>
   <div>
-    <div class="logo-text">VeriSite</div>
+    <div class="logo-text">VERISITE</div>
     <div class="logo-sub">Operations Dashboard</div>
   </div>
 
@@ -477,7 +477,7 @@
   </div>
 
   <div class="header-right">
-    <div class="mobile-company" id="mobile-company-pill" style="display:none;align-items:center;gap:6px;background:rgba(245,166,35,0.12);border:1px solid rgba(245,166,35,0.3);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:1px;color:#f5a623;"></div>
+    <div class="mobile-company" id="mobile-company-pill" style="display:none;align-items:center;gap:6px;background:rgba(240,174,60,0.12);border:1px solid rgba(240,174,60,0.3);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:1px;color:#F0AE3C;"></div>
     <div class="live-dot"></div>
     <span class="last-update" id="last-update">—</span>
     <button class="icon-btn" id="export-btn" onclick="exportCSV()" title="Export to CSV" style="font-size:11px;padding:0 8px;letter-spacing:0.5px;">⬇ CSV</button>
@@ -574,17 +574,17 @@
         <input type="text" id="loc-search" placeholder="Search locations…"
           oninput="renderLocations()"
           style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
-                 color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;
+                 color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;
                  padding:5px 10px;outline:none;width:160px;">
         <select id="loc-status-filter" onchange="renderLocations()"
           style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
-                 color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;
+                 color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;
                  padding:5px 10px;outline:none;cursor:pointer;">
           <option value="">All Statuses</option>
         </select>
         <button id="loc-view-toggle" onclick="toggleLocView()"
           style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
-                 color:var(--muted);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;
+                 color:var(--muted);font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;
                  padding:5px 12px;cursor:pointer;letter-spacing:0.5px;">
           ⊞ Cards
         </button>
@@ -741,7 +741,7 @@ const clientDisplay = (id) => CLIENT_NAMES[id] || id;
 
 const STATUS_CONFIG = {
   'In Progress':       { color:'#3498db', bg:'rgba(52,152,219,0.15)',  order:1 },
-  'Inspection Ready':  { color:'#f5a623', bg:'rgba(245,166,35,0.15)', order:2 },
+  'Inspection Ready':  { color:'#F0AE3C', bg:'rgba(240,174,60,0.15)', order:2 },
   'Passed Inspection': { color:'#2ecc71', bg:'rgba(46,204,113,0.15)', order:3 },
   'Punch Complete':    { color:'#1abc9c', bg:'rgba(26,188,156,0.15)', order:4 },
 };
@@ -1057,7 +1057,7 @@ function renderLocations() {
       return `<tr style="cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans">
         <td>
           <span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span>
-          ${stale ? '<span style="margin-left:6px;font-size:9px;font-weight:700;color:var(--accent);background:rgba(245,166,35,0.1);padding:1px 6px;border-radius:8px;border:1px solid rgba(245,166,35,0.3)">STALE</span>' : ''}
+          ${stale ? '<span style="margin-left:6px;font-size:9px;font-weight:700;color:var(--accent);background:rgba(240,174,60,0.1);padding:1px 6px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>' : ''}
           <div style="font-size:10px;color:var(--muted);margin-top:1px">${r['Project']||''}</div>
         </td>
         <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
@@ -1075,13 +1075,13 @@ function renderLocations() {
           const cfg   = STATUS_CONFIG[r['Status']] || {color:'var(--muted)', bg:'rgba(122,150,168,0.1)'};
           const age   = Math.floor((new Date() - r._ts) / 86400000);
           const stale = age >= sd;
-          return `<div class="card" style="border-color:${stale?'rgba(245,166,35,0.3)':'var(--border)'};cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans for ${r['Location']}">
+          return `<div class="card" style="border-color:${stale?'rgba(240,174,60,0.3)':'var(--border)'};cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans for ${r['Location']}">
             <div style="padding:14px 16px;border-bottom:1px solid var(--border);background:var(--steel);display:flex;justify-content:space-between;align-items:center;">
               <div>
                 <div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div>
                 <div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div>
               </div>
-              ${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(245,166,35,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(245,166,35,0.3)">STALE</span>':''}
+              ${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(240,174,60,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>':''}
             </div>
             <div style="padding:12px 16px;">
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">

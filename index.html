@@ -6,19 +6,19 @@
 <title>VeriSite — Real-Time Field Verification for Construction</title>
 <link rel="canonical" href="https://www.verisite.build">
 <meta name="description" content="Know exactly what got built today. VeriSite uses NFC tags to log real-time work verification directly from the field to your dashboard.">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black:  #05080b;
-    --navy:   #0c1520;
-    --steel:  #162030;
-    --mid:    #1e2f42;
-    --border: #253a52;
-    --amber:  #f5a623;
-    --amber2: #e8941a;
-    --text:   #c8d8e8;
-    --muted:  #5a7a96;
-    --white:  #f0f6fc;
+    --black:  #1A1B1E;
+    --navy:   #222326;
+    --steel:  #2a2b2f;
+    --mid:    #333438;
+    --border: #3a3b40;
+    --amber:  #F0AE3C;
+    --amber2: #d49a2e;
+    --text:   #e8e8e8;
+    --muted:  #6B7280;
+    --white:  #ffffff;
     --green:  #2ecc71;
     --red:    #e74c3c;
   }
@@ -30,7 +30,7 @@
   body {
     background: var(--black);
     color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
@@ -41,8 +41,8 @@
     content: '';
     position: fixed; inset: 0;
     background-image:
-      linear-gradient(rgba(245,166,35,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,166,35,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(240,174,60,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,174,60,0.03) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none; z-index: 0;
   }
@@ -52,9 +52,9 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 0 48px; height: 64px;
     display: flex; align-items: center; justify-content: space-between;
-    background: rgba(5,8,11,0.85);
+    background: rgba(26,27,30,0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(245,166,35,0.12);
+    border-bottom: 1px solid rgba(240,174,60,0.12);
   }
   .nav-logo {
     display: flex; align-items: center; gap: 10px;
@@ -66,8 +66,8 @@
   }
   .nav-mark svg { width: 18px; height: 18px; }
   .nav-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px; letter-spacing: 2px; color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 20px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); text-transform: uppercase;
   }
   .nav-links { display: flex; align-items: center; gap: 32px; }
   .nav-links a {
@@ -98,13 +98,14 @@
     position: absolute;
     top: -200px; left: -200px;
     width: 800px; height: 800px;
-    background: radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(240,174,60,0.07) 0%, transparent 65%);
     pointer-events: none;
   }
 
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'Space Mono', monospace;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--amber); margin-bottom: 24px;
   }
@@ -114,7 +115,8 @@
   }
 
   .hero-headline {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: clamp(56px, 9vw, 120px);
     line-height: 0.92;
     letter-spacing: 2px;
@@ -144,17 +146,17 @@
   .btn-primary {
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--amber); color: var(--black);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
     padding: 14px 28px; border-radius: 6px; border: none; cursor: pointer;
     text-decoration: none; transition: all 0.2s;
   }
-  .btn-primary:hover { background: var(--amber2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,166,35,0.25); }
+  .btn-primary:hover { background: var(--amber2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(240,174,60,0.25); }
 
   .btn-ghost {
     display: inline-flex; align-items: center; gap: 8px;
     background: transparent; color: var(--text);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
     padding: 13px 28px; border-radius: 6px;
     border: 1px solid var(--border); cursor: pointer;
@@ -170,7 +172,8 @@
   }
   .stat-item {}
   .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 40px; color: var(--amber); line-height: 1;
   }
   .stat-label {
@@ -186,7 +189,8 @@
   .section-inner { max-width: 1100px; margin: 0 auto; }
 
   .section-tag {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
     color: var(--amber); margin-bottom: 16px;
     display: flex; align-items: center; gap: 10px;
@@ -194,7 +198,8 @@
   .section-tag::after { content: ''; flex: 0 0 32px; height: 1px; background: var(--amber); }
 
   .section-headline {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: clamp(36px, 5vw, 64px);
     color: var(--white); line-height: 1.05;
     letter-spacing: 1px; margin-bottom: 20px;
@@ -226,7 +231,8 @@
     font-size: 18px; margin-bottom: 20px;
   }
   .problem-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 20px; letter-spacing: 1px; color: var(--white);
     margin-bottom: 10px;
   }
@@ -242,23 +248,25 @@
   }
   .step:last-child { border-bottom: none; }
   .step-num {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 48px; color: var(--border); line-height: 1;
     transition: color 0.3s;
   }
   .step:hover .step-num { color: var(--amber); }
   .step-content {}
   .step-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 24px; letter-spacing: 1px; color: var(--white);
     margin-bottom: 8px;
   }
   .step-body { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 560px; }
   .step-tag {
     display: inline-block; margin-top: 10px;
-    font-family: 'Space Mono', monospace; font-size: 10px;
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10px;
     color: var(--amber); letter-spacing: 2px; text-transform: uppercase;
-    background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.2);
+    background: rgba(240,174,60,0.08); border: 1px solid rgba(240,174,60,0.2);
     padding: 3px 10px; border-radius: 4px;
   }
 
@@ -273,7 +281,7 @@
   .form-section::before {
     content: '';
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at 70% 50%, rgba(245,166,35,0.05) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 70% 50%, rgba(240,174,60,0.05) 0%, transparent 60%);
     pointer-events: none;
   }
   .form-inner {
@@ -284,7 +292,8 @@
 
   .form-left {}
   .form-headline {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: clamp(36px, 4vw, 56px);
     color: var(--white); line-height: 1.05; margin-bottom: 20px;
   }
@@ -310,8 +319,8 @@
     padding: 36px;
   }
   .form-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px; letter-spacing: 2px; color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 20px; letter-spacing: 2px; color: var(--white); text-transform: uppercase;
     margin-bottom: 4px;
   }
   .form-sub { font-size: 12px; color: var(--muted); margin-bottom: 28px; }
@@ -326,7 +335,7 @@
     width: 100%;
     background: var(--mid); border: 1px solid var(--border);
     border-radius: 6px; color: var(--white);
-    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    font-family: 'Poppins', sans-serif; font-size: 14px;
     padding: 11px 14px; outline: none;
     transition: border-color 0.2s;
     -webkit-appearance: none; appearance: none;
@@ -339,12 +348,12 @@
   .submit-btn {
     width: 100%; margin-top: 8px;
     background: var(--amber); color: var(--black);
-    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    font-family: 'Poppins', sans-serif; font-size: 14px;
     font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
     padding: 14px; border-radius: 6px; border: none; cursor: pointer;
     transition: all 0.2s;
   }
-  .submit-btn:hover { background: var(--amber2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,166,35,0.3); }
+  .submit-btn:hover { background: var(--amber2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(240,174,60,0.3); }
   .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
   .form-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; }
@@ -355,7 +364,7 @@
   }
   .form-success.visible { display: block; }
   .success-icon { font-size: 40px; margin-bottom: 16px; }
-  .success-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--amber); letter-spacing: 2px; margin-bottom: 8px; }
+  .success-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 28px; color: var(--amber); letter-spacing: 2px; margin-bottom: 8px; }
   .success-body { font-size: 14px; color: var(--muted); }
 
   /* ── FOOTER ── */
@@ -367,13 +376,20 @@
     flex-wrap: wrap; gap: 16px;
   }
   .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 18px; letter-spacing: 2px; color: var(--muted);
   }
   .footer-logo span { color: var(--amber); }
   .footer-text { font-size: 12px; color: var(--muted); }
+  .footer-tagline-primary {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 13px; letter-spacing: 3px; color: var(--amber);
+    text-transform: uppercase;
+  }
   .footer-tagline {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 13px; letter-spacing: 2px; color: var(--amber);
     text-transform: uppercase; opacity: 0.85;
   }
@@ -402,7 +418,8 @@
     white-space: nowrap;
   }
   .ticker-item {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
     font-size: 13px; letter-spacing: 3px;
     color: var(--black); padding: 0 32px;
     display: flex; align-items: center; gap: 16px;
@@ -437,7 +454,7 @@
         <path d="M7 18l3.5 3.5L17 15" stroke="#0a0a0a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
-    <span class="nav-name">VeriSite</span>
+    <span class="nav-name">VERISITE</span>
   </a>
   <div class="nav-links">
     <a href="#problem">The Problem</a>
@@ -466,7 +483,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">Field Verification System</div>
+  <div class="hero-eyebrow">Field Verification. Built for Construction.</div>
   <h1 class="hero-headline">
     What got built<br>
     today?
@@ -485,7 +502,7 @@
   </div>
   <div class="hero-stats">
     <div class="stat-item">
-      <div class="stat-num">5s</div>
+      <div class="stat-num">15s</div>
       <div class="stat-label">To log a verification</div>
     </div>
     <div class="stat-item">
@@ -651,8 +668,9 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Veri<span>Site</span></div>
+  <div class="footer-logo">VERI<span>SITE</span></div>
   <div class="footer-text">© 2026 VeriSite LLC. North Alabama.</div>
+  <div class="footer-tagline-primary">Field Verification. Built for Construction.</div>
   <div class="footer-tagline">We don't manage your project. We verify what's built.</div>
 </footer>
 
