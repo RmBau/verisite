@@ -159,6 +159,12 @@
   .new-scan-btn:hover { background: rgba(240,174,60,0.1); }
 
   @media (max-width: 480px) { .status-grid { grid-template-columns: 1fr 1fr; } }
+/* Hide Procore connect button — replaced by View Dashboard */
+  #procore-connect-btn,
+  .procore-btn,
+  [id*="procore"],
+  [class*="procore"] { display: none !important; }
+  
 </style>
 </head>
 <body>
@@ -280,6 +286,15 @@
   <div class="success-title">Verification Logged</div>
   <div class="success-meta" id="success-meta"></div>
   <button class="new-scan-btn" onclick="resetForm()">LOG ANOTHER SCAN</button>
+  <a id="dashboard-link" href="#" target="_blank"
+    style="display:inline-block;margin-top:12px;padding:12px 32px;
+           background:rgba(240,174,60,0.08);border:1.5px solid var(--accent);
+           border-radius:var(--radius);color:var(--accent);
+           font-family:'Barlow Condensed',sans-serif;font-weight:700;
+           font-size:16px;letter-spacing:2px;text-decoration:none;
+           transition:background 0.2s;">
+    VIEW DASHBOARD →
+  </a>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -385,6 +400,14 @@ const TRADE_TASKS = {
     const o = document.createElement('option');
     o.value = t; o.textContent = t; tradeEl.appendChild(o);
   });
+  // Wire dashboard link
+  const dashLink = document.getElementById('dashboard-link');
+  if (dashLink) {
+    let dashUrl = 'https://verisite.build/verisite-dashboard.html';
+    if (company) dashUrl += '?company=' + encodeURIComponent(company);
+    if (project) dashUrl += (company ? '&' : '?') + 'project=' + encodeURIComponent(project);
+    dashLink.href = dashUrl;
+  }
 })();
 
 document.getElementById('trade').addEventListener('change', function() {
