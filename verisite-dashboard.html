@@ -805,7 +805,7 @@ function syncStale(val) {
 // ═══════════════════════════════════════════════
 // URL LOCKING
 // ═══════════════════════════════════════════════
-function initURL() {
+async function initURL() {
   const params  = new URLSearchParams(window.location.search);
   lockedCompany = params.get('company') || '';
   lockedProject = params.get('project') || '';
@@ -828,10 +828,39 @@ function initURL() {
     document.getElementById('share-url-box').textContent = url;
     document.getElementById('share-section').style.display = 'block';
   } else {
+    // Load projects from sheet for the selector
+    const projects = await loadProjects();
+    const projectsByCompany = {};
+    projects.forEach(p => {
+      if (!projectsByCompany[p.CompanyID]) projectsByCompany[p.CompanyID] = [];
+      projectsByCompany[p.CompanyID].push(p);
+    });
+
     center.innerHTML = `
-      <select class="filter-pill" id="project-filter" onchange="applyFilters()"><option value="">All Projects</option></select>
-      <select class="filter-pill" id="company-filter" onchange="applyFilters()"><option value="">All Clients</option></select>`;
+      <select class="filter-pill" id="company-filter" onchange="onCompanyChange()" style="min-width:160px;">
+        <option value="">All Clients</option>
+      </select>
+      <select class="filter-pill" id="project-filter" onchange="applyFilters()" style="min-width:180px;">
+        <option value="">All Projects</option>
+      </select>`;
+
+    // Store for use in onCompanyChange
+    window._projectsByCompany = projectsByCompany;
+    window._allProjects = projects;
   }
+}
+
+function onCompanyChange() {
+  const cf = document.getElementById('company-filter');
+  const pf = document.getElementById('project-filter');
+  if (!cf || !pf) return;
+  const comp = cf.value;
+  const projects = comp
+    ? (window._projectsByCompany[comp] || [])
+    : (window._allProjects || []);
+  pf.innerHTML = '<option value="">All Projects</option>' +
+    projects.map(p => `<option value="${p.ProjectName}">${p.ProjectName}</option>`).join('');
+  applyFilters();
 }
 
 function copyShareUrl() {
@@ -894,7 +923,14 @@ async function loadClients() {
     // Non-fatal — falls back to showing CompanyID
   }
 }
-
+async function loadProjects() {
+  try {
+    const res  = await fetch(`${WEBHOOK_URL}?action=getProjects`);
+    const json = await res.json();
+    if (json.result === 'success') return json.projects || [];
+  } catch(e) {}
+  return [];
+}
 async function loadData() {
   const btn = document.getElementById('refresh-btn');
   btn.classList.add('spinning');
@@ -921,10 +957,10 @@ async function loadData() {
 }
 
 function populateFilters() {
-  if (lockedCompany || lockedProject) return;
-  const pf = document.getElementById('project-filter');
-  const cf = document.getElementById('company-filter');
-  if (!pf||!cf) return;
+if (lockedCompany || lockedProject) return;
+const pf = document.getElementById('project-filter');
+const cf = document.getElementById('company-filter');
+if (!pf || !cf) return;
   const pVal = pf.value, cVal = cf.value;
   const projs = [...new Set(allData.map(r=>r['Project']).filter(Boolean))].sort();
   const comps = [...new Set(allData.map(r=>r['CompanyID']).filter(Boolean))].sort();
@@ -1351,9 +1387,10 @@ let clientPins = {};
 // ═══════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════
-initURL();
+
 applyPrefsToDOM(loadPrefs());
-loadClients().then(() => {
+loadClients().then(async () => {
+  await initURL();
   checkPinSession();
   loadData();
 });
