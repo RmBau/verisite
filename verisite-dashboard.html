@@ -40,7 +40,7 @@
   }
   .logo-mark { width: 36px; height: 36px; background: var(--accent); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .logo-mark svg { width: 20px; height: 20px; }
-  .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); text-transform: uppercase; line-height: 1; }
+  .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); line-height: 1; }
   .logo-sub  { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 600; }
   .header-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
@@ -233,6 +233,15 @@
   .empty-icon  { font-size: 28px; margin-bottom: 8px; opacity: 0.5; }
   .empty-text  { font-size: 12px; }
 
+  /* ── Select prompt ── */
+  .select-prompt {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 80px 24px; text-align: center;
+  }
+  .select-prompt-icon { font-size: 48px; margin-bottom: 20px; opacity: 0.3; }
+  .select-prompt-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .select-prompt-sub { font-size: 12px; color: var(--muted); }
+
   .loading-overlay { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; transition: opacity 0.4s; }
   .loading-overlay.hidden { opacity: 0; pointer-events: none; }
   .loading-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: 4px; color: var(--white); margin-bottom: 24px; }
@@ -249,7 +258,6 @@
 
   .error-banner { background: rgba(231,76,60,0.1); border: 1px solid var(--red-l); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: var(--red-l); display: none; }
 
-  /* Hidden via prefs */
   [data-hidden="true"] { display: none !important; }
 
   @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
@@ -257,14 +265,12 @@
   .kpi-card:nth-child(3){animation-delay:0.15s} .kpi-card:nth-child(4){animation-delay:0.20s}
 
   @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
-  /* ── PIN Screen ── */
   .pin-overlay { display:none; position:fixed; inset:0; background:var(--navy);
     z-index:2000; align-items:center; justify-content:center; flex-direction:column; }
   .pin-overlay.active { display:flex; }
   .pin-box { background:var(--card); border:1px solid var(--border); border-radius:16px;
     padding:40px 36px; width:100%; max-width:360px; text-align:center; }
-  .pin-logo { display:flex; align-items:center; justify-content:center; gap:10px;
-    margin-bottom:28px; }
+  .pin-logo { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:28px; }
   .pin-logo-badge { width:36px; height:36px; background:var(--accent); border-radius:7px;
     display:flex; align-items:center; justify-content:center; font-size:18px; }
   .pin-logo-text { font-size:18px; font-weight:800; color:var(--white); letter-spacing:1px; }
@@ -272,8 +278,7 @@
   .pin-title { font-size:15px; font-weight:700; color:var(--white); margin-bottom:6px; }
   .pin-subtitle { font-size:12px; color:var(--muted); margin-bottom:28px; }
   .pin-dots { display:flex; justify-content:center; gap:12px; margin-bottom:24px; }
-  .pin-dot { width:14px; height:14px; border-radius:50%; background:var(--border);
-    transition:background 0.15s; }
+  .pin-dot { width:14px; height:14px; border-radius:50%; background:var(--border); transition:background 0.15s; }
   .pin-dot.filled { background:var(--accent); }
   .pin-dot.error  { background:var(--red-l); }
   .pin-keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
@@ -285,8 +290,6 @@
   .pin-key.del    { font-size:16px; color:var(--muted); }
   .pin-key.empty  { background:transparent; border-color:transparent; cursor:default; }
   .pin-error { font-size:12px; color:var(--red-l); margin-top:16px; min-height:18px; }
-  .pin-lockout { font-size:12px; color:var(--red-l); margin-top:16px; }
-  /* ── Photo Modal ── */
   .photo-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85);
     z-index:1000; align-items:center; justify-content:center; padding:20px; }
   .photo-modal-overlay.open { display:flex; }
@@ -301,15 +304,13 @@
   .photo-modal-close:hover { color:var(--white); }
   .photo-modal-body { flex:1; overflow:auto; display:flex; align-items:center;
     justify-content:center; padding:16px; background:var(--navy); }
-  .photo-modal-body img { max-width:100%; max-height:70vh; border-radius:6px;
-    object-fit:contain; }
+  .photo-modal-body img { max-width:100%; max-height:70vh; border-radius:6px; object-fit:contain; }
   .photo-modal-footer { padding:12px 18px; border-top:1px solid var(--border);
     display:flex; justify-content:flex-end; gap:10px; }
   .photo-btn { background:var(--accent); color:#000; border:none; border-radius:6px;
     font-family:'Poppins',sans-serif; font-size:12px; font-weight:700;
     padding:8px 16px; cursor:pointer; text-decoration:none; display:inline-block; }
   .photo-btn.secondary { background:var(--steel); color:var(--text); border:1px solid var(--border); }
-  /* ── Scan Log ── */
   .th-filter, .th-search { display:block; width:100%; margin-top:6px;
     background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08);
     border-radius:4px; color:var(--text); font-family:'Poppins',sans-serif;
@@ -320,12 +321,6 @@
   .th-filter option { background:var(--steel); }
   .th-search::placeholder { color:var(--muted); }
   .scan-log-wrap { margin-top: 28px; }
-  .scan-log-filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
-  .scan-filter { background:var(--steel); border:1px solid var(--border); border-radius:6px;
-    color:var(--text); font-family:'Poppins',sans-serif; font-size:12px; padding:7px 12px;
-    outline:none; cursor:pointer; transition:border-color 0.2s; }
-  .scan-filter:focus { border-color:var(--accent); }
-  .scan-filter option { background:var(--steel); }
   .log-table-wrap { overflow-x:auto; border-radius:8px; border:1px solid var(--border); }
   .log-table { width:100%; border-collapse:collapse; font-size:12px; }
   .log-table th { background:var(--steel); color:var(--muted); font-weight:700;
@@ -347,14 +342,10 @@
   .log-table .td-loc { font-weight:600; color:var(--white); }
   .log-table .td-trade { color:var(--accent); }
   .log-count { font-size:11px; color:var(--muted); margin-left:auto; }
-  .active-filter-pill { display:inline-flex; align-items:center; gap:6px;
-    background:rgba(240,174,60,0.12); border:1px solid rgba(240,174,60,0.3);
-    border-radius:12px; padding:3px 10px; font-size:11px; color:var(--accent);
-    cursor:pointer; }
-  .active-filter-pill:hover { background:rgba(240,174,60,0.2); }
+  .scan-filter { background:var(--steel); border:1px solid var(--border); border-radius:6px;
+    color:var(--text); font-family:'Poppins',sans-serif; font-size:12px; padding:7px 12px;
+    outline:none; cursor:pointer; transition:border-color 0.2s; }
   @media(max-width:700px){.header-center{display:none}}
-  @media(max-width:700px){.header-right .mobile-company{display:flex!important}}
-  @media(min-width:701px){.mobile-company{display:none!important}}
   @media(max-width:500px){.main{padding:16px}.header{padding:0 16px}}
 </style>
 </head>
@@ -363,82 +354,31 @@
 <div class="loading-overlay" id="loading-overlay">
   <div class="loading-logo">Veri<span>Site</span></div>
   <div class="loading-bar-track"><div class="loading-bar-fill"></div></div>
-  <div class="loading-text">LOADING FIELD DATA…</div>
+  <div class="loading-text">LOADING…</div>
 </div>
 
-<!-- Settings overlay -->
 <div class="settings-overlay" id="settings-overlay" onclick="closeSettings()"></div>
-
-<!-- Settings drawer -->
 <div class="settings-drawer" id="settings-drawer">
   <div class="drawer-header">
     <span class="drawer-title">Dashboard Settings</span>
     <button class="drawer-close" onclick="closeSettings()">✕</button>
   </div>
   <div class="drawer-body">
-
     <div class="drawer-section">
       <div class="drawer-section-title">KPI Cards</div>
-      <div class="toggle-row" onclick="togglePref('kpi','total')">
-        <span class="toggle-label"><span class="toggle-icon">📊</span>Total Check-Ins</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-kpi-total" onchange="togglePref('kpi','total')"><span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="toggle-row" onclick="togglePref('kpi','failed')">
-        <span class="toggle-label"><span class="toggle-icon">🟡</span>Inspection Ready</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-kpi-failed" onchange="togglePref('kpi','failed')"><span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="toggle-row" onclick="togglePref('kpi','stale')">
-        <span class="toggle-label"><span class="toggle-icon">⏱️</span>Stale Locations</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-kpi-stale" onchange="togglePref('kpi','stale')"><span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="toggle-row" onclick="togglePref('kpi','done')">
-        <span class="toggle-label"><span class="toggle-icon">✅</span>Final Complete</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-kpi-done" onchange="togglePref('kpi','done')"><span class="toggle-slider"></span>
-        </label>
-      </div>
+      <div class="toggle-row" onclick="togglePref('kpi','total')"><span class="toggle-label"><span class="toggle-icon">📊</span>Total Check-Ins</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-kpi-total" onchange="togglePref('kpi','total')"><span class="toggle-slider"></span></label></div>
+      <div class="toggle-row" onclick="togglePref('kpi','failed')"><span class="toggle-label"><span class="toggle-icon">🟡</span>Inspection Ready</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-kpi-failed" onchange="togglePref('kpi','failed')"><span class="toggle-slider"></span></label></div>
+      <div class="toggle-row" onclick="togglePref('kpi','stale')"><span class="toggle-label"><span class="toggle-icon">⏱️</span>Stale Locations</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-kpi-stale" onchange="togglePref('kpi','stale')"><span class="toggle-slider"></span></label></div>
+      <div class="toggle-row" onclick="togglePref('kpi','done')"><span class="toggle-label"><span class="toggle-icon">✅</span>Final Complete</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-kpi-done" onchange="togglePref('kpi','done')"><span class="toggle-slider"></span></label></div>
     </div>
-
     <div class="drawer-section">
       <div class="drawer-section-title">Dashboard Sections</div>
-      <div class="toggle-row" onclick="togglePref('sec','status')">
-        <span class="toggle-label"><span class="toggle-icon">📈</span>Status Breakdown</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-sec-status" onchange="togglePref('sec','status')"><span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="toggle-row" onclick="togglePref('sec','failedlist')">
-        <span class="toggle-label"><span class="toggle-icon">🔔</span>Pending Inspections List</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-sec-failedlist" onchange="togglePref('sec','failedlist')"><span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="toggle-row" onclick="togglePref('sec','stalelist')">
-        <span class="toggle-label"><span class="toggle-icon">🏷️</span>Stale Locations Table</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-sec-stalelist" onchange="togglePref('sec','stalelist')"><span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="toggle-row" onclick="togglePref('sec','activity')">
-        <span class="toggle-label"><span class="toggle-icon">📋</span>Recent Activity</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-sec-activity" onchange="togglePref('sec','activity')"><span class="toggle-slider"></span>
-        </label>
-      </div>
-      <div class="toggle-row" onclick="togglePref('sec','locations')">
-        <span class="toggle-label"><span class="toggle-icon">📍</span>Latest Status by Location</span>
-        <label class="toggle-switch" onclick="event.stopPropagation()">
-          <input type="checkbox" id="tog-sec-locations" onchange="togglePref('sec','locations')"><span class="toggle-slider"></span>
-        </label>
-      </div>
+      <div class="toggle-row" onclick="togglePref('sec','status')"><span class="toggle-label"><span class="toggle-icon">📈</span>Status Breakdown</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-sec-status" onchange="togglePref('sec','status')"><span class="toggle-slider"></span></label></div>
+      <div class="toggle-row" onclick="togglePref('sec','failedlist')"><span class="toggle-label"><span class="toggle-icon">🔔</span>Pending Inspections List</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-sec-failedlist" onchange="togglePref('sec','failedlist')"><span class="toggle-slider"></span></label></div>
+      <div class="toggle-row" onclick="togglePref('sec','stalelist')"><span class="toggle-label"><span class="toggle-icon">🏷️</span>Stale Locations Table</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-sec-stalelist" onchange="togglePref('sec','stalelist')"><span class="toggle-slider"></span></label></div>
+      <div class="toggle-row" onclick="togglePref('sec','activity')"><span class="toggle-label"><span class="toggle-icon">📋</span>Recent Activity</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-sec-activity" onchange="togglePref('sec','activity')"><span class="toggle-slider"></span></label></div>
+      <div class="toggle-row" onclick="togglePref('sec','locations')"><span class="toggle-label"><span class="toggle-icon">📍</span>Latest Status by Location</span><label class="toggle-switch" onclick="event.stopPropagation()"><input type="checkbox" id="tog-sec-locations" onchange="togglePref('sec','locations')"><span class="toggle-slider"></span></label></div>
     </div>
-
     <div class="drawer-section">
       <div class="drawer-section-title">Stale Threshold</div>
       <div class="setting-row">
@@ -449,13 +389,11 @@
         </div>
       </div>
     </div>
-
     <div class="drawer-section" id="share-section" style="display:none">
       <div class="drawer-section-title">Client Share Link</div>
       <div class="share-box" id="share-url-box">—</div>
       <button class="copy-btn" id="copy-btn" onclick="copyShareUrl()">⎘&nbsp; Copy Client Link</button>
     </div>
-
   </div>
 </div>
 
@@ -472,13 +410,8 @@
     <div class="logo-text">VERISITE</div>
     <div class="logo-sub">Operations Dashboard</div>
   </div>
-
-  <div class="header-center" id="header-center">
-    <!-- populated by JS -->
-  </div>
-
+  <div class="header-center" id="header-center"></div>
   <div class="header-right">
-    <div class="mobile-company" id="mobile-company-pill" style="display:none;align-items:center;gap:6px;background:rgba(240,174,60,0.12);border:1px solid rgba(240,174,60,0.3);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:1px;color:#F0AE3C;"></div>
     <div class="live-dot"></div>
     <span class="last-update" id="last-update">—</span>
     <button class="icon-btn" id="export-btn" onclick="exportCSV()" title="Export to CSV" style="font-size:11px;padding:0 8px;letter-spacing:0.5px;">⬇ CSV</button>
@@ -491,191 +424,130 @@
 <div class="main">
   <div class="error-banner" id="error-banner"></div>
 
-  <!-- KPI Strip -->
-  <div class="section-title">OPS SUMMARY</div>
-  <div class="kpi-grid">
-    <div class="kpi-card amber" id="kpi-wrap-total" onclick="filterLogByKPI('total')" style="cursor:pointer;" title="View all scans">
-      <div class="kpi-label">Total Check-Ins</div>
-      <div class="kpi-value amber" id="kpi-total">—</div>
-      <div class="kpi-sub">all time scans</div>
-    </div>
-    <div class="kpi-card amber" id="kpi-wrap-failed" onclick="filterLogByKPI('ready')" style="cursor:pointer;" title="View locations awaiting inspection">
-      <div class="kpi-label">Inspection Ready</div>
-      <div class="kpi-value amber" id="kpi-failed">—</div>
-      <div class="kpi-sub">awaiting inspector</div>
-    </div>
-    <div class="kpi-card amber" id="kpi-wrap-stale">
-      <div class="kpi-label">Stale Locations</div>
-      <div class="kpi-value amber" id="kpi-stale">—</div>
-      <div class="kpi-sub" id="kpi-stale-sub">no activity</div>
-    </div>
-    <div class="kpi-card green" id="kpi-wrap-done" onclick="filterLogByKPI('done')" style="cursor:pointer;" title="View completed locations">
-      <div class="kpi-label">Final Complete</div>
-      <div class="kpi-value green" id="kpi-done">—</div>
-      <div class="kpi-sub">locations closed out</div>
-    </div>
+  <!-- Select prompt — shown until project is chosen in admin view -->
+  <div id="select-prompt" class="select-prompt" style="display:none;">
+    <div class="select-prompt-icon">🏗</div>
+    <div class="select-prompt-title">SELECT A PROJECT</div>
+    <div class="select-prompt-sub">Choose a client and project above to load field data</div>
   </div>
 
-  <!-- Status + Failed -->
-  <div class="two-col" id="row-top">
-    <div class="card" id="sec-wrap-status">
-      <div class="card-header">
-        <span class="card-title">Status Breakdown</span>
-        <span class="card-badge muted" id="status-total-badge">0 scans</span>
+  <!-- Dashboard content — hidden until selection made -->
+  <div id="dashboard-content">
+    <div class="section-title">OPS SUMMARY</div>
+    <div class="kpi-grid">
+      <div class="kpi-card amber" id="kpi-wrap-total" onclick="filterLogByKPI('total')" style="cursor:pointer;">
+        <div class="kpi-label">Total Check-Ins</div>
+        <div class="kpi-value amber" id="kpi-total">—</div>
+        <div class="kpi-sub">all time scans</div>
       </div>
-      <div class="card-body" id="status-breakdown">
-        <div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">Loading…</div></div>
+      <div class="kpi-card amber" id="kpi-wrap-failed" onclick="filterLogByKPI('ready')" style="cursor:pointer;">
+        <div class="kpi-label">Inspection Ready</div>
+        <div class="kpi-value amber" id="kpi-failed">—</div>
+        <div class="kpi-sub">awaiting inspector</div>
+      </div>
+      <div class="kpi-card amber" id="kpi-wrap-stale">
+        <div class="kpi-label">Stale Locations</div>
+        <div class="kpi-value amber" id="kpi-stale">—</div>
+        <div class="kpi-sub" id="kpi-stale-sub">no activity</div>
+      </div>
+      <div class="kpi-card green" id="kpi-wrap-done" onclick="filterLogByKPI('done')" style="cursor:pointer;">
+        <div class="kpi-label">Final Complete</div>
+        <div class="kpi-value green" id="kpi-done">—</div>
+        <div class="kpi-sub">locations closed out</div>
       </div>
     </div>
-    <div class="card" id="sec-wrap-failedlist">
-      <div class="card-header">
-        <span class="card-title">Pending Inspections</span>
-        <span class="card-badge amber" id="failed-badge">0</span>
-      </div>
-      <div class="card-body" id="failed-list">
-        <div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">No locations awaiting inspection</div></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Stale + Activity -->
-  <div class="two-col" id="row-bottom">
-    <div class="card" id="sec-wrap-stalelist">
-      <div class="card-header">
-        <span class="card-title">Stale Locations</span>
-        <div class="threshold-control">
-          <label>Stale after</label>
-          <input type="number" class="threshold-input" id="stale-days" value="3" min="1" max="30" onchange="syncStale(this.value)">
-          <label>days</label>
+    <div class="two-col" id="row-top">
+      <div class="card" id="sec-wrap-status">
+        <div class="card-header"><span class="card-title">Status Breakdown</span><span class="card-badge muted" id="status-total-badge">0 scans</span></div>
+        <div class="card-body" id="status-breakdown"><div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">Loading…</div></div></div>
+      </div>
+      <div class="card" id="sec-wrap-failedlist">
+        <div class="card-header"><span class="card-title">Pending Inspections</span><span class="card-badge amber" id="failed-badge">0</span></div>
+        <div class="card-body" id="failed-list"><div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">No locations awaiting inspection</div></div></div>
+      </div>
+    </div>
+
+    <div class="two-col" id="row-bottom">
+      <div class="card" id="sec-wrap-stalelist">
+        <div class="card-header">
+          <span class="card-title">Stale Locations</span>
+          <div class="threshold-control">
+            <label>Stale after</label>
+            <input type="number" class="threshold-input" id="stale-days" value="3" min="1" max="30" onchange="syncStale(this.value)">
+            <label>days</label>
+          </div>
+        </div>
+        <div class="card-body" style="padding:0;">
+          <table class="stale-table">
+            <thead><tr><th>Location</th><th>Trade</th><th>Last Status</th><th>Age</th></tr></thead>
+            <tbody id="stale-tbody"><tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🏷️</div><div class="empty-text">Loading…</div></div></td></tr></tbody>
+          </table>
         </div>
       </div>
-      <div class="card-body" style="padding:0;">
-        <table class="stale-table">
-          <thead><tr><th>Location</th><th>Trade</th><th>Last Status</th><th>Age</th></tr></thead>
-          <tbody id="stale-tbody"><tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🏷️</div><div class="empty-text">Loading…</div></div></td></tr></tbody>
-        </table>
+      <div class="card" id="sec-wrap-activity">
+        <div class="card-header"><span class="card-title">Recent Activity</span><span class="card-badge blue">Last 10</span></div>
+        <div class="card-body" id="recent-activity"><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">Loading…</div></div></div>
       </div>
     </div>
-    <div class="card" id="sec-wrap-activity">
-      <div class="card-header">
-        <span class="card-title">Recent Activity</span>
-        <span class="card-badge blue">Last 10</span>
-      </div>
-      <div class="card-body" id="recent-activity">
-        <div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">Loading…</div></div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Location grid -->
-  <div id="sec-wrap-locations">
-    <div class="section-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-      LATEST STATUS BY LOCATION
-      <div style="display:flex;gap:8px;margin-left:auto;align-items:center;">
-        <input type="text" id="loc-search" placeholder="Search locations…"
-          oninput="renderLocations()"
-          style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
-                 color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;
-                 padding:5px 10px;outline:none;width:160px;">
-        <select id="loc-status-filter" onchange="renderLocations()"
-          style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
-                 color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;
-                 padding:5px 10px;outline:none;cursor:pointer;">
-          <option value="">All Statuses</option>
-        </select>
-        <button id="loc-view-toggle" onclick="toggleLocView()"
-          style="background:var(--steel);border:1px solid var(--border);border-radius:6px;
-                 color:var(--muted);font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;
-                 padding:5px 12px;cursor:pointer;letter-spacing:0.5px;">
-          ⊞ Cards
-        </button>
+    <div id="sec-wrap-locations">
+      <div class="section-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        LATEST STATUS BY LOCATION
+        <div style="display:flex;gap:8px;margin-left:auto;align-items:center;">
+          <input type="text" id="loc-search" placeholder="Search locations…" oninput="renderLocations()"
+            style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;padding:5px 10px;outline:none;width:160px;">
+          <select id="loc-status-filter" onchange="renderLocations()"
+            style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;padding:5px 10px;outline:none;cursor:pointer;">
+            <option value="">All Statuses</option>
+          </select>
+          <button id="loc-view-toggle" onclick="toggleLocView()"
+            style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:5px 12px;cursor:pointer;letter-spacing:0.5px;">
+            ⊞ Cards
+          </button>
+        </div>
       </div>
+      <div id="location-table-wrap" style="margin-bottom:28px;">
+        <div class="log-table-wrap">
+          <table class="log-table">
+            <thead><tr><th>Location</th><th>Status</th><th>Trade</th><th>Task</th><th>Last Scan</th><th>Verified By</th><th></th></tr></thead>
+            <tbody id="location-table-body"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="location-grid" style="display:none;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:28px;"></div>
     </div>
-    <div id="location-table-wrap" style="margin-bottom:28px;">
+
+    <div class="scan-log-wrap" id="sec-wrap-scanlog">
+      <div class="section-title" style="display:flex;align-items:center;gap:12px;">
+        SCAN LOG
+        <span class="log-count" id="log-count"></span>
+        <button class="scan-filter" onclick="clearLogFilters()" style="margin-left:auto;cursor:pointer;color:var(--muted);font-size:11px;padding:4px 12px;">✕ Clear Filters</button>
+      </div>
       <div class="log-table-wrap">
         <table class="log-table">
           <thead>
             <tr>
-              <th>Location</th>
-              <th>Status</th>
-              <th>Trade</th>
-              <th>Task</th>
-              <th>Last Scan</th>
-              <th>Verified By</th>
-              <th></th>
+              <th class="col-time">Time<select class="th-filter" id="log-date-filter" onchange="renderScanLog()"><option value="">All Dates</option><option value="1">Last 24 hrs</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select></th>
+              <th class="col-location">Location<select class="th-filter" id="log-location-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+              <th class="col-trade">Trade<select class="th-filter" id="log-trade-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+              <th class="col-task">Task<input class="th-search" id="log-task-filter" placeholder="Search…" oninput="renderScanLog()"></th>
+              <th class="col-status">Status<select class="th-filter" id="log-status-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+              <th class="col-verified">Verified By<select class="th-filter" id="log-verifiedby-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+              <th class="col-notes">Notes</th>
+              <th style="min-width:60px;">Photo</th>
             </tr>
           </thead>
-          <tbody id="location-table-body">
-            <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr>
+          <tbody id="log-table-body">
+            <tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div id="location-grid" style="display:none;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:28px;"></div>
-  </div>
-
-  <!-- ── Scan Log ── -->
-  <div class="scan-log-wrap" id="sec-wrap-scanlog">
-    <div class="section-title" style="display:flex;align-items:center;gap:12px;">
-      SCAN LOG
-      <span class="log-count" id="log-count"></span>
-      <button class="scan-filter" onclick="clearLogFilters()" style="margin-left:auto;cursor:pointer;color:var(--muted);font-size:11px;padding:4px 12px;">✕ Clear Filters</button>
-    </div>
-    <div class="log-table-wrap">
-      <table class="log-table">
-        <thead>
-          <tr>
-            <th class="col-time">
-              Time
-              <select class="th-filter" id="log-date-filter" onchange="renderScanLog()">
-                <option value="">All Dates</option>
-                <option value="1">Last 24 hrs</option>
-                <option value="7">Last 7 days</option>
-                <option value="30">Last 30 days</option>
-              </select>
-            </th>
-            <th class="col-location">
-              Location
-              <select class="th-filter" id="log-location-filter" onchange="renderScanLog()">
-                <option value="">All</option>
-              </select>
-            </th>
-            <th class="col-trade">
-              Trade
-              <select class="th-filter" id="log-trade-filter" onchange="renderScanLog()">
-                <option value="">All</option>
-              </select>
-            </th>
-            <th class="col-task">
-              Task
-              <input class="th-search" id="log-task-filter" placeholder="Search…" oninput="renderScanLog()">
-            </th>
-            <th class="col-status">
-              Status
-              <select class="th-filter" id="log-status-filter" onchange="renderScanLog()">
-                <option value="">All</option>
-              </select>
-            </th>
-            <th class="col-verified">
-              Verified By
-              <select class="th-filter" id="log-verifiedby-filter" onchange="renderScanLog()">
-                <option value="">All</option>
-              </select>
-            </th>
-            <th class="col-notes">Notes</th>
-            <th style="min-width:60px;">Photo</th>
-          </tr>
-        </thead>
-        <tbody id="log-table-body">
-          <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
+  </div><!-- /dashboard-content -->
 </div>
 
-<!-- ── PIN Screen ── -->
+<!-- PIN Screen -->
 <div class="pin-overlay" id="pin-overlay">
   <div class="pin-box">
     <div class="pin-logo">
@@ -685,42 +557,27 @@
     <div class="pin-title" id="pin-title">Enter your PIN</div>
     <div class="pin-subtitle" id="pin-subtitle">Contact your VeriSite representative if you need access.</div>
     <div class="pin-dots" id="pin-dots">
-      <div class="pin-dot" id="pd0"></div>
-      <div class="pin-dot" id="pd1"></div>
-      <div class="pin-dot" id="pd2"></div>
-      <div class="pin-dot" id="pd3"></div>
+      <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
     </div>
     <div class="pin-keypad">
-      <button class="pin-key" onclick="pinKey('1')">1</button>
-      <button class="pin-key" onclick="pinKey('2')">2</button>
-      <button class="pin-key" onclick="pinKey('3')">3</button>
-      <button class="pin-key" onclick="pinKey('4')">4</button>
-      <button class="pin-key" onclick="pinKey('5')">5</button>
-      <button class="pin-key" onclick="pinKey('6')">6</button>
-      <button class="pin-key" onclick="pinKey('7')">7</button>
-      <button class="pin-key" onclick="pinKey('8')">8</button>
-      <button class="pin-key" onclick="pinKey('9')">9</button>
-      <button class="pin-key empty" disabled></button>
-      <button class="pin-key" onclick="pinKey('0')">0</button>
-      <button class="pin-key del" onclick="pinDel()">⌫</button>
+      <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button><button class="pin-key" onclick="pinKey('5')">5</button><button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button><button class="pin-key" onclick="pinKey('8')">8</button><button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key empty" disabled></button><button class="pin-key" onclick="pinKey('0')">0</button><button class="pin-key del" onclick="pinDel()">⌫</button>
     </div>
     <div class="pin-error" id="pin-error"></div>
   </div>
 </div>
 
-<!-- ── Photo Modal ── -->
+<!-- Photo Modal -->
 <div class="photo-modal-overlay" id="photo-modal" onclick="closePhotoModal(event)">
   <div class="photo-modal">
     <div class="photo-modal-header">
-      <div>
-        <div class="photo-modal-title" id="modal-title">Photo</div>
-        <div class="photo-modal-meta" id="modal-meta"></div>
-      </div>
+      <div><div class="photo-modal-title" id="modal-title">Photo</div><div class="photo-modal-meta" id="modal-meta"></div></div>
       <button class="photo-modal-close" onclick="document.getElementById('photo-modal').classList.remove('open')">✕</button>
     </div>
-    <div class="photo-modal-body">
-      <img id="modal-img" src="" alt="Site photo">
-    </div>
+    <div class="photo-modal-body"><img id="modal-img" src="" alt="Site photo"></div>
     <div class="photo-modal-footer">
       <button class="photo-btn secondary" onclick="document.getElementById('photo-modal').classList.remove('open')">Close</button>
       <a class="photo-btn" id="modal-open-link" href="" target="_blank">Open in Drive ↗</a>
@@ -729,14 +586,8 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwB5LGjk61WmuEgUnHBkSuejBVHMRLaubAldaXRp6DHK_x0m5rKU8ND0n3bH3eK71oa/exec';
 
-// ═══════════════════════════════════════════════
-// CLIENT DIRECTORY — loaded from CLIENTS sheet
-// ═══════════════════════════════════════════════
 let CLIENT_NAMES = {};
 const clientDisplay = (id) => CLIENT_NAMES[id] || id;
 
@@ -746,30 +597,26 @@ const STATUS_CONFIG = {
   'Passed Inspection': { color:'#2ecc71', bg:'rgba(46,204,113,0.15)', order:3 },
   'Punch Complete':    { color:'#1abc9c', bg:'rgba(26,188,156,0.15)', order:4 },
 };
-const DONE_STATUSES   = ['Punch Complete','Passed Inspection'];
-const FAILED_STATUSES = [];
+const DONE_STATUSES = ['Punch Complete','Passed Inspection'];
 
 let allData  = [];
 let filtered = [];
 let lockedCompany = '';
 let lockedProject = '';
+let isAdminView   = false;  // true when no ?company= in URL
 
-// ═══════════════════════════════════════════════
-// PREFERENCES  (per CompanyID, persisted)
-// ═══════════════════════════════════════════════
+// ── PREFS ──
 const PREFS_KEY = () => `vs_prefs_${lockedCompany || 'admin'}`;
 const DEFAULT_PREFS = {
   kpi: { total:true, failed:true, stale:true, done:true },
   sec: { status:true, failedlist:true, stalelist:true, activity:true, locations:true },
   staleDays: 3
 };
-
 function loadPrefs() {
   try { return Object.assign({}, DEFAULT_PREFS, JSON.parse(localStorage.getItem(PREFS_KEY()) || '{}')); }
   catch(e) { return Object.assign({}, DEFAULT_PREFS); }
 }
 function savePrefs(p) { localStorage.setItem(PREFS_KEY(), JSON.stringify(p)); }
-
 function applyPrefsToDOM(prefs) {
   Object.entries(prefs.kpi).forEach(([k,v]) => {
     const cb = document.getElementById(`tog-kpi-${k}`); if(cb) cb.checked = v;
@@ -783,7 +630,6 @@ function applyPrefsToDOM(prefs) {
   document.getElementById('stale-days').value   = sd;
   document.getElementById('stale-drawer').value = sd;
 }
-
 function togglePref(group, key) {
   const prefs = loadPrefs();
   if (!prefs[group]) prefs[group] = {};
@@ -793,7 +639,6 @@ function togglePref(group, key) {
   const wrap = document.getElementById(group === 'kpi' ? `kpi-wrap-${key}` : `sec-wrap-${key}`);
   if (wrap) wrap.dataset.hidden = !cb.checked;
 }
-
 function syncStale(val) {
   const days = Math.max(1, parseInt(val) || 3);
   document.getElementById('stale-days').value   = days;
@@ -802,18 +647,17 @@ function syncStale(val) {
   renderAll();
 }
 
-// ═══════════════════════════════════════════════
-// URL LOCKING
-// ═══════════════════════════════════════════════
+// ── INIT URL ──
 async function initURL() {
   const params  = new URLSearchParams(window.location.search);
   lockedCompany = params.get('company') || '';
   lockedProject = params.get('project') || '';
+  isAdminView   = !lockedCompany && !lockedProject;
 
-  const mobilePill = document.getElementById('mobile-company-pill');
   const center = document.getElementById('header-center');
 
-  if (lockedCompany || lockedProject) {
+  if (!isAdminView) {
+    // Client view — show pill, show data immediately
     const label = lockedProject || clientDisplay(lockedCompany);
     const sub   = lockedProject && lockedCompany ? clientDisplay(lockedCompany) : '';
     center.innerHTML = `
@@ -821,32 +665,42 @@ async function initURL() {
         🏗&nbsp;${label}
         ${sub ? `<span class="client-pill-sub">· ${sub}</span>` : ''}
       </div>`;
-    if (mobilePill) mobilePill.textContent = '🏗 ' + label;
     const base = window.location.href.split('?')[0];
     let url = `${base}?company=${encodeURIComponent(lockedCompany)}`;
     if (lockedProject) url += `&project=${encodeURIComponent(lockedProject)}`;
     document.getElementById('share-url-box').textContent = url;
     document.getElementById('share-section').style.display = 'block';
+    showDashboard();
   } else {
-    // Load projects from sheet for the selector
+    // Admin view — show dropdowns, hide dashboard until selection
     const projects = await loadProjects();
     const projectsByCompany = {};
     projects.forEach(p => {
       if (!projectsByCompany[p.CompanyID]) projectsByCompany[p.CompanyID] = [];
       projectsByCompany[p.CompanyID].push(p);
     });
+    window._projectsByCompany = projectsByCompany;
+    window._allProjects = projects;
+
+    // Build company dropdown from CLIENT_NAMES (display names, not raw IDs)
+    const companyOptions = Object.keys(CLIENT_NAMES)
+      .filter(id => CLIENT_NAMES[id]) // only populated entries
+      .sort((a,b) => CLIENT_NAMES[a].localeCompare(CLIENT_NAMES[b]))
+      .map(id => `<option value="${id}">${CLIENT_NAMES[id]}</option>`)
+      .join('');
 
     center.innerHTML = `
       <select class="filter-pill" id="company-filter" onchange="onCompanyChange()" style="min-width:160px;">
-        <option value="">All Clients</option>
+        <option value="">Select Client…</option>
+        ${companyOptions}
       </select>
-      <select class="filter-pill" id="project-filter" onchange="applyFilters()" style="min-width:180px;">
-        <option value="">All Projects</option>
+      <select class="filter-pill" id="project-filter" onchange="onProjectChange()" style="min-width:180px;" disabled>
+        <option value="">Select Project…</option>
       </select>`;
 
-    // Store for use in onCompanyChange
-    window._projectsByCompany = projectsByCompany;
-    window._allProjects = projects;
+    // Show the prompt, hide dashboard
+    document.getElementById('select-prompt').style.display = 'flex';
+    document.getElementById('dashboard-content').style.display = 'none';
   }
 }
 
@@ -855,12 +709,48 @@ function onCompanyChange() {
   const pf = document.getElementById('project-filter');
   if (!cf || !pf) return;
   const comp = cf.value;
-  const projects = comp
-    ? (window._projectsByCompany[comp] || [])
-    : (window._allProjects || []);
-  pf.innerHTML = '<option value="">All Projects</option>' +
+
+  if (!comp) {
+    pf.innerHTML = '<option value="">Select Project…</option>';
+    pf.disabled = true;
+    document.getElementById('select-prompt').style.display = 'flex';
+    document.getElementById('dashboard-content').style.display = 'none';
+    return;
+  }
+
+  const projects = window._projectsByCompany[comp] || [];
+  pf.innerHTML = '<option value="">Select Project…</option>' +
     projects.map(p => `<option value="${p.ProjectName}">${p.ProjectName}</option>`).join('');
+  pf.disabled = false;
+
+  // Hide dashboard until project is also selected
+  document.getElementById('select-prompt').style.display = 'flex';
+  document.getElementById('dashboard-content').style.display = 'none';
+}
+
+function onProjectChange() {
+  const cf = document.getElementById('company-filter');
+  const pf = document.getElementById('project-filter');
+  if (!cf || !pf) return;
+  const comp = cf.value;
+  const proj = pf.value;
+
+  if (!proj) {
+    document.getElementById('select-prompt').style.display = 'flex';
+    document.getElementById('dashboard-content').style.display = 'none';
+    return;
+  }
+
+  // Selection complete — show dashboard and filter data
+  showDashboard();
+  lockedCompany = comp;
+  lockedProject = proj;
   applyFilters();
+}
+
+function showDashboard() {
+  document.getElementById('select-prompt').style.display = 'none';
+  document.getElementById('dashboard-content').style.display = 'block';
 }
 
 function copyShareUrl() {
@@ -872,40 +762,22 @@ function copyShareUrl() {
   });
 }
 
-// ═══════════════════════════════════════════════
-// SETTINGS PANEL
-// ═══════════════════════════════════════════════
-function openSettings()  {
-  document.getElementById('settings-overlay').classList.add('open');
-  document.getElementById('settings-drawer').classList.add('open');
-}
-function closeSettings() {
-  document.getElementById('settings-overlay').classList.remove('open');
-  document.getElementById('settings-drawer').classList.remove('open');
-}
+// ── SETTINGS ──
+function openSettings()  { document.getElementById('settings-overlay').classList.add('open'); document.getElementById('settings-drawer').classList.add('open'); }
+function closeSettings() { document.getElementById('settings-overlay').classList.remove('open'); document.getElementById('settings-drawer').classList.remove('open'); }
 
-// ═══════════════════════════════════════════════
-// DATA
-// ═══════════════════════════════════════════════
+// ── DATA ──
 function exportCSV() {
   if (!allData || allData.length === 0) { alert('No data to export.'); return; }
-  const filtered = allData.filter(r =>
-    (!lockedCompany || r['CompanyID'] === lockedCompany) &&
-    (!lockedProject || r['Project'] === lockedProject)
-  );
-  const headers = Object.keys(filtered[0] || {}).filter(k => k !== '_ts');
-  const rows = filtered.map(r => headers.map(h => {
-    const val = (r[h] || '').toString().replace(/"/g, '""');
-    return `"${val}"`;
-  }).join(','));
-  const csv = [headers.join(','), ...rows].join('\n');
+  const rows = filtered.length ? filtered : allData;
+  const headers = Object.keys(rows[0] || {}).filter(k => k !== '_ts');
+  const csvRows = rows.map(r => headers.map(h => `"${(r[h]||'').toString().replace(/"/g,'""')}"`).join(','));
+  const csv = [headers.join(','), ...csvRows].join('\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
-  const date = new Date().toISOString().slice(0,10);
-  const name = lockedProject || lockedCompany || 'verisite';
   a.href = url;
-  a.download = `verisite-${name}-${date}.csv`;
+  a.download = `verisite-${lockedProject||lockedCompany||'export'}-${new Date().toISOString().slice(0,10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -917,12 +789,10 @@ async function loadClients() {
     if (json.result === 'success') {
       CLIENT_NAMES = json.clients;
       if (json.pins) clientPins = json.pins;
-      if (lockedCompany || lockedProject) initURL();
     }
-  } catch(e) {
-    // Non-fatal — falls back to showing CompanyID
-  }
+  } catch(e) {}
 }
+
 async function loadProjects() {
   try {
     const res  = await fetch(`${WEBHOOK_URL}?action=getProjects`);
@@ -931,6 +801,7 @@ async function loadProjects() {
   } catch(e) {}
   return [];
 }
+
 async function loadData() {
   const btn = document.getElementById('refresh-btn');
   btn.classList.add('spinning');
@@ -941,8 +812,6 @@ async function loadData() {
     allData = json.data
       .map(row => ({ ...row, _ts: new Date(row['Timestamp'] || 0) }))
       .filter(r => r._ts > new Date('2000-01-01'));
-
-    populateFilters();
     applyFilters();
     document.getElementById('last-update').textContent =
       'Updated ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
@@ -956,36 +825,20 @@ async function loadData() {
   document.getElementById('loading-overlay').classList.add('hidden');
 }
 
-function populateFilters() {
-if (lockedCompany || lockedProject) return;
-const pf = document.getElementById('project-filter');
-const cf = document.getElementById('company-filter');
-if (!pf || !cf) return;
-  const pVal = pf.value, cVal = cf.value;
-  const projs = [...new Set(allData.map(r=>r['Project']).filter(Boolean))].sort();
-  const comps = [...new Set(allData.map(r=>r['CompanyID']).filter(Boolean))].sort();
-  pf.innerHTML = '<option value="">All Projects</option>' + projs.map(p=>`<option value="${p}"${p===pVal?' selected':''}>${p}</option>`).join('');
-  cf.innerHTML = '<option value="">All Clients</option>'  + comps.map(c=>`<option value="${c}"${c===cVal?' selected':''}>${c}</option>`).join('');
-}
-
 function applyFilters() {
-  let comp = lockedCompany, proj = lockedProject;
-  if (!lockedCompany && !lockedProject) {
-    const pf = document.getElementById('project-filter');
-    const cf = document.getElementById('company-filter');
-    if (pf) proj = pf.value;
-    if (cf) comp = cf.value;
-  }
+  // In admin view, lockedCompany/lockedProject are set by onProjectChange
+  // In client view, they come from URL params
   filtered = allData.filter(r =>
-    (!proj || r['Project'] === proj) &&
-    (!comp || r['CompanyID'] === comp)
+    (!lockedProject || r['Project'] === lockedProject) &&
+    (!lockedCompany || r['CompanyID'] === lockedCompany)
   );
-  renderAll();
+  // Only render if dashboard is visible
+  if (document.getElementById('dashboard-content').style.display !== 'none') {
+    renderAll();
+  }
 }
 
-// ═══════════════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════════════
+// ── RENDER ──
 function renderAll() {
   renderKPIs(); renderStatus(); renderFailed();
   renderStale(); renderActivity(); renderLocations();
@@ -1013,7 +866,7 @@ function renderStatus() {
   const counts={}, total=filtered.length;
   filtered.forEach(r=>{ const s=r['Status']||'Unknown'; counts[s]=(counts[s]||0)+1; });
   document.getElementById('status-total-badge').textContent = `${total} scan${total!==1?'s':''}`;
-  if(!total){ document.getElementById('status-breakdown').innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">No data yet</div></div>'; return; }
+  if(!total){ document.getElementById('status-breakdown').innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">No data</div></div>'; return; }
   const sorted=Object.entries(counts).sort((a,b)=>(STATUS_CONFIG[a[0]]?.order||99)-(STATUS_CONFIG[b[0]]?.order||99));
   document.getElementById('status-breakdown').innerHTML=sorted.map(([s,n])=>{
     const pct=Math.round(n/total*100), cfg=STATUS_CONFIG[s]||{color:'#7a96a8'};
@@ -1046,21 +899,13 @@ function renderActivity() {
 }
 
 let locViewMode = 'table';
-
 function toggleLocView() {
   locViewMode = locViewMode === 'table' ? 'cards' : 'table';
   const btn = document.getElementById('loc-view-toggle');
   const tableWrap = document.getElementById('location-table-wrap');
   const grid = document.getElementById('location-grid');
-  if (locViewMode === 'cards') {
-    tableWrap.style.display = 'none';
-    grid.style.display = 'grid';
-    btn.textContent = '☰ Table';
-  } else {
-    tableWrap.style.display = 'block';
-    grid.style.display = 'none';
-    btn.textContent = '⊞ Cards';
-  }
+  if (locViewMode === 'cards') { tableWrap.style.display='none'; grid.style.display='grid'; btn.textContent='☰ Table'; }
+  else { tableWrap.style.display='block'; grid.style.display='none'; btn.textContent='⊞ Cards'; }
   renderLocations();
 }
 
@@ -1068,15 +913,12 @@ function renderLocations() {
   const sd = parseInt(document.getElementById('stale-days').value) || 3;
   const search = (document.getElementById('loc-search')?.value || '').toLowerCase();
   const statusF = document.getElementById('loc-status-filter')?.value || '';
-
   const sf = document.getElementById('loc-status-filter');
   if (sf) {
     const cur = sf.value;
     const statuses = [...new Set(filtered.map(r=>r['Status']).filter(Boolean))].sort();
-    sf.innerHTML = '<option value="">All Statuses</option>' +
-      statuses.map(s=>`<option value="${s}"${s===cur?' selected':''}>${s}</option>`).join('');
+    sf.innerHTML = '<option value="">All Statuses</option>' + statuses.map(s=>`<option value="${s}"${s===cur?' selected':''}>${s}</option>`).join('');
   }
-
   let locs = latestPerLoc(filtered).sort((a,b) => b._ts - a._ts);
   if (search)  locs = locs.filter(r => (r['Location']||'').toLowerCase().includes(search));
   if (statusF) locs = locs.filter(r => r['Status'] === statusF);
@@ -1084,41 +926,30 @@ function renderLocations() {
   if (locViewMode === 'table') {
     const tbody = document.getElementById('location-table-body');
     if (!tbody) return;
-    if (locs.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">No locations match</td></tr>';
-      return;
-    }
-    tbody.innerHTML = locs.map(r => {
-      const cfg   = STATUS_CONFIG[r['Status']] || {color:'var(--muted)', bg:'rgba(122,150,168,0.1)'};
-      const age   = Math.floor((new Date() - r._ts) / 86400000);
-      const stale = age >= sd;
-      return `<tr style="cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans">
-        <td>
-          <span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span>
-          ${stale ? '<span style="margin-left:6px;font-size:9px;font-weight:700;color:var(--accent);background:rgba(240,174,60,0.1);padding:1px 6px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>' : ''}
-          <div style="font-size:10px;color:var(--muted);margin-top:1px">${r['Project']||''}</div>
-        </td>
-        <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
-        <td style="color:var(--accent)">${r['SelectTrade']||'—'}</td>
-        <td style="color:var(--muted);font-size:11px">${r['Task']||'—'}</td>
-        <td style="color:var(--muted);font-size:11px;white-space:nowrap">${timeAgo(r._ts)}</td>
-        <td style="font-size:11px">${r['VerifiedBy']||'—'}</td>
-        <td style="font-size:11px;color:var(--muted)">›</td>
-      </tr>`;
-    }).join('');
-  } else {
-    document.getElementById('location-grid').innerHTML = locs.length === 0
-      ? '<div class="card"><div class="card-body"><div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No locations match</div></div></div></div>'
+    tbody.innerHTML = locs.length===0
+      ? '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">No locations match</td></tr>'
       : locs.map(r => {
-          const cfg   = STATUS_CONFIG[r['Status']] || {color:'var(--muted)', bg:'rgba(122,150,168,0.1)'};
-          const age   = Math.floor((new Date() - r._ts) / 86400000);
-          const stale = age >= sd;
+          const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)',bg:'rgba(122,150,168,0.1)'};
+          const age=Math.floor((new Date()-r._ts)/86400000), stale=age>=sd;
+          return `<tr style="cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans">
+            <td><span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span>${stale?'<span style="margin-left:6px;font-size:9px;font-weight:700;color:var(--accent);background:rgba(240,174,60,0.1);padding:1px 6px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>':''}<div style="font-size:10px;color:var(--muted);margin-top:1px">${r['Project']||''}</div></td>
+            <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
+            <td style="color:var(--accent)">${r['SelectTrade']||'—'}</td>
+            <td style="color:var(--muted);font-size:11px">${r['Task']||'—'}</td>
+            <td style="color:var(--muted);font-size:11px;white-space:nowrap">${timeAgo(r._ts)}</td>
+            <td style="font-size:11px">${r['VerifiedBy']||'—'}</td>
+            <td style="font-size:11px;color:var(--muted)">›</td>
+          </tr>`;
+        }).join('');
+  } else {
+    document.getElementById('location-grid').innerHTML = locs.length===0
+      ? '<div class="card"><div class="card-body"><div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No locations match</div></div></div></div>'
+      : locs.map(r=>{
+          const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)',bg:'rgba(122,150,168,0.1)'};
+          const age=Math.floor((new Date()-r._ts)/86400000),stale=age>=sd;
           return `<div class="card" style="border-color:${stale?'rgba(240,174,60,0.3)':'var(--border)'};cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans for ${r['Location']}">
             <div style="padding:14px 16px;border-bottom:1px solid var(--border);background:var(--steel);display:flex;justify-content:space-between;align-items:center;">
-              <div>
-                <div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div>
-                <div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div>
-              </div>
+              <div><div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div></div>
               ${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(240,174,60,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>':''}
             </div>
             <div style="padding:12px 16px;">
@@ -1142,252 +973,144 @@ function timeAgo(d) {
   return Math.floor(s/86400)+'d ago';
 }
 
-// ═══════════════════════════════════════════════
-// SCAN LOG
-// ═══════════════════════════════════════════════
-let logLocationFilter = '';
-let logTradeFilter    = '';
-let logStatusFilter   = '';
-let logDateFilter     = '';
+// ── SCAN LOG ──
+let logLocationFilter='', logTradeFilter='', logStatusFilter='', logDateFilter='';
 
 function populateScanLogFilters() {
-  const source = (filtered && filtered.length > 0) ? filtered : allData;
+  const source = filtered.length ? filtered : allData;
   const locs   = [...new Set(source.map(r=>r['Location']).filter(Boolean))].sort();
   const trades = [...new Set(source.map(r=>r['SelectTrade']).filter(Boolean))].sort();
   const stats  = [...new Set(source.map(r=>r['Status']).filter(Boolean))].sort();
   const verifys= [...new Set(source.map(r=>r['VerifiedBy']).filter(Boolean))].sort();
-
-  const lf = document.getElementById('log-location-filter');
-  const tf = document.getElementById('log-trade-filter');
-  const sf = document.getElementById('log-status-filter');
-  const vf = document.getElementById('log-verifiedby-filter');
+  const lf=document.getElementById('log-location-filter');
+  const tf=document.getElementById('log-trade-filter');
+  const sf=document.getElementById('log-status-filter');
+  const vf=document.getElementById('log-verifiedby-filter');
   if (!lf) return;
-
-  const curL=lf.value, curT=tf.value, curS=sf.value, curV=vf?vf.value:'';
-  lf.innerHTML = '<option value="">All</option>' + locs.map(l=>`<option value="${l}"${l===curL?' selected':''}>${l}</option>`).join('');
-  tf.innerHTML = '<option value="">All</option>' + trades.map(t=>`<option value="${t}"${t===curT?' selected':''}>${t}</option>`).join('');
-  sf.innerHTML = '<option value="">All</option>' + stats.map(s=>`<option value="${s}"${s===curS?' selected':''}>${s}</option>`).join('');
-  if (vf) vf.innerHTML = '<option value="">All</option>' + verifys.map(v=>`<option value="${v}"${v===curV?' selected':''}>${v}</option>`).join('');
+  const curL=lf.value,curT=tf.value,curS=sf.value,curV=vf?vf.value:'';
+  lf.innerHTML='<option value="">All</option>'+locs.map(l=>`<option value="${l}"${l===curL?' selected':''}>${l}</option>`).join('');
+  tf.innerHTML='<option value="">All</option>'+trades.map(t=>`<option value="${t}"${t===curT?' selected':''}>${t}</option>`).join('');
+  sf.innerHTML='<option value="">All</option>'+stats.map(s=>`<option value="${s}"${s===curS?' selected':''}>${s}</option>`).join('');
+  if(vf) vf.innerHTML='<option value="">All</option>'+verifys.map(v=>`<option value="${v}"${v===curV?' selected':''}>${v}</option>`).join('');
 }
 
 function renderScanLog() {
-  const lf  = document.getElementById('log-location-filter');
-  const tf  = document.getElementById('log-trade-filter');
-  const sf  = document.getElementById('log-status-filter');
-  const df  = document.getElementById('log-date-filter');
-  const tkf = document.getElementById('log-task-filter');
-  const vf  = document.getElementById('log-verifiedby-filter');
+  const lf=document.getElementById('log-location-filter');
+  const tf=document.getElementById('log-trade-filter');
+  const sf=document.getElementById('log-status-filter');
+  const df=document.getElementById('log-date-filter');
+  const tkf=document.getElementById('log-task-filter');
+  const vf=document.getElementById('log-verifiedby-filter');
   if (!lf) return;
-
-  logLocationFilter = lf.value;
-  logTradeFilter    = tf.value;
-  logStatusFilter   = sf.value;
-  logDateFilter     = df.value;
-  const taskSearch  = (tkf?.value || '').toLowerCase();
-  const verifiedBy  = vf?.value || '';
-
-  const now    = new Date();
-  const cutoff = logDateFilter ? new Date(now - logDateFilter * 86400000) : null;
-
-  let rows = filtered
-    .filter(r => (!logLocationFilter || r['Location'] === logLocationFilter))
-    .filter(r => (!logTradeFilter    || r['SelectTrade'] === logTradeFilter))
-    .filter(r => (!logStatusFilter   || r['Status'] === logStatusFilter))
-    .filter(r => (!cutoff            || r._ts >= cutoff))
-    .filter(r => (!taskSearch        || (r['Task']||'').toLowerCase().includes(taskSearch)))
-    .filter(r => (!verifiedBy        || r['VerifiedBy'] === verifiedBy))
-    .sort((a,b) => b._ts - a._ts);
-
-  document.getElementById('log-count').textContent = `${rows.length} record${rows.length!==1?'s':''}`;
-
-  const tbody = document.getElementById('log-table-body');
-  if (rows.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">No records match the current filters</td></tr>';
-    return;
-  }
-
-  tbody.innerHTML = rows.map(r => {
-    const cfg = STATUS_CONFIG[r['Status']] || {color:'var(--muted)'};
-    const ts  = r._ts instanceof Date && !isNaN(r._ts)
-      ? r._ts.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' ' +
-        r._ts.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true})
-      : '—';
-    return `<tr>
-      <td class="td-ts">${ts}</td>
-      <td class="td-loc">${r['Location']||'—'}</td>
-      <td class="td-trade">${r['SelectTrade']||'—'}</td>
-      <td>${r['Task']||'—'}</td>
-      <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
-      <td>${r['VerifiedBy']||'—'}</td>
-      <td style="color:var(--muted);font-size:11px;">${r['Notes']||''}</td>
-      <td>${r['Photo'] ? `<div onclick="openPhotoModal('${r['Photo']}','${(r['Location']||'').replace(/'/g,"\\'")}','${(r['SelectTrade']||'').replace(/'/g,"\\'")}','${(r['Timestamp']||'').toString().replace(/'/g,"\\'")}' )" style="cursor:pointer;width:44px;height:44px;border-radius:4px;overflow:hidden;border:1px solid var(--border);background:var(--steel);display:flex;align-items:center;justify-content:center;" title="View photo"><img src="${r['Photo'].replace('view','preview')}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;\'>📷</span>'"></div>` : ''}</td>
-    </tr>`;
-  }).join('');
+  logLocationFilter=lf.value; logTradeFilter=tf.value; logStatusFilter=sf.value; logDateFilter=df.value;
+  const taskSearch=(tkf?.value||'').toLowerCase(), verifiedBy=vf?.value||'';
+  const now=new Date(), cutoff=logDateFilter?new Date(now-logDateFilter*86400000):null;
+  let rows=filtered
+    .filter(r=>(!logLocationFilter||r['Location']===logLocationFilter))
+    .filter(r=>(!logTradeFilter||r['SelectTrade']===logTradeFilter))
+    .filter(r=>(!logStatusFilter||r['Status']===logStatusFilter))
+    .filter(r=>(!cutoff||r._ts>=cutoff))
+    .filter(r=>(!taskSearch||(r['Task']||'').toLowerCase().includes(taskSearch)))
+    .filter(r=>(!verifiedBy||r['VerifiedBy']===verifiedBy))
+    .sort((a,b)=>b._ts-a._ts);
+  document.getElementById('log-count').textContent=`${rows.length} record${rows.length!==1?'s':''}`;
+  const tbody=document.getElementById('log-table-body');
+  tbody.innerHTML=rows.length===0
+    ? '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">No records match the current filters</td></tr>'
+    : rows.map(r=>{
+        const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)'};
+        const ts=r._ts instanceof Date&&!isNaN(r._ts)
+          ?r._ts.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+r._ts.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}):'—';
+        return `<tr>
+          <td class="td-ts">${ts}</td>
+          <td class="td-loc">${r['Location']||'—'}</td>
+          <td class="td-trade">${r['SelectTrade']||'—'}</td>
+          <td>${r['Task']||'—'}</td>
+          <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
+          <td>${r['VerifiedBy']||'—'}</td>
+          <td style="color:var(--muted);font-size:11px;">${r['Notes']||''}</td>
+          <td>${r['Photo']?`<div onclick="openPhotoModal('${r['Photo']}','${(r['Location']||'').replace(/'/g,"\\'")}','${(r['SelectTrade']||'').replace(/'/g,"\\'")}','${(r['Timestamp']||'').toString().replace(/'/g,"\\'")}' )" style="cursor:pointer;width:44px;height:44px;border-radius:4px;overflow:hidden;border:1px solid var(--border);background:var(--steel);display:flex;align-items:center;justify-content:center;" title="View photo"><img src="${r['Photo'].replace('view','preview')}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;\'>📷</span>'"></div>`:''}</td>
+        </tr>`;
+      }).join('');
 }
 
 function clearLogFilters() {
-  logLocationFilter = logTradeFilter = logStatusFilter = logDateFilter = '';
-  ['log-location-filter','log-trade-filter','log-status-filter',
-   'log-date-filter','log-verifiedby-filter'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-  const tkf = document.getElementById('log-task-filter');
-  if (tkf) tkf.value = '';
+  logLocationFilter=logTradeFilter=logStatusFilter=logDateFilter='';
+  ['log-location-filter','log-trade-filter','log-status-filter','log-date-filter','log-verifiedby-filter'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const tkf=document.getElementById('log-task-filter'); if(tkf) tkf.value='';
   renderScanLog();
 }
 
 function filterLogByKPI(type) {
   clearLogFilters();
-  const sf = document.getElementById('log-status-filter');
-  if (type === 'done' && sf) {
-    sf.value = 'Punch Complete';
-    logStatusFilter = 'Punch Complete';
-  } else if (type === 'inspection' && sf) {
-    sf.value = 'Passed Inspection';
-    logStatusFilter = 'Passed Inspection';
-  } else if (type === 'ready' && sf) {
-    sf.value = 'Inspection Ready';
-    logStatusFilter = 'Inspection Ready';
-  }
+  const sf=document.getElementById('log-status-filter');
+  if(type==='done'&&sf){sf.value='Punch Complete';logStatusFilter='Punch Complete';}
+  else if(type==='ready'&&sf){sf.value='Inspection Ready';logStatusFilter='Inspection Ready';}
   renderScanLog();
-  document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function filterLogByLocation(location) {
   clearLogFilters();
-  const lf = document.getElementById('log-location-filter');
-  if (lf) { lf.value = location; logLocationFilter = location; }
+  const lf=document.getElementById('log-location-filter');
+  if(lf){lf.value=location;logLocationFilter=location;}
   renderScanLog();
-  document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// ═══════════════════════════════════════════════
-// PHOTO MODAL
-// ═══════════════════════════════════════════════
-function openPhotoModal(url, location, trade, timestamp) {
-  const modal = document.getElementById('photo-modal');
-  const img   = document.getElementById('modal-img');
-  const title = document.getElementById('modal-title');
-  const meta  = document.getElementById('modal-meta');
-  const link  = document.getElementById('modal-open-link');
-
-  const match = url.match(/\/file\/d\/([^\/]+)\//);
-  const embedUrl = match
-    ? 'https://drive.google.com/thumbnail?id=' + match[1] + '&sz=w1200'
-    : url;
-
-  img.src        = embedUrl;
-  title.textContent = location + (trade ? ' · ' + trade : '');
-  meta.textContent  = timestamp ? new Date(timestamp).toLocaleString('en-US',{
-    month:'short', day:'numeric', year:'numeric',
-    hour:'numeric', minute:'2-digit', hour12:true
-  }) : '';
-  link.href = url;
+// ── PHOTO MODAL ──
+function openPhotoModal(url,location,trade,timestamp) {
+  const modal=document.getElementById('photo-modal');
+  const match=url.match(/\/file\/d\/([^\/]+)\//);
+  document.getElementById('modal-img').src=match?'https://drive.google.com/thumbnail?id='+match[1]+'&sz=w1200':url;
+  document.getElementById('modal-title').textContent=location+(trade?' · '+trade:'');
+  document.getElementById('modal-meta').textContent=timestamp?new Date(timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true}):'';
+  document.getElementById('modal-open-link').href=url;
   modal.classList.add('open');
 }
+function closePhotoModal(e) { if(e.target===document.getElementById('photo-modal')) document.getElementById('photo-modal').classList.remove('open'); }
 
-function closePhotoModal(e) {
-  if (e.target === document.getElementById('photo-modal')) {
-    document.getElementById('photo-modal').classList.remove('open');
-  }
-}
-
-// ═══════════════════════════════════════════════
-// PIN AUTH
-// ═══════════════════════════════════════════════
-let pinEntry   = '';
-let pinAttempts = 0;
-const PIN_SESSION_KEY  = () => `vs_pin_${lockedCompany}`;
-const PIN_LOCKOUT_KEY  = () => `vs_lock_${lockedCompany}`;
-const MAX_ATTEMPTS = 3;
-const LOCKOUT_MS   = 5 * 60 * 1000;
+// ── PIN AUTH ──
+let pinEntry='', pinAttempts=0, clientPins={};
+const PIN_SESSION_KEY=()=>`vs_pin_${lockedCompany}`;
+const PIN_LOCKOUT_KEY=()=>`vs_lock_${lockedCompany}`;
+const MAX_ATTEMPTS=3, LOCKOUT_MS=5*60*1000;
 
 function pinKey(digit) {
-  const lockUntil = parseInt(localStorage.getItem(PIN_LOCKOUT_KEY()) || '0');
-  if (Date.now() < lockUntil) { showPinLockout(lockUntil); return; }
-  if (pinEntry.length >= 4) return;
-  pinEntry += digit;
-  updatePinDots();
-  if (pinEntry.length === 4) setTimeout(checkPin, 120);
+  const lockUntil=parseInt(localStorage.getItem(PIN_LOCKOUT_KEY())||'0');
+  if(Date.now()<lockUntil){showPinLockout(lockUntil);return;}
+  if(pinEntry.length>=4) return;
+  pinEntry+=digit; updatePinDots();
+  if(pinEntry.length===4) setTimeout(checkPin,120);
 }
-
-function pinDel() {
-  pinEntry = pinEntry.slice(0, -1);
-  updatePinDots();
-  document.getElementById('pin-error').textContent = '';
-}
-
+function pinDel() { pinEntry=pinEntry.slice(0,-1); updatePinDots(); document.getElementById('pin-error').textContent=''; }
 function updatePinDots(state) {
-  for (let i = 0; i < 4; i++) {
-    const dot = document.getElementById('pd' + i);
-    dot.className = 'pin-dot';
-    if (state === 'error') dot.classList.add('error');
-    else if (i < pinEntry.length) dot.classList.add('filled');
-  }
+  for(let i=0;i<4;i++){const dot=document.getElementById('pd'+i);dot.className='pin-dot';if(state==='error')dot.classList.add('error');else if(i<pinEntry.length)dot.classList.add('filled');}
 }
-
-function showPinLockout(until) {
-  const remaining = Math.ceil((until - Date.now()) / 1000);
-  document.getElementById('pin-error').textContent =
-    `Too many attempts. Try again in ${remaining}s.`;
-}
-
+function showPinLockout(until) { document.getElementById('pin-error').textContent=`Too many attempts. Try again in ${Math.ceil((until-Date.now())/1000)}s.`; }
 async function checkPin() {
-  const stored = clientPins[lockedCompany];
-  if (!stored) { grantPinAccess(); return; }
-  if (pinEntry === stored.toString()) {
-    pinAttempts = 0;
-    localStorage.setItem(PIN_SESSION_KEY(), Date.now() + (8 * 60 * 60 * 1000));
-    grantPinAccess();
+  const stored=clientPins[lockedCompany];
+  if(!stored){grantPinAccess();return;}
+  if(pinEntry===stored.toString()){
+    pinAttempts=0; localStorage.setItem(PIN_SESSION_KEY(),Date.now()+(8*60*60*1000)); grantPinAccess();
   } else {
-    pinAttempts++;
-    pinEntry = '';
-    updatePinDots('error');
-    if (pinAttempts >= MAX_ATTEMPTS) {
-      const lockUntil = Date.now() + LOCKOUT_MS;
-      localStorage.setItem(PIN_LOCKOUT_KEY(), lockUntil);
-      document.getElementById('pin-error').textContent =
-        'Too many attempts. Locked for 5 minutes.';
-    } else {
-      document.getElementById('pin-error').textContent =
-        `Incorrect PIN. ${MAX_ATTEMPTS - pinAttempts} attempt${MAX_ATTEMPTS - pinAttempts !== 1 ? 's' : ''} remaining.`;
-    }
-    setTimeout(() => {
-      updatePinDots();
-      document.getElementById('pin-error').textContent = '';
-    }, 1200);
+    pinAttempts++; pinEntry=''; updatePinDots('error');
+    if(pinAttempts>=MAX_ATTEMPTS){const lu=Date.now()+LOCKOUT_MS;localStorage.setItem(PIN_LOCKOUT_KEY(),lu);document.getElementById('pin-error').textContent='Too many attempts. Locked for 5 minutes.';}
+    else{document.getElementById('pin-error').textContent=`Incorrect PIN. ${MAX_ATTEMPTS-pinAttempts} attempt${MAX_ATTEMPTS-pinAttempts!==1?'s':''} remaining.`;}
+    setTimeout(()=>{updatePinDots();document.getElementById('pin-error').textContent='';},1200);
   }
 }
-
-function grantPinAccess() {
-  document.getElementById('pin-overlay').classList.remove('active');
-}
-
+function grantPinAccess() { document.getElementById('pin-overlay').classList.remove('active'); }
 function checkPinSession() {
-  if (!lockedCompany) return;
-  const lockUntil = parseInt(localStorage.getItem(PIN_LOCKOUT_KEY()) || '0');
-  if (Date.now() < lockUntil) {
-    document.getElementById('pin-overlay').classList.add('active');
-    showPinLockout(lockUntil);
-    setInterval(() => {
-      const l = parseInt(localStorage.getItem(PIN_LOCKOUT_KEY()) || '0');
-      if (Date.now() >= l) location.reload();
-      else showPinLockout(l);
-    }, 1000);
-    return;
-  }
-  const session = parseInt(localStorage.getItem(PIN_SESSION_KEY()) || '0');
-  if (Date.now() < session) return;
+  if(!lockedCompany) return;
+  const lockUntil=parseInt(localStorage.getItem(PIN_LOCKOUT_KEY())||'0');
+  if(Date.now()<lockUntil){document.getElementById('pin-overlay').classList.add('active');showPinLockout(lockUntil);setInterval(()=>{const l=parseInt(localStorage.getItem(PIN_LOCKOUT_KEY())||'0');if(Date.now()>=l)location.reload();else showPinLockout(l);},1000);return;}
+  const session=parseInt(localStorage.getItem(PIN_SESSION_KEY())||'0');
+  if(Date.now()<session) return;
   document.getElementById('pin-overlay').classList.add('active');
 }
 
-let clientPins = {};
-
-// ═══════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════
-
+// ── INIT ──
 applyPrefsToDOM(loadPrefs());
 loadClients().then(async () => {
   await initURL();
