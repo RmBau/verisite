@@ -29,8 +29,6 @@
                 radial-gradient(ellipse at 80% 80%, rgba(41,128,185,0.04) 0%, transparent 50%);
     pointer-events: none; z-index: 0;
   }
-
-  /* ── Header ── */
   .header {
     background: var(--navy); border-bottom: 1px solid var(--border);
     padding: 0 24px; height: 60px;
@@ -43,150 +41,61 @@
   .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: var(--white); line-height: 1; }
   .logo-sub  { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 600; }
   .header-center { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; }
-
-  .client-pill {
-    background: rgba(240,174,60,0.1); border: 1px solid rgba(240,174,60,0.3);
-    border-radius: 20px; padding: 6px 16px;
-    font-size: 12px; font-weight: 600; color: var(--accent);
-    display: flex; align-items: center; gap: 8px;
-  }
+  .client-pill { background: rgba(240,174,60,0.1); border: 1px solid rgba(240,174,60,0.3); border-radius: 20px; padding: 6px 16px; font-size: 12px; font-weight: 600; color: var(--accent); display: flex; align-items: center; gap: 8px; }
   .client-pill-sub { font-size: 10px; color: rgba(240,174,60,0.6); font-weight: 400; }
-
-  .filter-pill {
-    background: var(--steel); border: 1px solid var(--border); border-radius: 20px;
-    padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--text);
-    cursor: pointer; transition: all 0.15s; -webkit-appearance: none; appearance: none; outline: none;
-  }
+  .filter-pill { background: var(--steel); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--text); cursor: pointer; transition: all 0.15s; -webkit-appearance: none; appearance: none; outline: none; }
   .filter-pill:focus, .filter-pill:hover { border-color: var(--accent); color: var(--accent); }
-
   .header-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
   .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-l); box-shadow: 0 0 6px var(--green-l); animation: pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
   .last-update { font-size: 11px; color: var(--muted); }
-
-  .icon-btn {
-    background: transparent; border: 1px solid var(--border); border-radius: 7px;
-    color: var(--muted); cursor: pointer; width: 34px; height: 34px;
-    font-size: 16px; transition: all 0.15s;
-    display: flex; align-items: center; justify-content: center;
-  }
+  .icon-btn { background: transparent; border: 1px solid var(--border); border-radius: 7px; color: var(--muted); cursor: pointer; width: 34px; height: 34px; font-size: 16px; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
   .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
   .icon-btn.spinning { animation: spin 1s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ── Settings Drawer ── */
-  .settings-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.55);
-    z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.25s;
-  }
+  .settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
   .settings-overlay.open { opacity: 1; pointer-events: all; }
-  .settings-drawer {
-    position: fixed; top: 0; right: -380px; width: 360px; height: 100vh;
-    background: var(--navy); border-left: 1px solid var(--border);
-    z-index: 201; transition: right 0.3s cubic-bezier(0.4,0,0.2,1);
-    display: flex; flex-direction: column;
-    box-shadow: -8px 0 40px rgba(0,0,0,0.5);
-  }
+  .settings-drawer { position: fixed; top: 0; right: -380px; width: 360px; height: 100vh; background: var(--navy); border-left: 1px solid var(--border); z-index: 201; transition: right 0.3s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; box-shadow: -8px 0 40px rgba(0,0,0,0.5); }
   .settings-drawer.open { right: 0; }
-
-  .drawer-header {
-    padding: 18px 20px; border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    background: var(--steel); flex-shrink: 0;
-  }
+  .drawer-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--steel); flex-shrink: 0; }
   .drawer-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 2px; color: var(--white); }
-  .drawer-close {
-    background: none; border: none; color: var(--muted); font-size: 18px;
-    cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
-    border-radius: 5px; transition: all 0.15s;
-  }
+  .drawer-close { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 5px; transition: all 0.15s; }
   .drawer-close:hover { color: var(--accent); background: rgba(240,174,60,0.1); }
-
   .drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
   .drawer-section { margin-bottom: 24px; }
-  .drawer-section-title {
-    font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 10px; padding-bottom: 6px;
-    border-bottom: 1px solid rgba(240,174,60,0.15);
-  }
-
-  .toggle-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 12px; background: var(--steel); border-radius: 7px;
-    margin-bottom: 5px; border: 1px solid var(--border);
-    transition: border-color 0.15s; cursor: pointer; user-select: none;
-  }
+  .drawer-section-title { font-size: 9px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(240,174,60,0.15); }
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px; background: var(--steel); border-radius: 7px; margin-bottom: 5px; border: 1px solid var(--border); transition: border-color 0.15s; cursor: pointer; user-select: none; }
   .toggle-row:hover { border-color: rgba(240,174,60,0.3); }
   .toggle-label { font-size: 12px; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 8px; }
   .toggle-icon { font-size: 13px; width: 20px; text-align: center; }
-
   .toggle-switch { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
   .toggle-switch input { opacity: 0; width: 0; height: 0; }
   .toggle-slider { position: absolute; inset: 0; background: var(--mid); border-radius: 10px; cursor: pointer; transition: background 0.2s; }
   .toggle-slider::before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: var(--muted); border-radius: 50%; transition: transform 0.2s, background 0.2s; }
   .toggle-switch input:checked + .toggle-slider { background: rgba(240,174,60,0.25); border: 1px solid rgba(240,174,60,0.4); }
   .toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); background: var(--accent); }
-
-  .setting-row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 12px; background: var(--steel); border-radius: 7px;
-    border: 1px solid var(--border); margin-bottom: 5px;
-  }
+  .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 12px; background: var(--steel); border-radius: 7px; border: 1px solid var(--border); margin-bottom: 5px; }
   .setting-label { font-size: 12px; color: var(--text); }
-  .setting-input {
-    width: 56px; background: var(--mid); border: 1px solid var(--border);
-    border-radius: 5px; color: var(--text); font-size: 12px; font-weight: 600;
-    padding: 4px 8px; text-align: center; outline: none; font-family: 'Poppins', sans-serif;
-  }
+  .setting-input { width: 56px; background: var(--mid); border: 1px solid var(--border); border-radius: 5px; color: var(--text); font-size: 12px; font-weight: 600; padding: 4px 8px; text-align: center; outline: none; font-family: 'Poppins', sans-serif; }
   .setting-input:focus { border-color: var(--accent); }
-
-  .share-box {
-    background: var(--mid); border: 1px solid var(--border); border-radius: 7px;
-    padding: 10px 12px; font-size: 10px; color: var(--muted);
-    word-break: break-all; line-height: 1.6; margin-bottom: 8px;
-    font-family: monospace;
-  }
-  .copy-btn {
-    width: 100%; background: rgba(240,174,60,0.08); border: 1px solid rgba(240,174,60,0.3);
-    border-radius: 7px; color: var(--accent); font-size: 12px; font-weight: 600;
-    padding: 9px; cursor: pointer; transition: all 0.15s; font-family: 'Poppins', sans-serif;
-  }
+  .share-box { background: var(--mid); border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; font-size: 10px; color: var(--muted); word-break: break-all; line-height: 1.6; margin-bottom: 8px; font-family: monospace; }
+  .copy-btn { width: 100%; background: rgba(240,174,60,0.08); border: 1px solid rgba(240,174,60,0.3); border-radius: 7px; color: var(--accent); font-size: 12px; font-weight: 600; padding: 9px; cursor: pointer; transition: all 0.15s; font-family: 'Poppins', sans-serif; }
   .copy-btn:hover { background: rgba(240,174,60,0.18); }
-
-  /* ── Main layout ── */
   .main { position: relative; z-index: 1; padding: 24px; max-width: 1400px; margin: 0 auto; }
-
-  .section-title {
-    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 3px;
-    color: var(--accent); margin-bottom: 14px;
-    display: flex; align-items: center; gap: 10px;
-  }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 3px; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
   .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  /* KPI grid */
   .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
-  .kpi-card {
-    background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 18px 20px; position: relative; overflow: hidden;
-    transition: border-color 0.2s, transform 0.2s; animation: fadeUp 0.4s ease both;
-  }
+  .kpi-card { background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; animation: fadeUp 0.4s ease both; }
   .kpi-card:hover { border-color: var(--accent); transform: translateY(-2px); }
   .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
   .kpi-card.amber::before { background: var(--accent); }
   .kpi-card.green::before { background: var(--green-l); }
-  .kpi-card.red::before   { background: var(--red-l); }
-  .kpi-card.blue::before  { background: var(--blue-l); }
-  .kpi-card.orange::before{ background: #F0AE3C; }
   .kpi-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
   .kpi-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 42px; line-height: 1; }
   .kpi-value.amber { color: var(--accent); }
   .kpi-value.green { color: var(--green-l); }
-  .kpi-value.red   { color: var(--red-l); }
-  .kpi-value.blue  { color: var(--blue-l); }
   .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
-
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
-
   .card { background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; animation: fadeUp 0.5s ease both; }
   .card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--steel); }
   .card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--white); }
@@ -196,14 +105,12 @@
   .card-badge.blue  { background: rgba(52,152,219,0.15);  color: var(--blue-l); }
   .card-badge.muted { background: rgba(107,143,168,0.15); color: var(--muted); }
   .card-body { padding: 16px 18px; }
-
   .status-bar-wrap { margin-bottom: 12px; }
   .status-bar-label { display: flex; justify-content: space-between; margin-bottom: 5px; }
   .status-bar-label span:first-child { font-size: 12px; font-weight: 500; }
   .status-bar-label span:last-child  { font-size: 12px; font-weight: 700; color: var(--white); }
   .status-bar-track { height: 6px; background: var(--mid); border-radius: 3px; overflow: hidden; }
   .status-bar-fill  { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
-
   .stale-table { width: 100%; border-collapse: collapse; }
   .stale-table th { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
   .stale-table td { padding: 10px; font-size: 12px; color: var(--text); border-bottom: 1px solid rgba(46,66,88,0.5); vertical-align: middle; }
@@ -213,7 +120,6 @@
   .age-badge.critical { background: rgba(231,76,60,0.15);  color: var(--red-l); }
   .age-badge.warning  { background: rgba(240,174,60,0.15); color: var(--accent); }
   .age-badge.ok       { background: rgba(46,204,113,0.15); color: var(--green-l); }
-
   .activity-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid rgba(46,66,88,0.5); }
   .activity-item:last-child { border-bottom: none; }
   .activity-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 3px; }
@@ -221,27 +127,19 @@
   .activity-main { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .activity-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .activity-time { font-size: 11px; color: var(--muted); flex-shrink: 0; }
-
   .failed-item { background: rgba(231,76,60,0.06); border: 1px solid rgba(231,76,60,0.2); border-radius: 7px; padding: 12px 14px; margin-bottom: 8px; }
   .failed-item:last-child { margin-bottom: 0; }
   .failed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
   .failed-trade { font-size: 13px; font-weight: 600; color: var(--red-l); }
   .failed-time  { font-size: 11px; color: var(--muted); }
   .failed-detail { font-size: 12px; color: var(--muted); }
-
   .empty-state { text-align: center; padding: 32px 20px; color: var(--muted); }
   .empty-icon  { font-size: 28px; margin-bottom: 8px; opacity: 0.5; }
   .empty-text  { font-size: 12px; }
-
-  /* ── Select prompt ── */
-  .select-prompt {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 80px 24px; text-align: center;
-  }
+  .select-prompt { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 24px; text-align: center; }
   .select-prompt-icon { font-size: 48px; margin-bottom: 20px; opacity: 0.3; }
   .select-prompt-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
   .select-prompt-sub { font-size: 12px; color: var(--muted); }
-
   .loading-overlay { position: fixed; inset: 0; background: var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 999; transition: opacity 0.4s; }
   .loading-overlay.hidden { opacity: 0; pointer-events: none; }
   .loading-logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: 4px; color: var(--white); margin-bottom: 24px; }
@@ -250,29 +148,23 @@
   .loading-bar-fill  { height: 100%; background: var(--accent); border-radius: 2px; animation: loadBar 1.2s ease forwards; }
   @keyframes loadBar { from{width:0} to{width:100%} }
   .loading-text { font-size: 11px; color: var(--muted); margin-top: 12px; letter-spacing: 2px; }
-
   .threshold-control { display: flex; align-items: center; gap: 8px; }
   .threshold-control label { font-size: 11px; color: var(--muted); }
   .threshold-input { width: 48px; background: var(--mid); border: 1px solid var(--border); border-radius: 5px; color: var(--text); font-size: 12px; font-weight: 600; padding: 4px 8px; text-align: center; outline: none; font-family: 'Poppins', sans-serif; }
   .threshold-input:focus { border-color: var(--accent); }
-
   .error-banner { background: rgba(231,76,60,0.1); border: 1px solid var(--red-l); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: var(--red-l); display: none; }
-
   [data-hidden="true"] { display: none !important; }
-
   @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
   .kpi-card:nth-child(1){animation-delay:0.05s} .kpi-card:nth-child(2){animation-delay:0.10s}
   .kpi-card:nth-child(3){animation-delay:0.15s} .kpi-card:nth-child(4){animation-delay:0.20s}
-
   @media(max-width:900px){.kpi-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
-  .pin-overlay { display:none; position:fixed; inset:0; background:var(--navy);
-    z-index:2000; align-items:center; justify-content:center; flex-direction:column; }
+
+  /* ── PIN overlay (shared by admin + client) ── */
+  .pin-overlay { display:none; position:fixed; inset:0; background:var(--navy); z-index:2000; align-items:center; justify-content:center; flex-direction:column; }
   .pin-overlay.active { display:flex; }
-  .pin-box { background:var(--card); border:1px solid var(--border); border-radius:16px;
-    padding:40px 36px; width:100%; max-width:360px; text-align:center; }
+  .pin-box { background:var(--steel); border:1px solid var(--border); border-radius:16px; padding:40px 36px; width:100%; max-width:360px; text-align:center; }
   .pin-logo { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:28px; }
-  .pin-logo-badge { width:36px; height:36px; background:var(--accent); border-radius:7px;
-    display:flex; align-items:center; justify-content:center; font-size:18px; }
+  .pin-logo-badge { width:36px; height:36px; background:var(--accent); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:18px; }
   .pin-logo-text { font-size:18px; font-weight:800; color:var(--white); letter-spacing:1px; }
   .pin-logo-text span { color:var(--accent); }
   .pin-title { font-size:15px; font-weight:700; color:var(--white); margin-bottom:6px; }
@@ -282,40 +174,30 @@
   .pin-dot.filled { background:var(--accent); }
   .pin-dot.error  { background:var(--red-l); }
   .pin-keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-  .pin-key { background:var(--steel); border:1px solid var(--border); border-radius:10px;
-    color:var(--white); font-family:'Poppins',sans-serif; font-size:20px; font-weight:600;
-    padding:16px; cursor:pointer; transition:all 0.1s; -webkit-tap-highlight-color:transparent; }
+  .pin-key { background:var(--mid); border:1px solid var(--border); border-radius:10px; color:var(--white); font-family:'Poppins',sans-serif; font-size:20px; font-weight:600; padding:16px; cursor:pointer; transition:all 0.1s; -webkit-tap-highlight-color:transparent; }
   .pin-key:hover  { border-color:var(--accent); background:rgba(240,174,60,0.08); }
   .pin-key:active { transform:scale(0.95); }
   .pin-key.del    { font-size:16px; color:var(--muted); }
   .pin-key.empty  { background:transparent; border-color:transparent; cursor:default; }
   .pin-error { font-size:12px; color:var(--red-l); margin-top:16px; min-height:18px; }
-  .photo-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85);
-    z-index:1000; align-items:center; justify-content:center; padding:20px; }
+
+  /* Admin badge in header */
+  .admin-badge { background:rgba(240,174,60,0.12); border:1px solid rgba(240,174,60,0.3); border-radius:6px; padding:3px 10px; font-size:10px; font-weight:700; letter-spacing:1px; color:var(--accent); }
+
+  .photo-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; align-items:center; justify-content:center; padding:20px; }
   .photo-modal-overlay.open { display:flex; }
-  .photo-modal { background:var(--card); border:1px solid var(--border); border-radius:12px;
-    max-width:860px; width:100%; max-height:90vh; overflow:hidden; display:flex; flex-direction:column; }
-  .photo-modal-header { display:flex; justify-content:space-between; align-items:center;
-    padding:14px 18px; border-bottom:1px solid var(--border); background:var(--steel); }
+  .photo-modal { background:var(--steel); border:1px solid var(--border); border-radius:12px; max-width:860px; width:100%; max-height:90vh; overflow:hidden; display:flex; flex-direction:column; }
+  .photo-modal-header { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; border-bottom:1px solid var(--border); background:var(--steel); }
   .photo-modal-title { font-size:13px; font-weight:700; color:var(--white); }
   .photo-modal-meta { font-size:11px; color:var(--muted); margin-top:2px; }
-  .photo-modal-close { background:none; border:none; color:var(--muted); font-size:22px;
-    cursor:pointer; padding:0 4px; line-height:1; }
+  .photo-modal-close { background:none; border:none; color:var(--muted); font-size:22px; cursor:pointer; padding:0 4px; line-height:1; }
   .photo-modal-close:hover { color:var(--white); }
-  .photo-modal-body { flex:1; overflow:auto; display:flex; align-items:center;
-    justify-content:center; padding:16px; background:var(--navy); }
+  .photo-modal-body { flex:1; overflow:auto; display:flex; align-items:center; justify-content:center; padding:16px; background:var(--navy); }
   .photo-modal-body img { max-width:100%; max-height:70vh; border-radius:6px; object-fit:contain; }
-  .photo-modal-footer { padding:12px 18px; border-top:1px solid var(--border);
-    display:flex; justify-content:flex-end; gap:10px; }
-  .photo-btn { background:var(--accent); color:#000; border:none; border-radius:6px;
-    font-family:'Poppins',sans-serif; font-size:12px; font-weight:700;
-    padding:8px 16px; cursor:pointer; text-decoration:none; display:inline-block; }
+  .photo-modal-footer { padding:12px 18px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:10px; }
+  .photo-btn { background:var(--accent); color:#000; border:none; border-radius:6px; font-family:'Poppins',sans-serif; font-size:12px; font-weight:700; padding:8px 16px; cursor:pointer; text-decoration:none; display:inline-block; }
   .photo-btn.secondary { background:var(--steel); color:var(--text); border:1px solid var(--border); }
-  .th-filter, .th-search { display:block; width:100%; margin-top:6px;
-    background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08);
-    border-radius:4px; color:var(--text); font-family:'Poppins',sans-serif;
-    font-size:11px; font-weight:400; padding:4px 6px; outline:none;
-    letter-spacing:0; text-transform:none; box-sizing:border-box; }
+  .th-filter, .th-search { display:block; width:100%; margin-top:6px; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.08); border-radius:4px; color:var(--text); font-family:'Poppins',sans-serif; font-size:11px; font-weight:400; padding:4px 6px; outline:none; letter-spacing:0; text-transform:none; box-sizing:border-box; }
   .th-filter { cursor:pointer; }
   .th-filter:focus, .th-search:focus { border-color:var(--accent); }
   .th-filter option { background:var(--steel); }
@@ -323,10 +205,7 @@
   .scan-log-wrap { margin-top: 28px; }
   .log-table-wrap { overflow-x:auto; border-radius:8px; border:1px solid var(--border); }
   .log-table { width:100%; border-collapse:collapse; font-size:12px; }
-  .log-table th { background:var(--steel); color:var(--muted); font-weight:700;
-    letter-spacing:1px; text-transform:uppercase; font-size:10px;
-    padding:10px 10px 8px; text-align:left; border-bottom:1px solid var(--border);
-    white-space:normal; vertical-align:top; min-width:90px; }
+  .log-table th { background:var(--steel); color:var(--muted); font-weight:700; letter-spacing:1px; text-transform:uppercase; font-size:10px; padding:10px 10px 8px; text-align:left; border-bottom:1px solid var(--border); white-space:normal; vertical-align:top; min-width:90px; }
   .log-table th.col-time     { min-width:110px; }
   .log-table th.col-location { min-width:130px; }
   .log-table th.col-trade    { min-width:120px; }
@@ -334,17 +213,14 @@
   .log-table th.col-status   { min-width:120px; }
   .log-table th.col-verified { min-width:110px; }
   .log-table th.col-notes    { min-width:80px;  }
-  .log-table td { padding:9px 14px; border-bottom:1px solid rgba(37,58,82,0.5);
-    color:var(--text); vertical-align:middle; }
+  .log-table td { padding:9px 14px; border-bottom:1px solid rgba(37,58,82,0.5); color:var(--text); vertical-align:middle; }
   .log-table tr:last-child td { border-bottom:none; }
   .log-table tr:hover td { background:rgba(255,255,255,0.02); }
   .log-table .td-ts { color:var(--muted); font-size:11px; white-space:nowrap; }
   .log-table .td-loc { font-weight:600; color:var(--white); }
   .log-table .td-trade { color:var(--accent); }
   .log-count { font-size:11px; color:var(--muted); margin-left:auto; }
-  .scan-filter { background:var(--steel); border:1px solid var(--border); border-radius:6px;
-    color:var(--text); font-family:'Poppins',sans-serif; font-size:12px; padding:7px 12px;
-    outline:none; cursor:pointer; transition:border-color 0.2s; }
+  .scan-filter { background:var(--steel); border:1px solid var(--border); border-radius:6px; color:var(--text); font-family:'Poppins',sans-serif; font-size:12px; padding:7px 12px; outline:none; cursor:pointer; transition:border-color 0.2s; }
   @media(max-width:700px){.header-center{display:none}}
   @media(max-width:500px){.main{padding:16px}.header{padding:0 16px}}
 </style>
@@ -423,131 +299,87 @@
 <!-- Main -->
 <div class="main">
   <div class="error-banner" id="error-banner"></div>
-
-  <!-- Select prompt — shown until project is chosen in admin view -->
   <div id="select-prompt" class="select-prompt" style="display:none;">
     <div class="select-prompt-icon">🏗</div>
     <div class="select-prompt-title">SELECT A PROJECT</div>
     <div class="select-prompt-sub">Choose a client and project above to load field data</div>
   </div>
-
-  <!-- Dashboard content — hidden until selection made -->
   <div id="dashboard-content">
     <div class="section-title">OPS SUMMARY</div>
     <div class="kpi-grid">
-      <div class="kpi-card amber" id="kpi-wrap-total" onclick="filterLogByKPI('total')" style="cursor:pointer;">
-        <div class="kpi-label">Total Check-Ins</div>
-        <div class="kpi-value amber" id="kpi-total">—</div>
-        <div class="kpi-sub">all time scans</div>
-      </div>
-      <div class="kpi-card amber" id="kpi-wrap-failed" onclick="filterLogByKPI('ready')" style="cursor:pointer;">
-        <div class="kpi-label">Inspection Ready</div>
-        <div class="kpi-value amber" id="kpi-failed">—</div>
-        <div class="kpi-sub">awaiting inspector</div>
-      </div>
-      <div class="kpi-card amber" id="kpi-wrap-stale">
-        <div class="kpi-label">Stale Locations</div>
-        <div class="kpi-value amber" id="kpi-stale">—</div>
-        <div class="kpi-sub" id="kpi-stale-sub">no activity</div>
-      </div>
-      <div class="kpi-card green" id="kpi-wrap-done" onclick="filterLogByKPI('done')" style="cursor:pointer;">
-        <div class="kpi-label">Final Complete</div>
-        <div class="kpi-value green" id="kpi-done">—</div>
-        <div class="kpi-sub">locations closed out</div>
-      </div>
+      <div class="kpi-card amber" id="kpi-wrap-total" onclick="filterLogByKPI('total')" style="cursor:pointer;"><div class="kpi-label">Total Check-Ins</div><div class="kpi-value amber" id="kpi-total">—</div><div class="kpi-sub">all time scans</div></div>
+      <div class="kpi-card amber" id="kpi-wrap-failed" onclick="filterLogByKPI('ready')" style="cursor:pointer;"><div class="kpi-label">Inspection Ready</div><div class="kpi-value amber" id="kpi-failed">—</div><div class="kpi-sub">awaiting inspector</div></div>
+      <div class="kpi-card amber" id="kpi-wrap-stale"><div class="kpi-label">Stale Locations</div><div class="kpi-value amber" id="kpi-stale">—</div><div class="kpi-sub" id="kpi-stale-sub">no activity</div></div>
+      <div class="kpi-card green" id="kpi-wrap-done" onclick="filterLogByKPI('done')" style="cursor:pointer;"><div class="kpi-label">Final Complete</div><div class="kpi-value green" id="kpi-done">—</div><div class="kpi-sub">locations closed out</div></div>
     </div>
-
     <div class="two-col" id="row-top">
-      <div class="card" id="sec-wrap-status">
-        <div class="card-header"><span class="card-title">Status Breakdown</span><span class="card-badge muted" id="status-total-badge">0 scans</span></div>
-        <div class="card-body" id="status-breakdown"><div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">Loading…</div></div></div>
-      </div>
-      <div class="card" id="sec-wrap-failedlist">
-        <div class="card-header"><span class="card-title">Pending Inspections</span><span class="card-badge amber" id="failed-badge">0</span></div>
-        <div class="card-body" id="failed-list"><div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">No locations awaiting inspection</div></div></div>
-      </div>
+      <div class="card" id="sec-wrap-status"><div class="card-header"><span class="card-title">Status Breakdown</span><span class="card-badge muted" id="status-total-badge">0 scans</span></div><div class="card-body" id="status-breakdown"><div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">Loading…</div></div></div></div>
+      <div class="card" id="sec-wrap-failedlist"><div class="card-header"><span class="card-title">Pending Inspections</span><span class="card-badge amber" id="failed-badge">0</span></div><div class="card-body" id="failed-list"><div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">No locations awaiting inspection</div></div></div></div>
     </div>
-
     <div class="two-col" id="row-bottom">
       <div class="card" id="sec-wrap-stalelist">
-        <div class="card-header">
-          <span class="card-title">Stale Locations</span>
-          <div class="threshold-control">
-            <label>Stale after</label>
-            <input type="number" class="threshold-input" id="stale-days" value="3" min="1" max="30" onchange="syncStale(this.value)">
-            <label>days</label>
-          </div>
-        </div>
-        <div class="card-body" style="padding:0;">
-          <table class="stale-table">
-            <thead><tr><th>Location</th><th>Trade</th><th>Last Status</th><th>Age</th></tr></thead>
-            <tbody id="stale-tbody"><tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🏷️</div><div class="empty-text">Loading…</div></div></td></tr></tbody>
-          </table>
-        </div>
+        <div class="card-header"><span class="card-title">Stale Locations</span><div class="threshold-control"><label>Stale after</label><input type="number" class="threshold-input" id="stale-days" value="3" min="1" max="30" onchange="syncStale(this.value)"><label>days</label></div></div>
+        <div class="card-body" style="padding:0;"><table class="stale-table"><thead><tr><th>Location</th><th>Trade</th><th>Last Status</th><th>Age</th></tr></thead><tbody id="stale-tbody"><tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🏷️</div><div class="empty-text">Loading…</div></div></td></tr></tbody></table></div>
       </div>
-      <div class="card" id="sec-wrap-activity">
-        <div class="card-header"><span class="card-title">Recent Activity</span><span class="card-badge blue">Last 10</span></div>
-        <div class="card-body" id="recent-activity"><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">Loading…</div></div></div>
-      </div>
+      <div class="card" id="sec-wrap-activity"><div class="card-header"><span class="card-title">Recent Activity</span><span class="card-badge blue">Last 10</span></div><div class="card-body" id="recent-activity"><div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">Loading…</div></div></div></div>
     </div>
-
     <div id="sec-wrap-locations">
       <div class="section-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
         LATEST STATUS BY LOCATION
         <div style="display:flex;gap:8px;margin-left:auto;align-items:center;">
-          <input type="text" id="loc-search" placeholder="Search locations…" oninput="renderLocations()"
-            style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;padding:5px 10px;outline:none;width:160px;">
-          <select id="loc-status-filter" onchange="renderLocations()"
-            style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;padding:5px 10px;outline:none;cursor:pointer;">
-            <option value="">All Statuses</option>
-          </select>
-          <button id="loc-view-toggle" onclick="toggleLocView()"
-            style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:5px 12px;cursor:pointer;letter-spacing:0.5px;">
-            ⊞ Cards
-          </button>
+          <input type="text" id="loc-search" placeholder="Search locations…" oninput="renderLocations()" style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;padding:5px 10px;outline:none;width:160px;">
+          <select id="loc-status-filter" onchange="renderLocations()" style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Poppins',sans-serif;font-size:12px;padding:5px 10px;outline:none;cursor:pointer;"><option value="">All Statuses</option></select>
+          <button id="loc-view-toggle" onclick="toggleLocView()" style="background:var(--steel);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;padding:5px 12px;cursor:pointer;letter-spacing:0.5px;">⊞ Cards</button>
         </div>
       </div>
-      <div id="location-table-wrap" style="margin-bottom:28px;">
-        <div class="log-table-wrap">
-          <table class="log-table">
-            <thead><tr><th>Location</th><th>Status</th><th>Trade</th><th>Task</th><th>Last Scan</th><th>Verified By</th><th></th></tr></thead>
-            <tbody id="location-table-body"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
-          </table>
-        </div>
-      </div>
+      <div id="location-table-wrap" style="margin-bottom:28px;"><div class="log-table-wrap"><table class="log-table"><thead><tr><th>Location</th><th>Status</th><th>Trade</th><th>Task</th><th>Last Scan</th><th>Verified By</th><th></th></tr></thead><tbody id="location-table-body"><tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody></table></div></div>
       <div id="location-grid" style="display:none;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:28px;"></div>
     </div>
-
     <div class="scan-log-wrap" id="sec-wrap-scanlog">
-      <div class="section-title" style="display:flex;align-items:center;gap:12px;">
-        SCAN LOG
-        <span class="log-count" id="log-count"></span>
-        <button class="scan-filter" onclick="clearLogFilters()" style="margin-left:auto;cursor:pointer;color:var(--muted);font-size:11px;padding:4px 12px;">✕ Clear Filters</button>
-      </div>
+      <div class="section-title" style="display:flex;align-items:center;gap:12px;">SCAN LOG<span class="log-count" id="log-count"></span><button class="scan-filter" onclick="clearLogFilters()" style="margin-left:auto;cursor:pointer;color:var(--muted);font-size:11px;padding:4px 12px;">✕ Clear Filters</button></div>
       <div class="log-table-wrap">
         <table class="log-table">
-          <thead>
-            <tr>
-              <th class="col-time">Time<select class="th-filter" id="log-date-filter" onchange="renderScanLog()"><option value="">All Dates</option><option value="1">Last 24 hrs</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select></th>
-              <th class="col-location">Location<select class="th-filter" id="log-location-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
-              <th class="col-trade">Trade<select class="th-filter" id="log-trade-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
-              <th class="col-task">Task<input class="th-search" id="log-task-filter" placeholder="Search…" oninput="renderScanLog()"></th>
-              <th class="col-status">Status<select class="th-filter" id="log-status-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
-              <th class="col-verified">Verified By<select class="th-filter" id="log-verifiedby-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
-              <th class="col-notes">Notes</th>
-              <th style="min-width:60px;">Photo</th>
-            </tr>
-          </thead>
-          <tbody id="log-table-body">
-            <tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr>
-          </tbody>
+          <thead><tr>
+            <th class="col-time">Time<select class="th-filter" id="log-date-filter" onchange="renderScanLog()"><option value="">All Dates</option><option value="1">Last 24 hrs</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select></th>
+            <th class="col-location">Location<select class="th-filter" id="log-location-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+            <th class="col-trade">Trade<select class="th-filter" id="log-trade-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+            <th class="col-task">Task<input class="th-search" id="log-task-filter" placeholder="Search…" oninput="renderScanLog()"></th>
+            <th class="col-status">Status<select class="th-filter" id="log-status-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+            <th class="col-verified">Verified By<select class="th-filter" id="log-verifiedby-filter" onchange="renderScanLog()"><option value="">All</option></select></th>
+            <th class="col-notes">Notes</th>
+            <th style="min-width:60px;">Photo</th>
+          </tr></thead>
+          <tbody id="log-table-body"><tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
-  </div><!-- /dashboard-content -->
+  </div>
 </div>
 
-<!-- PIN Screen -->
+<!-- ── Admin PIN Screen ── -->
+<div class="pin-overlay" id="admin-pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo">
+      <div class="pin-logo-badge">🔐</div>
+      <div class="pin-logo-text">VERI<span>SITE</span></div>
+    </div>
+    <div class="pin-title">Admin Access</div>
+    <div class="pin-subtitle">Enter your VeriSite admin PIN to continue.</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="apd0"></div><div class="pin-dot" id="apd1"></div>
+      <div class="pin-dot" id="apd2"></div><div class="pin-dot" id="apd3"></div>
+    </div>
+    <div class="pin-keypad">
+      <button class="pin-key" onclick="adminPinKey('1')">1</button><button class="pin-key" onclick="adminPinKey('2')">2</button><button class="pin-key" onclick="adminPinKey('3')">3</button>
+      <button class="pin-key" onclick="adminPinKey('4')">4</button><button class="pin-key" onclick="adminPinKey('5')">5</button><button class="pin-key" onclick="adminPinKey('6')">6</button>
+      <button class="pin-key" onclick="adminPinKey('7')">7</button><button class="pin-key" onclick="adminPinKey('8')">8</button><button class="pin-key" onclick="adminPinKey('9')">9</button>
+      <button class="pin-key empty" disabled></button><button class="pin-key" onclick="adminPinKey('0')">0</button><button class="pin-key del" onclick="adminPinDel()">⌫</button>
+    </div>
+    <div class="pin-error" id="admin-pin-error"></div>
+  </div>
+</div>
+
+<!-- ── Client PIN Screen ── -->
 <div class="pin-overlay" id="pin-overlay">
   <div class="pin-box">
     <div class="pin-logo">
@@ -556,7 +388,7 @@
     </div>
     <div class="pin-title" id="pin-title">Enter your PIN</div>
     <div class="pin-subtitle" id="pin-subtitle">Contact your VeriSite representative if you need access.</div>
-    <div class="pin-dots" id="pin-dots">
+    <div class="pin-dots">
       <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
       <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
     </div>
@@ -573,20 +405,21 @@
 <!-- Photo Modal -->
 <div class="photo-modal-overlay" id="photo-modal" onclick="closePhotoModal(event)">
   <div class="photo-modal">
-    <div class="photo-modal-header">
-      <div><div class="photo-modal-title" id="modal-title">Photo</div><div class="photo-modal-meta" id="modal-meta"></div></div>
-      <button class="photo-modal-close" onclick="document.getElementById('photo-modal').classList.remove('open')">✕</button>
-    </div>
+    <div class="photo-modal-header"><div><div class="photo-modal-title" id="modal-title">Photo</div><div class="photo-modal-meta" id="modal-meta"></div></div><button class="photo-modal-close" onclick="document.getElementById('photo-modal').classList.remove('open')">✕</button></div>
     <div class="photo-modal-body"><img id="modal-img" src="" alt="Site photo"></div>
-    <div class="photo-modal-footer">
-      <button class="photo-btn secondary" onclick="document.getElementById('photo-modal').classList.remove('open')">Close</button>
-      <a class="photo-btn" id="modal-open-link" href="" target="_blank">Open in Drive ↗</a>
-    </div>
+    <div class="photo-modal-footer"><button class="photo-btn secondary" onclick="document.getElementById('photo-modal').classList.remove('open')">Close</button><a class="photo-btn" id="modal-open-link" href="" target="_blank">Open in Drive ↗</a></div>
   </div>
 </div>
 
 <script>
 const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwB5LGjk61WmuEgUnHBkSuejBVHMRLaubAldaXRp6DHK_x0m5rKU8ND0n3bH3eK71oa/exec';
+
+// ── ADMIN PIN CONFIG ──
+// Change this to your desired admin PIN before deploying
+const ADMIN_PIN = '9274';
+const ADMIN_SESSION_KEY = 'vs_admin_session';
+const ADMIN_LOCKOUT_KEY = 'vs_admin_lock';
+const ADMIN_SESSION_HOURS = 8;
 
 let CLIENT_NAMES = {};
 const clientDisplay = (id) => CLIENT_NAMES[id] || id;
@@ -603,487 +436,394 @@ let allData  = [];
 let filtered = [];
 let lockedCompany = '';
 let lockedProject = '';
-let isAdminView   = false;  // true when no ?company= in URL
+let isAdminView   = false;
 
 // ── PREFS ──
 const PREFS_KEY = () => `vs_prefs_${lockedCompany || 'admin'}`;
-const DEFAULT_PREFS = {
-  kpi: { total:true, failed:true, stale:true, done:true },
-  sec: { status:true, failedlist:true, stalelist:true, activity:true, locations:true },
-  staleDays: 3
-};
-function loadPrefs() {
-  try { return Object.assign({}, DEFAULT_PREFS, JSON.parse(localStorage.getItem(PREFS_KEY()) || '{}')); }
-  catch(e) { return Object.assign({}, DEFAULT_PREFS); }
-}
-function savePrefs(p) { localStorage.setItem(PREFS_KEY(), JSON.stringify(p)); }
+const DEFAULT_PREFS = { kpi:{total:true,failed:true,stale:true,done:true}, sec:{status:true,failedlist:true,stalelist:true,activity:true,locations:true}, staleDays:3 };
+function loadPrefs() { try{return Object.assign({},DEFAULT_PREFS,JSON.parse(localStorage.getItem(PREFS_KEY())||'{}'));}catch(e){return Object.assign({},DEFAULT_PREFS);} }
+function savePrefs(p) { localStorage.setItem(PREFS_KEY(),JSON.stringify(p)); }
 function applyPrefsToDOM(prefs) {
-  Object.entries(prefs.kpi).forEach(([k,v]) => {
-    const cb = document.getElementById(`tog-kpi-${k}`); if(cb) cb.checked = v;
-    const el = document.getElementById(`kpi-wrap-${k}`); if(el) el.dataset.hidden = !v;
-  });
-  Object.entries(prefs.sec).forEach(([k,v]) => {
-    const cb = document.getElementById(`tog-sec-${k}`); if(cb) cb.checked = v;
-    const el = document.getElementById(`sec-wrap-${k}`); if(el) el.dataset.hidden = !v;
-  });
-  const sd = prefs.staleDays || 3;
-  document.getElementById('stale-days').value   = sd;
-  document.getElementById('stale-drawer').value = sd;
+  Object.entries(prefs.kpi).forEach(([k,v])=>{const cb=document.getElementById(`tog-kpi-${k}`);if(cb)cb.checked=v;const el=document.getElementById(`kpi-wrap-${k}`);if(el)el.dataset.hidden=!v;});
+  Object.entries(prefs.sec).forEach(([k,v])=>{const cb=document.getElementById(`tog-sec-${k}`);if(cb)cb.checked=v;const el=document.getElementById(`sec-wrap-${k}`);if(el)el.dataset.hidden=!v;});
+  const sd=prefs.staleDays||3;
+  document.getElementById('stale-days').value=sd;
+  document.getElementById('stale-drawer').value=sd;
 }
-function togglePref(group, key) {
-  const prefs = loadPrefs();
-  if (!prefs[group]) prefs[group] = {};
-  const cb = document.getElementById(`tog-${group}-${key}`);
-  prefs[group][key] = cb.checked;
-  savePrefs(prefs);
-  const wrap = document.getElementById(group === 'kpi' ? `kpi-wrap-${key}` : `sec-wrap-${key}`);
-  if (wrap) wrap.dataset.hidden = !cb.checked;
+function togglePref(group,key) {
+  const prefs=loadPrefs();if(!prefs[group])prefs[group]={};
+  const cb=document.getElementById(`tog-${group}-${key}`);prefs[group][key]=cb.checked;savePrefs(prefs);
+  const wrap=document.getElementById(group==='kpi'?`kpi-wrap-${key}`:`sec-wrap-${key}`);if(wrap)wrap.dataset.hidden=!cb.checked;
 }
 function syncStale(val) {
-  const days = Math.max(1, parseInt(val) || 3);
-  document.getElementById('stale-days').value   = days;
-  document.getElementById('stale-drawer').value = days;
-  const prefs = loadPrefs(); prefs.staleDays = days; savePrefs(prefs);
-  renderAll();
+  const days=Math.max(1,parseInt(val)||3);
+  document.getElementById('stale-days').value=days;document.getElementById('stale-drawer').value=days;
+  const prefs=loadPrefs();prefs.staleDays=days;savePrefs(prefs);renderAll();
+}
+
+// ── ADMIN PIN AUTH ──
+let adminPinEntry = '';
+let adminPinAttempts = 0;
+
+function adminPinKey(digit) {
+  const lockUntil = parseInt(localStorage.getItem(ADMIN_LOCKOUT_KEY)||'0');
+  if (Date.now() < lockUntil) { showAdminLockout(lockUntil); return; }
+  if (adminPinEntry.length >= 4) return;
+  adminPinEntry += digit;
+  updateAdminDots();
+  if (adminPinEntry.length === 4) setTimeout(checkAdminPin, 120);
+}
+function adminPinDel() {
+  adminPinEntry = adminPinEntry.slice(0,-1);
+  updateAdminDots();
+  document.getElementById('admin-pin-error').textContent = '';
+}
+function updateAdminDots(state) {
+  for (let i=0;i<4;i++) {
+    const dot=document.getElementById('apd'+i);dot.className='pin-dot';
+    if(state==='error') dot.classList.add('error');
+    else if(i<adminPinEntry.length) dot.classList.add('filled');
+  }
+}
+function showAdminLockout(until) {
+  document.getElementById('admin-pin-error').textContent=`Too many attempts. Try again in ${Math.ceil((until-Date.now())/1000)}s.`;
+}
+function checkAdminPin() {
+  if (adminPinEntry === ADMIN_PIN) {
+    adminPinAttempts = 0;
+    localStorage.setItem(ADMIN_SESSION_KEY, Date.now() + (ADMIN_SESSION_HOURS * 60 * 60 * 1000));
+    document.getElementById('admin-pin-overlay').classList.remove('active');
+    continueAdminInit();
+  } else {
+    adminPinAttempts++;
+    adminPinEntry = '';
+    updateAdminDots('error');
+    if (adminPinAttempts >= 3) {
+      const lu = Date.now() + (5 * 60 * 1000);
+      localStorage.setItem(ADMIN_LOCKOUT_KEY, lu);
+      document.getElementById('admin-pin-error').textContent = 'Too many attempts. Locked for 5 minutes.';
+    } else {
+      document.getElementById('admin-pin-error').textContent = `Incorrect PIN. ${3-adminPinAttempts} attempt${3-adminPinAttempts!==1?'s':''} remaining.`;
+    }
+    setTimeout(()=>{ updateAdminDots(); document.getElementById('admin-pin-error').textContent=''; }, 1200);
+  }
+}
+function checkAdminSession() {
+  const lockUntil = parseInt(localStorage.getItem(ADMIN_LOCKOUT_KEY)||'0');
+  if (Date.now() < lockUntil) {
+    document.getElementById('admin-pin-overlay').classList.add('active');
+    showAdminLockout(lockUntil);
+    return false;
+  }
+  const session = parseInt(localStorage.getItem(ADMIN_SESSION_KEY)||'0');
+  if (Date.now() < session) return true; // valid session
+  document.getElementById('admin-pin-overlay').classList.add('active');
+  return false;
 }
 
 // ── INIT URL ──
+let _adminInitPending = false;
+
 async function initURL() {
   const params  = new URLSearchParams(window.location.search);
   lockedCompany = params.get('company') || '';
   lockedProject = params.get('project') || '';
   isAdminView   = !lockedCompany && !lockedProject;
 
+  if (isAdminView) {
+    // Check admin PIN session first
+    if (!checkAdminSession()) {
+      _adminInitPending = true;
+      return; // continueAdminInit() called after PIN
+    }
+    await continueAdminInit();
+  } else {
+    await continueClientInit();
+  }
+}
+
+async function continueAdminInit() {
+  _adminInitPending = false;
   const center = document.getElementById('header-center');
 
-  if (!isAdminView) {
-    // Client view — show pill, show data immediately
-    const label = lockedProject || clientDisplay(lockedCompany);
-    const sub   = lockedProject && lockedCompany ? clientDisplay(lockedCompany) : '';
-    center.innerHTML = `
-      <div class="client-pill">
-        🏗&nbsp;${label}
-        ${sub ? `<span class="client-pill-sub">· ${sub}</span>` : ''}
-      </div>`;
-    const base = window.location.href.split('?')[0];
-    let url = `${base}?company=${encodeURIComponent(lockedCompany)}`;
-    if (lockedProject) url += `&project=${encodeURIComponent(lockedProject)}`;
-    document.getElementById('share-url-box').textContent = url;
-    document.getElementById('share-section').style.display = 'block';
-    showDashboard();
-  } else {
-    // Admin view — show dropdowns, hide dashboard until selection
-    const projects = await loadProjects();
-    const projectsByCompany = {};
-    projects.forEach(p => {
-      if (!projectsByCompany[p.CompanyID]) projectsByCompany[p.CompanyID] = [];
-      projectsByCompany[p.CompanyID].push(p);
-    });
-    window._projectsByCompany = projectsByCompany;
-    window._allProjects = projects;
+  // Show admin badge
+  const projects = await loadProjects();
+  const projectsByCompany = {};
+  projects.forEach(p => {
+    if (!projectsByCompany[p.CompanyID]) projectsByCompany[p.CompanyID] = [];
+    projectsByCompany[p.CompanyID].push(p);
+  });
+  window._projectsByCompany = projectsByCompany;
+  window._allProjects = projects;
 
-    // Build company dropdown from CLIENT_NAMES (display names, not raw IDs)
-    const companyOptions = Object.keys(CLIENT_NAMES)
-      .filter(id => CLIENT_NAMES[id]) // only populated entries
-      .sort((a,b) => CLIENT_NAMES[a].localeCompare(CLIENT_NAMES[b]))
-      .map(id => `<option value="${id}">${CLIENT_NAMES[id]}</option>`)
-      .join('');
+  const companyOptions = Object.keys(CLIENT_NAMES)
+    .filter(id => CLIENT_NAMES[id])
+    .sort((a,b) => CLIENT_NAMES[a].localeCompare(CLIENT_NAMES[b]))
+    .map(id => `<option value="${id}">${CLIENT_NAMES[id]}</option>`)
+    .join('');
 
-    center.innerHTML = `
-      <select class="filter-pill" id="company-filter" onchange="onCompanyChange()" style="min-width:160px;">
-        <option value="">Select Client…</option>
-        ${companyOptions}
-      </select>
-      <select class="filter-pill" id="project-filter" onchange="onProjectChange()" style="min-width:180px;" disabled>
-        <option value="">Select Project…</option>
-      </select>`;
+  center.innerHTML = `
+    <span class="admin-badge">ADMIN</span>
+    <select class="filter-pill" id="company-filter" onchange="onCompanyChange()" style="min-width:160px;">
+      <option value="">Select Client…</option>
+      ${companyOptions}
+    </select>
+    <select class="filter-pill" id="project-filter" onchange="onProjectChange()" style="min-width:180px;" disabled>
+      <option value="">Select Project…</option>
+    </select>`;
 
-    // Show the prompt, hide dashboard
-    document.getElementById('select-prompt').style.display = 'flex';
-    document.getElementById('dashboard-content').style.display = 'none';
-  }
+  document.getElementById('select-prompt').style.display = 'flex';
+  document.getElementById('dashboard-content').style.display = 'none';
+
+  // Data loads in background, renders only when project selected
+  loadData();
+}
+
+async function continueClientInit() {
+  const center = document.getElementById('header-center');
+  const label = lockedProject || clientDisplay(lockedCompany);
+  const sub   = lockedProject && lockedCompany ? clientDisplay(lockedCompany) : '';
+  center.innerHTML = `
+    <div class="client-pill">
+      🏗&nbsp;${label}
+      ${sub ? `<span class="client-pill-sub">· ${sub}</span>` : ''}
+    </div>`;
+  const base = window.location.href.split('?')[0];
+  let url = `${base}?company=${encodeURIComponent(lockedCompany)}`;
+  if (lockedProject) url += `&project=${encodeURIComponent(lockedProject)}`;
+  document.getElementById('share-url-box').textContent = url;
+  document.getElementById('share-section').style.display = 'block';
+  showDashboard();
+  checkPinSession();
+  loadData();
 }
 
 function onCompanyChange() {
-  const cf = document.getElementById('company-filter');
-  const pf = document.getElementById('project-filter');
-  if (!cf || !pf) return;
-  const comp = cf.value;
-
-  if (!comp) {
-    pf.innerHTML = '<option value="">Select Project…</option>';
-    pf.disabled = true;
-    document.getElementById('select-prompt').style.display = 'flex';
-    document.getElementById('dashboard-content').style.display = 'none';
-    return;
-  }
-
-  const projects = window._projectsByCompany[comp] || [];
-  pf.innerHTML = '<option value="">Select Project…</option>' +
-    projects.map(p => `<option value="${p.ProjectName}">${p.ProjectName}</option>`).join('');
-  pf.disabled = false;
-
-  // Hide dashboard until project is also selected
-  document.getElementById('select-prompt').style.display = 'flex';
-  document.getElementById('dashboard-content').style.display = 'none';
+  const cf=document.getElementById('company-filter');const pf=document.getElementById('project-filter');if(!cf||!pf)return;
+  const comp=cf.value;
+  if(!comp){pf.innerHTML='<option value="">Select Project…</option>';pf.disabled=true;document.getElementById('select-prompt').style.display='flex';document.getElementById('dashboard-content').style.display='none';return;}
+  const projects=window._projectsByCompany[comp]||[];
+  pf.innerHTML='<option value="">Select Project…</option>'+projects.map(p=>`<option value="${p.ProjectName}">${p.ProjectName}</option>`).join('');
+  pf.disabled=false;
+  document.getElementById('select-prompt').style.display='flex';document.getElementById('dashboard-content').style.display='none';
 }
 
 function onProjectChange() {
-  const cf = document.getElementById('company-filter');
-  const pf = document.getElementById('project-filter');
-  if (!cf || !pf) return;
-  const comp = cf.value;
-  const proj = pf.value;
-
-  if (!proj) {
-    document.getElementById('select-prompt').style.display = 'flex';
-    document.getElementById('dashboard-content').style.display = 'none';
-    return;
-  }
-
-  // Selection complete — show dashboard and filter data
+  const cf=document.getElementById('company-filter');const pf=document.getElementById('project-filter');if(!cf||!pf)return;
+  const comp=cf.value,proj=pf.value;
+  if(!proj){document.getElementById('select-prompt').style.display='flex';document.getElementById('dashboard-content').style.display='none';return;}
   showDashboard();
-  lockedCompany = comp;
-  lockedProject = proj;
+  lockedCompany=comp;lockedProject=proj;
   applyFilters();
 }
 
 function showDashboard() {
-  document.getElementById('select-prompt').style.display = 'none';
-  document.getElementById('dashboard-content').style.display = 'block';
+  document.getElementById('select-prompt').style.display='none';
+  document.getElementById('dashboard-content').style.display='block';
 }
 
 function copyShareUrl() {
-  const url = document.getElementById('share-url-box').textContent;
-  navigator.clipboard.writeText(url).then(() => {
-    const btn = document.getElementById('copy-btn');
-    btn.textContent = '✓  Copied to clipboard!';
-    setTimeout(() => { btn.innerHTML = '⎘&nbsp; Copy Client Link'; }, 2200);
-  });
+  const url=document.getElementById('share-url-box').textContent;
+  navigator.clipboard.writeText(url).then(()=>{const btn=document.getElementById('copy-btn');btn.textContent='✓  Copied!';setTimeout(()=>{btn.innerHTML='⎘&nbsp; Copy Client Link';},2200);});
 }
 
 // ── SETTINGS ──
-function openSettings()  { document.getElementById('settings-overlay').classList.add('open'); document.getElementById('settings-drawer').classList.add('open'); }
-function closeSettings() { document.getElementById('settings-overlay').classList.remove('open'); document.getElementById('settings-drawer').classList.remove('open'); }
+function openSettings()  { document.getElementById('settings-overlay').classList.add('open');document.getElementById('settings-drawer').classList.add('open'); }
+function closeSettings() { document.getElementById('settings-overlay').classList.remove('open');document.getElementById('settings-drawer').classList.remove('open'); }
 
 // ── DATA ──
 function exportCSV() {
-  if (!allData || allData.length === 0) { alert('No data to export.'); return; }
-  const rows = filtered.length ? filtered : allData;
-  const headers = Object.keys(rows[0] || {}).filter(k => k !== '_ts');
-  const csvRows = rows.map(r => headers.map(h => `"${(r[h]||'').toString().replace(/"/g,'""')}"`).join(','));
-  const csv = [headers.join(','), ...csvRows].join('\n');
-  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url;
-  a.download = `verisite-${lockedProject||lockedCompany||'export'}-${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();
-  URL.revokeObjectURL(url);
+  if(!allData||allData.length===0){alert('No data to export.');return;}
+  const rows=filtered.length?filtered:allData;
+  const headers=Object.keys(rows[0]||{}).filter(k=>k!=='_ts');
+  const csvRows=rows.map(r=>headers.map(h=>`"${(r[h]||'').toString().replace(/"/g,'""')}"`).join(','));
+  const csv=[headers.join(','),...csvRows].join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');
+  a.href=url;a.download=`verisite-${lockedProject||lockedCompany||'export'}-${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
 }
 
 async function loadClients() {
   try {
-    const res  = await fetch(`${WEBHOOK_URL}?action=getClients`);
-    const json = await res.json();
-    if (json.result === 'success') {
-      CLIENT_NAMES = json.clients;
-      if (json.pins) clientPins = json.pins;
-    }
-  } catch(e) {}
+    const res=await fetch(`${WEBHOOK_URL}?action=getClients`);
+    const json=await res.json();
+    if(json.result==='success'){CLIENT_NAMES=json.clients;if(json.pins)clientPins=json.pins;}
+  } catch(e){}
 }
 
 async function loadProjects() {
   try {
-    const res  = await fetch(`${WEBHOOK_URL}?action=getProjects`);
-    const json = await res.json();
-    if (json.result === 'success') return json.projects || [];
-  } catch(e) {}
+    const res=await fetch(`${WEBHOOK_URL}?action=getProjects`);
+    const json=await res.json();
+    if(json.result==='success') return json.projects||[];
+  } catch(e){}
   return [];
 }
 
 async function loadData() {
-  const btn = document.getElementById('refresh-btn');
-  btn.classList.add('spinning');
+  const btn=document.getElementById('refresh-btn');btn.classList.add('spinning');
   try {
-    const res  = await fetch(`${WEBHOOK_URL}?action=getData`);
-    const json = await res.json();
-    if (json.result !== 'success') throw new Error('API error');
-    allData = json.data
-      .map(row => ({ ...row, _ts: new Date(row['Timestamp'] || 0) }))
-      .filter(r => r._ts > new Date('2000-01-01'));
+    const res=await fetch(`${WEBHOOK_URL}?action=getData`);
+    const json=await res.json();
+    if(json.result!=='success') throw new Error('API error');
+    allData=json.data.map(row=>({...row,_ts:new Date(row['Timestamp']||0)})).filter(r=>r._ts>new Date('2000-01-01'));
     applyFilters();
-    document.getElementById('last-update').textContent =
-      'Updated ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
-    document.getElementById('error-banner').style.display = 'none';
+    document.getElementById('last-update').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});
+    document.getElementById('error-banner').style.display='none';
   } catch(err) {
-    const b = document.getElementById('error-banner');
-    b.textContent = '⚠  Could not load data. Check connection or Apps Script deployment.';
-    b.style.display = 'block';
+    const b=document.getElementById('error-banner');b.textContent='⚠  Could not load data. Check connection or Apps Script deployment.';b.style.display='block';
   }
   btn.classList.remove('spinning');
   document.getElementById('loading-overlay').classList.add('hidden');
 }
 
 function applyFilters() {
-  // In admin view, lockedCompany/lockedProject are set by onProjectChange
-  // In client view, they come from URL params
-  filtered = allData.filter(r =>
-    (!lockedProject || r['Project'] === lockedProject) &&
-    (!lockedCompany || r['CompanyID'] === lockedCompany)
-  );
-  // Only render if dashboard is visible
-  if (document.getElementById('dashboard-content').style.display !== 'none') {
-    renderAll();
-  }
+  filtered=allData.filter(r=>(!lockedProject||r['Project']===lockedProject)&&(!lockedCompany||r['CompanyID']===lockedCompany));
+  if(document.getElementById('dashboard-content').style.display!=='none') renderAll();
 }
 
 // ── RENDER ──
-function renderAll() {
-  renderKPIs(); renderStatus(); renderFailed();
-  renderStale(); renderActivity(); renderLocations();
-  populateScanLogFilters(); renderScanLog();
-}
+function renderAll() { renderKPIs();renderStatus();renderFailed();renderStale();renderActivity();renderLocations();populateScanLogFilters();renderScanLog(); }
 
 function latestPerLoc(data) {
-  const m = {};
-  data.forEach(r => { const loc=r['Location']||r['TagID']; if(!m[loc]||r._ts>m[loc]._ts) m[loc]=r; });
-  return Object.values(m);
+  const m={};data.forEach(r=>{const loc=r['Location']||r['TagID'];if(!m[loc]||r._ts>m[loc]._ts)m[loc]=r;});return Object.values(m);
 }
 
 function renderKPIs() {
-  const sd  = parseInt(document.getElementById('stale-days').value)||3;
-  const now = new Date();
-  const lpl = latestPerLoc(filtered);
-  document.getElementById('kpi-total').textContent  = filtered.length;
-  document.getElementById('kpi-failed').textContent = lpl.filter(r=>r['Status']==='Inspection Ready').length;
-  document.getElementById('kpi-stale').textContent  = lpl.filter(r=>(now-r._ts)>sd*86400000).length;
-  document.getElementById('kpi-done').textContent   = lpl.filter(r=>DONE_STATUSES.includes(r['Status'])).length;
-  document.getElementById('kpi-stale-sub').textContent = `no activity in ${sd}+ days`;
+  const sd=parseInt(document.getElementById('stale-days').value)||3,now=new Date(),lpl=latestPerLoc(filtered);
+  document.getElementById('kpi-total').textContent=filtered.length;
+  document.getElementById('kpi-failed').textContent=lpl.filter(r=>r['Status']==='Inspection Ready').length;
+  document.getElementById('kpi-stale').textContent=lpl.filter(r=>(now-r._ts)>sd*86400000).length;
+  document.getElementById('kpi-done').textContent=lpl.filter(r=>DONE_STATUSES.includes(r['Status'])).length;
+  document.getElementById('kpi-stale-sub').textContent=`no activity in ${sd}+ days`;
 }
 
 function renderStatus() {
-  const counts={}, total=filtered.length;
-  filtered.forEach(r=>{ const s=r['Status']||'Unknown'; counts[s]=(counts[s]||0)+1; });
-  document.getElementById('status-total-badge').textContent = `${total} scan${total!==1?'s':''}`;
-  if(!total){ document.getElementById('status-breakdown').innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">No data</div></div>'; return; }
+  const counts={},total=filtered.length;filtered.forEach(r=>{const s=r['Status']||'Unknown';counts[s]=(counts[s]||0)+1;});
+  document.getElementById('status-total-badge').textContent=`${total} scan${total!==1?'s':''}`;
+  if(!total){document.getElementById('status-breakdown').innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-text">No data</div></div>';return;}
   const sorted=Object.entries(counts).sort((a,b)=>(STATUS_CONFIG[a[0]]?.order||99)-(STATUS_CONFIG[b[0]]?.order||99));
-  document.getElementById('status-breakdown').innerHTML=sorted.map(([s,n])=>{
-    const pct=Math.round(n/total*100), cfg=STATUS_CONFIG[s]||{color:'#7a96a8'};
-    return `<div class="status-bar-wrap"><div class="status-bar-label"><span style="color:${cfg.color}">${s}</span><span>${n} <span style="color:var(--muted);font-weight:400">(${pct}%)</span></span></div><div class="status-bar-track"><div class="status-bar-fill" style="width:${pct}%;background:${cfg.color}"></div></div></div>`;
-  }).join('');
+  document.getElementById('status-breakdown').innerHTML=sorted.map(([s,n])=>{const pct=Math.round(n/total*100),cfg=STATUS_CONFIG[s]||{color:'#7a96a8'};return `<div class="status-bar-wrap"><div class="status-bar-label"><span style="color:${cfg.color}">${s}</span><span>${n} <span style="color:var(--muted);font-weight:400">(${pct}%)</span></span></div><div class="status-bar-track"><div class="status-bar-fill" style="width:${pct}%;background:${cfg.color}"></div></div></div>`;}).join('');
 }
 
 function renderFailed() {
-  const lpl   = latestPerLoc(filtered);
-  const items = lpl.filter(r=>r['Status']==='Inspection Ready').sort((a,b)=>a._ts-b._ts);
+  const lpl=latestPerLoc(filtered),items=lpl.filter(r=>r['Status']==='Inspection Ready').sort((a,b)=>a._ts-b._ts);
   document.getElementById('failed-badge').textContent=items.length;
-  document.getElementById('failed-list').innerHTML = items.length===0
-    ? '<div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">No locations awaiting inspection</div></div>'
-    : items.slice(0,8).map(r=>`<div class="failed-item" style="background:rgba(240,174,60,0.06);border:1px solid rgba(240,174,60,0.25);"><div class="failed-header"><span class="failed-trade" style="color:var(--accent)">${r['SelectTrade']||'—'} · ${r['Task']||'—'}</span><span class="failed-time">${timeAgo(r._ts)}</span></div><div class="failed-detail">${r['Location']||'—'} · ${r['Project']||'—'} · ${r['VerifiedBy']||'—'}</div>${r['Notes']?`<div style="font-size:11px;color:var(--muted);margin-top:4px">📝 ${r['Notes']}</div>`:''}</div>`).join('');
+  document.getElementById('failed-list').innerHTML=items.length===0?'<div class="empty-state"><div class="empty-icon">✅</div><div class="empty-text">No locations awaiting inspection</div></div>':items.slice(0,8).map(r=>`<div class="failed-item" style="background:rgba(240,174,60,0.06);border:1px solid rgba(240,174,60,0.25);"><div class="failed-header"><span class="failed-trade" style="color:var(--accent)">${r['SelectTrade']||'—'} · ${r['Task']||'—'}</span><span class="failed-time">${timeAgo(r._ts)}</span></div><div class="failed-detail">${r['Location']||'—'} · ${r['Project']||'—'} · ${r['VerifiedBy']||'—'}</div>${r['Notes']?`<div style="font-size:11px;color:var(--muted);margin-top:4px">📝 ${r['Notes']}</div>`:''}</div>`).join('');
 }
 
 function renderStale() {
-  const sd=parseInt(document.getElementById('stale-days').value)||3, now=new Date();
+  const sd=parseInt(document.getElementById('stale-days').value)||3,now=new Date();
   const stale=latestPerLoc(filtered).map(r=>({...r,ageDays:(now-r._ts)/86400000})).filter(r=>r.ageDays>sd).sort((a,b)=>b.ageDays-a.ageDays);
-  document.getElementById('stale-tbody').innerHTML = stale.length===0
-    ? `<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🏷️</div><div class="empty-text">No stale locations</div></div></td></tr>`
-    : stale.slice(0,10).map(r=>{const d=Math.floor(r.ageDays),cls=d>7?'critical':d>3?'warning':'ok';return `<tr><td><span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span><br><span style="font-size:10px;color:var(--muted)">${r['Project']||''}</span></td><td>${r['SelectTrade']||'—'}</td><td><span style="font-size:11px;color:${STATUS_CONFIG[r['Status']]?.color||'var(--muted)'}">${r['Status']||'—'}</span></td><td><span class="age-badge ${cls}">${d}d</span></td></tr>`;}).join('');
+  document.getElementById('stale-tbody').innerHTML=stale.length===0?`<tr><td colspan="4"><div class="empty-state"><div class="empty-icon">🏷️</div><div class="empty-text">No stale locations</div></div></td></tr>`:stale.slice(0,10).map(r=>{const d=Math.floor(r.ageDays),cls=d>7?'critical':d>3?'warning':'ok';return `<tr><td><span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span><br><span style="font-size:10px;color:var(--muted)">${r['Project']||''}</span></td><td>${r['SelectTrade']||'—'}</td><td><span style="font-size:11px;color:${STATUS_CONFIG[r['Status']]?.color||'var(--muted)'}">${r['Status']||'—'}</span></td><td><span class="age-badge ${cls}">${d}d</span></td></tr>`;}).join('');
 }
 
 function renderActivity() {
   const items=[...filtered].sort((a,b)=>b._ts-a._ts).slice(0,10);
-  document.getElementById('recent-activity').innerHTML = items.length===0
-    ? '<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No activity yet</div></div>'
-    : items.map(r=>{const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)'};return `<div class="activity-item"><div class="activity-dot" style="background:${cfg.color};box-shadow:0 0 5px ${cfg.color}40"></div><div class="activity-content"><div class="activity-main">${r['SelectTrade']||'—'} · ${r['Task']||'—'}</div><div class="activity-meta">${r['Location']||'—'} · ${r['VerifiedBy']||'—'}</div></div><div class="activity-time">${timeAgo(r._ts)}</div></div>`;}).join('');
+  document.getElementById('recent-activity').innerHTML=items.length===0?'<div class="empty-state"><div class="empty-icon">📋</div><div class="empty-text">No activity yet</div></div>':items.map(r=>{const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)'};return `<div class="activity-item"><div class="activity-dot" style="background:${cfg.color};box-shadow:0 0 5px ${cfg.color}40"></div><div class="activity-content"><div class="activity-main">${r['SelectTrade']||'—'} · ${r['Task']||'—'}</div><div class="activity-meta">${r['Location']||'—'} · ${r['VerifiedBy']||'—'}</div></div><div class="activity-time">${timeAgo(r._ts)}</div></div>`;}).join('');
 }
 
-let locViewMode = 'table';
+let locViewMode='table';
 function toggleLocView() {
-  locViewMode = locViewMode === 'table' ? 'cards' : 'table';
-  const btn = document.getElementById('loc-view-toggle');
-  const tableWrap = document.getElementById('location-table-wrap');
-  const grid = document.getElementById('location-grid');
-  if (locViewMode === 'cards') { tableWrap.style.display='none'; grid.style.display='grid'; btn.textContent='☰ Table'; }
-  else { tableWrap.style.display='block'; grid.style.display='none'; btn.textContent='⊞ Cards'; }
+  locViewMode=locViewMode==='table'?'cards':'table';
+  const btn=document.getElementById('loc-view-toggle'),tw=document.getElementById('location-table-wrap'),g=document.getElementById('location-grid');
+  if(locViewMode==='cards'){tw.style.display='none';g.style.display='grid';btn.textContent='☰ Table';}
+  else{tw.style.display='block';g.style.display='none';btn.textContent='⊞ Cards';}
   renderLocations();
 }
 
 function renderLocations() {
-  const sd = parseInt(document.getElementById('stale-days').value) || 3;
-  const search = (document.getElementById('loc-search')?.value || '').toLowerCase();
-  const statusF = document.getElementById('loc-status-filter')?.value || '';
-  const sf = document.getElementById('loc-status-filter');
-  if (sf) {
-    const cur = sf.value;
-    const statuses = [...new Set(filtered.map(r=>r['Status']).filter(Boolean))].sort();
-    sf.innerHTML = '<option value="">All Statuses</option>' + statuses.map(s=>`<option value="${s}"${s===cur?' selected':''}>${s}</option>`).join('');
-  }
-  let locs = latestPerLoc(filtered).sort((a,b) => b._ts - a._ts);
-  if (search)  locs = locs.filter(r => (r['Location']||'').toLowerCase().includes(search));
-  if (statusF) locs = locs.filter(r => r['Status'] === statusF);
-
-  if (locViewMode === 'table') {
-    const tbody = document.getElementById('location-table-body');
-    if (!tbody) return;
-    tbody.innerHTML = locs.length===0
-      ? '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">No locations match</td></tr>'
-      : locs.map(r => {
-          const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)',bg:'rgba(122,150,168,0.1)'};
-          const age=Math.floor((new Date()-r._ts)/86400000), stale=age>=sd;
-          return `<tr style="cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans">
-            <td><span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span>${stale?'<span style="margin-left:6px;font-size:9px;font-weight:700;color:var(--accent);background:rgba(240,174,60,0.1);padding:1px 6px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>':''}<div style="font-size:10px;color:var(--muted);margin-top:1px">${r['Project']||''}</div></td>
-            <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
-            <td style="color:var(--accent)">${r['SelectTrade']||'—'}</td>
-            <td style="color:var(--muted);font-size:11px">${r['Task']||'—'}</td>
-            <td style="color:var(--muted);font-size:11px;white-space:nowrap">${timeAgo(r._ts)}</td>
-            <td style="font-size:11px">${r['VerifiedBy']||'—'}</td>
-            <td style="font-size:11px;color:var(--muted)">›</td>
-          </tr>`;
-        }).join('');
+  const sd=parseInt(document.getElementById('stale-days').value)||3,search=(document.getElementById('loc-search')?.value||'').toLowerCase(),statusF=document.getElementById('loc-status-filter')?.value||'';
+  const sf=document.getElementById('loc-status-filter');
+  if(sf){const cur=sf.value,statuses=[...new Set(filtered.map(r=>r['Status']).filter(Boolean))].sort();sf.innerHTML='<option value="">All Statuses</option>'+statuses.map(s=>`<option value="${s}"${s===cur?' selected':''}>${s}</option>`).join('');}
+  let locs=latestPerLoc(filtered).sort((a,b)=>b._ts-a._ts);
+  if(search) locs=locs.filter(r=>(r['Location']||'').toLowerCase().includes(search));
+  if(statusF) locs=locs.filter(r=>r['Status']===statusF);
+  if(locViewMode==='table'){
+    const tbody=document.getElementById('location-table-body');if(!tbody)return;
+    tbody.innerHTML=locs.length===0?'<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px;">No locations match</td></tr>':locs.map(r=>{const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)',bg:'rgba(122,150,168,0.1)'},age=Math.floor((new Date()-r._ts)/86400000),stale=age>=sd;return `<tr style="cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans"><td><span style="font-weight:600;color:var(--white)">${r['Location']||'—'}</span>${stale?'<span style="margin-left:6px;font-size:9px;font-weight:700;color:var(--accent);background:rgba(240,174,60,0.1);padding:1px 6px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>':''}<div style="font-size:10px;color:var(--muted);margin-top:1px">${r['Project']||''}</div></td><td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td><td style="color:var(--accent)">${r['SelectTrade']||'—'}</td><td style="color:var(--muted);font-size:11px">${r['Task']||'—'}</td><td style="color:var(--muted);font-size:11px;white-space:nowrap">${timeAgo(r._ts)}</td><td style="font-size:11px">${r['VerifiedBy']||'—'}</td><td style="font-size:11px;color:var(--muted)">›</td></tr>`;}).join('');
   } else {
-    document.getElementById('location-grid').innerHTML = locs.length===0
-      ? '<div class="card"><div class="card-body"><div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No locations match</div></div></div></div>'
-      : locs.map(r=>{
-          const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)',bg:'rgba(122,150,168,0.1)'};
-          const age=Math.floor((new Date()-r._ts)/86400000),stale=age>=sd;
-          return `<div class="card" style="border-color:${stale?'rgba(240,174,60,0.3)':'var(--border)'};cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans for ${r['Location']}">
-            <div style="padding:14px 16px;border-bottom:1px solid var(--border);background:var(--steel);display:flex;justify-content:space-between;align-items:center;">
-              <div><div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div></div>
-              ${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(240,174,60,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>':''}
-            </div>
-            <div style="padding:12px 16px;">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-                <span style="font-size:12px;color:${cfg.color};font-weight:600;background:${cfg.bg};padding:3px 10px;border-radius:10px">${r['Status']||'—'}</span>
-                <span style="font-size:11px;color:var(--muted)">${timeAgo(r._ts)}</span>
-              </div>
-              <div style="font-size:12px;color:var(--text)">${r['SelectTrade']||'—'} · <span style="color:var(--muted)">${r['Task']||'—'}</span></div>
-              <div style="font-size:11px;color:var(--muted);margin-top:4px">👤 ${r['VerifiedBy']||'—'} · 🏷️ ${r['TagID']||'—'}</div>
-            </div>
-          </div>`;
-        }).join('');
+    document.getElementById('location-grid').innerHTML=locs.length===0?'<div class="card"><div class="card-body"><div class="empty-state"><div class="empty-icon">📍</div><div class="empty-text">No locations match</div></div></div></div>':locs.map(r=>{const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)',bg:'rgba(122,150,168,0.1)'},age=Math.floor((new Date()-r._ts)/86400000),stale=age>=sd;return `<div class="card" style="border-color:${stale?'rgba(240,174,60,0.3)':'var(--border)'};cursor:pointer;" onclick="filterLogByLocation('${r['Location']}')" title="View all scans for ${r['Location']}"><div style="padding:14px 16px;border-bottom:1px solid var(--border);background:var(--steel);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-weight:600;font-size:13px;color:var(--white)">${r['Location']||'—'}</div><div style="font-size:10px;color:var(--muted);margin-top:2px">${r['Project']||''} · ${clientDisplay(r['CompanyID']||'')}</div></div>${stale?'<span style="font-size:9px;font-weight:700;color:var(--accent);letter-spacing:1px;background:rgba(240,174,60,0.1);padding:2px 7px;border-radius:8px;border:1px solid rgba(240,174,60,0.3)">STALE</span>':''}</div><div style="padding:12px 16px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span style="font-size:12px;color:${cfg.color};font-weight:600;background:${cfg.bg};padding:3px 10px;border-radius:10px">${r['Status']||'—'}</span><span style="font-size:11px;color:var(--muted)">${timeAgo(r._ts)}</span></div><div style="font-size:12px;color:var(--text)">${r['SelectTrade']||'—'} · <span style="color:var(--muted)">${r['Task']||'—'}</span></div><div style="font-size:11px;color:var(--muted);margin-top:4px">👤 ${r['VerifiedBy']||'—'} · 🏷️ ${r['TagID']||'—'}</div></div></div>`;}).join('');
   }
 }
 
 function timeAgo(d) {
   const s=Math.floor((new Date()-d)/1000);
-  if(s<60) return 'just now';
-  if(s<3600) return Math.floor(s/60)+'m ago';
-  if(s<86400) return Math.floor(s/3600)+'h ago';
-  return Math.floor(s/86400)+'d ago';
+  if(s<60)return 'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';
 }
 
 // ── SCAN LOG ──
-let logLocationFilter='', logTradeFilter='', logStatusFilter='', logDateFilter='';
+let logLocationFilter='',logTradeFilter='',logStatusFilter='',logDateFilter='';
 
 function populateScanLogFilters() {
-  const source = filtered.length ? filtered : allData;
-  const locs   = [...new Set(source.map(r=>r['Location']).filter(Boolean))].sort();
-  const trades = [...new Set(source.map(r=>r['SelectTrade']).filter(Boolean))].sort();
-  const stats  = [...new Set(source.map(r=>r['Status']).filter(Boolean))].sort();
-  const verifys= [...new Set(source.map(r=>r['VerifiedBy']).filter(Boolean))].sort();
-  const lf=document.getElementById('log-location-filter');
-  const tf=document.getElementById('log-trade-filter');
-  const sf=document.getElementById('log-status-filter');
-  const vf=document.getElementById('log-verifiedby-filter');
-  if (!lf) return;
+  const source=filtered.length?filtered:allData;
+  const locs=[...new Set(source.map(r=>r['Location']).filter(Boolean))].sort();
+  const trades=[...new Set(source.map(r=>r['SelectTrade']).filter(Boolean))].sort();
+  const stats=[...new Set(source.map(r=>r['Status']).filter(Boolean))].sort();
+  const verifys=[...new Set(source.map(r=>r['VerifiedBy']).filter(Boolean))].sort();
+  const lf=document.getElementById('log-location-filter'),tf=document.getElementById('log-trade-filter'),sf=document.getElementById('log-status-filter'),vf=document.getElementById('log-verifiedby-filter');
+  if(!lf)return;
   const curL=lf.value,curT=tf.value,curS=sf.value,curV=vf?vf.value:'';
   lf.innerHTML='<option value="">All</option>'+locs.map(l=>`<option value="${l}"${l===curL?' selected':''}>${l}</option>`).join('');
   tf.innerHTML='<option value="">All</option>'+trades.map(t=>`<option value="${t}"${t===curT?' selected':''}>${t}</option>`).join('');
   sf.innerHTML='<option value="">All</option>'+stats.map(s=>`<option value="${s}"${s===curS?' selected':''}>${s}</option>`).join('');
-  if(vf) vf.innerHTML='<option value="">All</option>'+verifys.map(v=>`<option value="${v}"${v===curV?' selected':''}>${v}</option>`).join('');
+  if(vf)vf.innerHTML='<option value="">All</option>'+verifys.map(v=>`<option value="${v}"${v===curV?' selected':''}>${v}</option>`).join('');
 }
 
 function renderScanLog() {
-  const lf=document.getElementById('log-location-filter');
-  const tf=document.getElementById('log-trade-filter');
-  const sf=document.getElementById('log-status-filter');
-  const df=document.getElementById('log-date-filter');
-  const tkf=document.getElementById('log-task-filter');
-  const vf=document.getElementById('log-verifiedby-filter');
-  if (!lf) return;
-  logLocationFilter=lf.value; logTradeFilter=tf.value; logStatusFilter=sf.value; logDateFilter=df.value;
-  const taskSearch=(tkf?.value||'').toLowerCase(), verifiedBy=vf?.value||'';
-  const now=new Date(), cutoff=logDateFilter?new Date(now-logDateFilter*86400000):null;
-  let rows=filtered
-    .filter(r=>(!logLocationFilter||r['Location']===logLocationFilter))
-    .filter(r=>(!logTradeFilter||r['SelectTrade']===logTradeFilter))
-    .filter(r=>(!logStatusFilter||r['Status']===logStatusFilter))
-    .filter(r=>(!cutoff||r._ts>=cutoff))
-    .filter(r=>(!taskSearch||(r['Task']||'').toLowerCase().includes(taskSearch)))
-    .filter(r=>(!verifiedBy||r['VerifiedBy']===verifiedBy))
-    .sort((a,b)=>b._ts-a._ts);
+  const lf=document.getElementById('log-location-filter'),tf=document.getElementById('log-trade-filter'),sf=document.getElementById('log-status-filter'),df=document.getElementById('log-date-filter'),tkf=document.getElementById('log-task-filter'),vf=document.getElementById('log-verifiedby-filter');
+  if(!lf)return;
+  logLocationFilter=lf.value;logTradeFilter=tf.value;logStatusFilter=sf.value;logDateFilter=df.value;
+  const taskSearch=(tkf?.value||'').toLowerCase(),verifiedBy=vf?.value||'';
+  const now=new Date(),cutoff=logDateFilter?new Date(now-logDateFilter*86400000):null;
+  let rows=filtered.filter(r=>(!logLocationFilter||r['Location']===logLocationFilter)).filter(r=>(!logTradeFilter||r['SelectTrade']===logTradeFilter)).filter(r=>(!logStatusFilter||r['Status']===logStatusFilter)).filter(r=>(!cutoff||r._ts>=cutoff)).filter(r=>(!taskSearch||(r['Task']||'').toLowerCase().includes(taskSearch))).filter(r=>(!verifiedBy||r['VerifiedBy']===verifiedBy)).sort((a,b)=>b._ts-a._ts);
   document.getElementById('log-count').textContent=`${rows.length} record${rows.length!==1?'s':''}`;
   const tbody=document.getElementById('log-table-body');
-  tbody.innerHTML=rows.length===0
-    ? '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">No records match the current filters</td></tr>'
-    : rows.map(r=>{
-        const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)'};
-        const ts=r._ts instanceof Date&&!isNaN(r._ts)
-          ?r._ts.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+r._ts.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}):'—';
-        return `<tr>
-          <td class="td-ts">${ts}</td>
-          <td class="td-loc">${r['Location']||'—'}</td>
-          <td class="td-trade">${r['SelectTrade']||'—'}</td>
-          <td>${r['Task']||'—'}</td>
-          <td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td>
-          <td>${r['VerifiedBy']||'—'}</td>
-          <td style="color:var(--muted);font-size:11px;">${r['Notes']||''}</td>
-          <td>${r['Photo']?`<div onclick="openPhotoModal('${r['Photo']}','${(r['Location']||'').replace(/'/g,"\\'")}','${(r['SelectTrade']||'').replace(/'/g,"\\'")}','${(r['Timestamp']||'').toString().replace(/'/g,"\\'")}' )" style="cursor:pointer;width:44px;height:44px;border-radius:4px;overflow:hidden;border:1px solid var(--border);background:var(--steel);display:flex;align-items:center;justify-content:center;" title="View photo"><img src="${r['Photo'].replace('view','preview')}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;\'>📷</span>'"></div>`:''}</td>
-        </tr>`;
-      }).join('');
+  tbody.innerHTML=rows.length===0?'<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">No records match the current filters</td></tr>':rows.map(r=>{const cfg=STATUS_CONFIG[r['Status']]||{color:'var(--muted)'};const ts=r._ts instanceof Date&&!isNaN(r._ts)?r._ts.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' '+r._ts.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}):'—';return `<tr><td class="td-ts">${ts}</td><td class="td-loc">${r['Location']||'—'}</td><td class="td-trade">${r['SelectTrade']||'—'}</td><td>${r['Task']||'—'}</td><td><span style="color:${cfg.color};font-weight:600;font-size:11px;">${r['Status']||'—'}</span></td><td>${r['VerifiedBy']||'—'}</td><td style="color:var(--muted);font-size:11px;">${r['Notes']||''}</td><td>${r['Photo']?`<div onclick="openPhotoModal('${r['Photo']}','${(r['Location']||'').replace(/'/g,"\\'")}','${(r['SelectTrade']||'').replace(/'/g,"\\'")}','${(r['Timestamp']||'').toString().replace(/'/g,"\\'")}' )" style="cursor:pointer;width:44px;height:44px;border-radius:4px;overflow:hidden;border:1px solid var(--border);background:var(--steel);display:flex;align-items:center;justify-content:center;" title="View photo"><img src="${r['Photo'].replace('view','preview')}" style="width:100%;height:100%;object-fit:cover;" onerror="this.parentElement.innerHTML='<span style=\'font-size:16px;\'>📷</span>'"></div>`:''}</td></tr>`;}).join('');
 }
 
 function clearLogFilters() {
   logLocationFilter=logTradeFilter=logStatusFilter=logDateFilter='';
   ['log-location-filter','log-trade-filter','log-status-filter','log-date-filter','log-verifiedby-filter'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  const tkf=document.getElementById('log-task-filter'); if(tkf) tkf.value='';
+  const tkf=document.getElementById('log-task-filter');if(tkf)tkf.value='';
   renderScanLog();
 }
-
 function filterLogByKPI(type) {
-  clearLogFilters();
-  const sf=document.getElementById('log-status-filter');
+  clearLogFilters();const sf=document.getElementById('log-status-filter');
   if(type==='done'&&sf){sf.value='Punch Complete';logStatusFilter='Punch Complete';}
   else if(type==='ready'&&sf){sf.value='Inspection Ready';logStatusFilter='Inspection Ready';}
-  renderScanLog();
-  document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth',block:'start'});
+  renderScanLog();document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
 function filterLogByLocation(location) {
-  clearLogFilters();
-  const lf=document.getElementById('log-location-filter');
+  clearLogFilters();const lf=document.getElementById('log-location-filter');
   if(lf){lf.value=location;logLocationFilter=location;}
-  renderScanLog();
-  document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth',block:'start'});
+  renderScanLog();document.getElementById('sec-wrap-scanlog').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 // ── PHOTO MODAL ──
 function openPhotoModal(url,location,trade,timestamp) {
-  const modal=document.getElementById('photo-modal');
-  const match=url.match(/\/file\/d\/([^\/]+)\//);
+  const modal=document.getElementById('photo-modal'),match=url.match(/\/file\/d\/([^\/]+)\//);
   document.getElementById('modal-img').src=match?'https://drive.google.com/thumbnail?id='+match[1]+'&sz=w1200':url;
   document.getElementById('modal-title').textContent=location+(trade?' · '+trade:'');
   document.getElementById('modal-meta').textContent=timestamp?new Date(timestamp).toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',hour12:true}):'';
-  document.getElementById('modal-open-link').href=url;
-  modal.classList.add('open');
+  document.getElementById('modal-open-link').href=url;modal.classList.add('open');
 }
-function closePhotoModal(e) { if(e.target===document.getElementById('photo-modal')) document.getElementById('photo-modal').classList.remove('open'); }
+function closePhotoModal(e) { if(e.target===document.getElementById('photo-modal'))document.getElementById('photo-modal').classList.remove('open'); }
 
-// ── PIN AUTH ──
-let pinEntry='', pinAttempts=0, clientPins={};
+// ── CLIENT PIN AUTH ──
+let pinEntry='',pinAttempts=0,clientPins={};
 const PIN_SESSION_KEY=()=>`vs_pin_${lockedCompany}`;
 const PIN_LOCKOUT_KEY=()=>`vs_lock_${lockedCompany}`;
-const MAX_ATTEMPTS=3, LOCKOUT_MS=5*60*1000;
+const MAX_ATTEMPTS=3,LOCKOUT_MS=5*60*1000;
 
 function pinKey(digit) {
   const lockUntil=parseInt(localStorage.getItem(PIN_LOCKOUT_KEY())||'0');
   if(Date.now()<lockUntil){showPinLockout(lockUntil);return;}
-  if(pinEntry.length>=4) return;
-  pinEntry+=digit; updatePinDots();
-  if(pinEntry.length===4) setTimeout(checkPin,120);
+  if(pinEntry.length>=4)return;
+  pinEntry+=digit;updatePinDots();
+  if(pinEntry.length===4)setTimeout(checkPin,120);
 }
-function pinDel() { pinEntry=pinEntry.slice(0,-1); updatePinDots(); document.getElementById('pin-error').textContent=''; }
+function pinDel() { pinEntry=pinEntry.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent=''; }
 function updatePinDots(state) {
   for(let i=0;i<4;i++){const dot=document.getElementById('pd'+i);dot.className='pin-dot';if(state==='error')dot.classList.add('error');else if(i<pinEntry.length)dot.classList.add('filled');}
 }
@@ -1091,10 +831,9 @@ function showPinLockout(until) { document.getElementById('pin-error').textConten
 async function checkPin() {
   const stored=clientPins[lockedCompany];
   if(!stored){grantPinAccess();return;}
-  if(pinEntry===stored.toString()){
-    pinAttempts=0; localStorage.setItem(PIN_SESSION_KEY(),Date.now()+(8*60*60*1000)); grantPinAccess();
-  } else {
-    pinAttempts++; pinEntry=''; updatePinDots('error');
+  if(pinEntry===stored.toString()){pinAttempts=0;localStorage.setItem(PIN_SESSION_KEY(),Date.now()+(8*60*60*1000));grantPinAccess();}
+  else{
+    pinAttempts++;pinEntry='';updatePinDots('error');
     if(pinAttempts>=MAX_ATTEMPTS){const lu=Date.now()+LOCKOUT_MS;localStorage.setItem(PIN_LOCKOUT_KEY(),lu);document.getElementById('pin-error').textContent='Too many attempts. Locked for 5 minutes.';}
     else{document.getElementById('pin-error').textContent=`Incorrect PIN. ${MAX_ATTEMPTS-pinAttempts} attempt${MAX_ATTEMPTS-pinAttempts!==1?'s':''} remaining.`;}
     setTimeout(()=>{updatePinDots();document.getElementById('pin-error').textContent='';},1200);
@@ -1102,11 +841,11 @@ async function checkPin() {
 }
 function grantPinAccess() { document.getElementById('pin-overlay').classList.remove('active'); }
 function checkPinSession() {
-  if(!lockedCompany) return;
+  if(!lockedCompany)return;
   const lockUntil=parseInt(localStorage.getItem(PIN_LOCKOUT_KEY())||'0');
   if(Date.now()<lockUntil){document.getElementById('pin-overlay').classList.add('active');showPinLockout(lockUntil);setInterval(()=>{const l=parseInt(localStorage.getItem(PIN_LOCKOUT_KEY())||'0');if(Date.now()>=l)location.reload();else showPinLockout(l);},1000);return;}
   const session=parseInt(localStorage.getItem(PIN_SESSION_KEY())||'0');
-  if(Date.now()<session) return;
+  if(Date.now()<session)return;
   document.getElementById('pin-overlay').classList.add('active');
 }
 
@@ -1114,8 +853,6 @@ function checkPinSession() {
 applyPrefsToDOM(loadPrefs());
 loadClients().then(async () => {
   await initURL();
-  checkPinSession();
-  loadData();
 });
 setInterval(loadData, 60000);
 setInterval(loadClients, 300000);
