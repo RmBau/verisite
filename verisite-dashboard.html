@@ -558,7 +558,7 @@ async function continueClientInit(){
   }
 
   const projectName=lockedProject||'';
-  center.innerHTML=`<div class="client-pill">&#x1F3D7;&nbsp;${companyName}${projectName?`&nbsp;<span style="color:rgba(240,174,60,.5)">|</span>&nbsp;<span style="color:var(--accent);font-weight:700">${projectName}</span>`:''}</div>`;
+  center.innerHTML=`<div class="client-pill" style="cursor:${lockedProject?'pointer':'default'}" onclick="${lockedProject?'switchClientProject()':''}" title="${lockedProject?'Switch project':''}">&#x1F3D7;&nbsp;${companyName}${projectName?`&nbsp;<span style="color:rgba(240,174,60,.5)">|</span>&nbsp;<span style="color:var(--accent);font-weight:700">${projectName}</span>&nbsp;<span style="font-size:10px;opacity:0.6">&#x21C4;</span>`:''}</div>`;
   const base=window.location.href.split('?')[0];
   let url=`${base}?company=${encodeURIComponent(lockedCompany)}`;if(lockedProject)url+=`&project=${encodeURIComponent(lockedProject)}`;
   document.getElementById('share-url-box').textContent=url;document.getElementById('share-section').style.display='block';
@@ -568,6 +568,10 @@ function selectClientProject(projectName,projectCode){
   const overlay=document.getElementById('project-select-overlay');
   if(overlay)overlay.remove();
   lockedProject=projectName;
+  continueClientInit();
+}
+function switchClientProject(){
+  lockedProject='';
   continueClientInit();
 }
 function onCompanyChange(){
