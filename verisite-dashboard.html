@@ -410,8 +410,8 @@
 <div class="pin-overlay" id="admin-pin-overlay">
   <div class="pin-box">
     <div class="pin-logo"><div class="pin-logo-badge">&#x1F510;</div><div class="pin-logo-text">VERI<span>SITE</span></div></div>
-    <div class="pin-title">Admin Access</div>
-    <div class="pin-subtitle">Enter your VeriSite admin PIN to continue.</div>
+<div class="pin-title">Dashboard Access</div>
+<div class="pin-subtitle">Enter your PIN to continue.</div>
     <div class="pin-dots"><div class="pin-dot" id="apd0"></div><div class="pin-dot" id="apd1"></div><div class="pin-dot" id="apd2"></div><div class="pin-dot" id="apd3"></div></div>
     <div class="pin-keypad">
       <button class="pin-key" onclick="adminPinKey('1')">1</button><button class="pin-key" onclick="adminPinKey('2')">2</button><button class="pin-key" onclick="adminPinKey('3')">3</button>
@@ -451,7 +451,7 @@
 
 <script>
 const WEBHOOK_URL='https://script.google.com/macros/s/AKfycbwB5LGjk61WmuEgUnHBkSuejBVHMRLaubAldaXRp6DHK_x0m5rKU8ND0n3bH3eK71oa/exec';
-const ADMIN_PIN='1234';
+const ADMIN_PIN='2009';
 const ADMIN_SESSION_KEY='vs_admin_session';
 const ADMIN_LOCKOUT_KEY='vs_admin_lock';
 const ADMIN_SESSION_HOURS=8;
@@ -515,7 +515,7 @@ async function continueAdminInit(){
   const pbc={};projects.forEach(p=>{if(!pbc[p.CompanyID])pbc[p.CompanyID]=[];pbc[p.CompanyID].push(p);});
   window._projectsByCompany=pbc;window._allProjects=projects;
   const co=Object.keys(CLIENT_NAMES).filter(id=>CLIENT_NAMES[id]).sort((a,b)=>CLIENT_NAMES[a].localeCompare(CLIENT_NAMES[b])).map(id=>`<option value="${id}">${CLIENT_NAMES[id]}</option>`).join('');
-  center.innerHTML=`<span class="admin-badge">ADMIN</span><select class="filter-pill" id="company-filter" onchange="onCompanyChange()" style="min-width:160px;"><option value="">Select Client&hellip;</option>${co}</select><select class="filter-pill" id="project-filter" onchange="onProjectChange()" style="min-width:180px;" disabled><option value="">Select Project&hellip;</option></select>`;
+  center.innerHTML=`<select class="filter-pill" id="company-filter" onchange="onCompanyChange()" style="min-width:160px;"><option value="">Select Client&hellip;</option>${co}</select><select class="filter-pill" id="project-filter" onchange="onProjectChange()" style="min-width:180px;" disabled><option value="">Select Project&hellip;</option></select>`;
   document.getElementById('select-prompt').style.display='flex';document.getElementById('dashboard-content').style.display='none';
   loadData();
 }
@@ -596,13 +596,13 @@ function showDashboard(){document.getElementById('select-prompt').style.display=
 function copyShareUrl(){const url=document.getElementById('share-url-box').textContent;navigator.clipboard.writeText(url).then(()=>{const btn=document.getElementById('copy-btn');btn.textContent='&#x2713;  Copied!';setTimeout(()=>{btn.innerHTML='&#x2398;&nbsp; Copy Client Link';},2200);});}
 function openSettings(){document.getElementById('settings-overlay').classList.add('open');document.getElementById('settings-drawer').classList.add('open');}
 function closeSettings(){document.getElementById('settings-overlay').classList.remove('open');document.getElementById('settings-drawer').classList.remove('open');}
-function exportCSV(){if(!allData||allData.length===0){alert('No data to export.');return;}const rows=filtered.length?filtered:allData;const headers=Object.keys(rows[0]||{}).filter(k=>k!=='_ts');const csvRows=rows.map(r=>headers.map(h=>`"${(r[h]||'').toString().replace(/"/g,'""')}"`).join(','));const csv=[headers.join(','),...csvRows].join('\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`verisite-${lockedProject||lockedCompany||'export'}-${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);}
+function exportCSV(){if(!allData||allData.length===0){alert('No data to export.');return;}const rows=filtered.length?filtered:allData;const headers=Object.keys(rows[0]||{}).filter(k=>k!=='_ts');const csvRows=rows.map(r=>headers.map(h=>`"${(r[h]||'').toString().replace(/"/g,'""')}"`).join(','));const csv=[headers.join(','),...csvRows].join('\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`verisite-export-${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);}
 async function loadClients(){try{const res=await fetch(`${WEBHOOK_URL}?action=getClients`);const json=await res.json();if(json.result==='success'){CLIENT_NAMES=json.clients;if(json.pins)clientPins=json.pins;}}catch(e){}}
 async function loadProjects(){try{const res=await fetch(`${WEBHOOK_URL}?action=getProjects`);const json=await res.json();if(json.result==='success')return json.projects||[];}catch(e){}return[];}
 async function loadData(){
   const btn=document.getElementById('refresh-btn');btn.classList.add('spinning');
   try{const res=await fetch(`${WEBHOOK_URL}?action=getData`);const json=await res.json();if(json.result!=='success')throw new Error('API error');allData=json.data.map(row=>({...row,_ts:new Date(row['Timestamp']||0)})).filter(r=>r._ts>new Date('2000-01-01'));applyFilters();document.getElementById('last-update').textContent='Updated '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true});document.getElementById('error-banner').style.display='none';}
-  catch(err){const b=document.getElementById('error-banner');b.textContent='&#x26A0;  Could not load data. Check connection or Apps Script deployment.';b.style.display='block';}
+  catch(err){const b=document.getElementById('error-banner');b.textContent='&#x26A0;  Could not load data. Please try again or contact support.';b.style.display='block';}
   btn.classList.remove('spinning');document.getElementById('loading-overlay').classList.add('hidden');
 }
 function applyFilters(){filtered=allData.filter(r=>(!lockedProject||r['Project']===lockedProject)&&(!lockedCompany||r['CompanyID']===lockedCompany));if(document.getElementById('dashboard-content').style.display!=='none')renderAll();}
