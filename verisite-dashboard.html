@@ -522,12 +522,53 @@ async function continueAdminInit(){
 async function continueClientInit(){
   const center=document.getElementById('header-center');
   const companyName=CLIENT_NAMES[lockedCompany]||lockedCompany;
+
+  if(!lockedProject){
+    const projects=await loadProjects();
+    const clientProjects=projects.filter(p=>p.CompanyID===lockedCompany);
+
+    if(clientProjects.length===0){
+      center.innerHTML=`<div class="client-pill">&#x1F3D7;&nbsp;${companyName}</div>`;
+      const base=window.location.href.split('?')[0];
+      const url=`${base}?company=${encodeURIComponent(lockedCompany)}`;
+      document.getElementById('share-url-box').textContent=url;
+      document.getElementById('share-section').style.display='block';
+      showDashboard();checkPinSession();loadData();
+      return;
+    }
+
+    if(clientProjects.length===1){
+      lockedProject=clientProjects[0].ProjectName||clientProjects[0].ProjectCode||'';
+    } else {
+      document.getElementById('loading-overlay').classList.add('hidden');
+      const overlay=document.createElement('div');
+      overlay.id='project-select-overlay';
+      overlay.style.cssText='position:fixed;inset:0;background:var(--navy);z-index:1500;display:flex;align-items:center;justify-content:center;flex-direction:column;';
+      const opts=clientProjects.map(p=>{
+        const name=p.ProjectName||p.ProjectCode||'';
+        const code=p.ProjectCode||'';
+        const addr=p.Address||'';
+        return `<button onclick="selectClientProject('${name.replace(/'/g,"\\'")}','${code.replace(/'/g,"\\'")}' )" style="width:100%;max-width:420px;background:var(--steel);border:1px solid var(--border);border-radius:10px;color:var(--white);font-family:'Poppins',sans-serif;padding:18px 22px;margin-bottom:10px;cursor:pointer;text-align:left;transition:border-color .15s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'"><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:1px;color:var(--white);margin-bottom:4px;">${name}</div><div style="font-size:11px;color:var(--accent);font-weight:600;letter-spacing:1px;">${code}</div>${addr?`<div style="font-size:11px;color:var(--muted);margin-top:4px;">&#x1F4CD;&nbsp;${addr}</div>`:''}</button>`;
+      }).join('');
+      overlay.innerHTML=`<div style="margin-bottom:32px;text-align:center;"><div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px;"><div style="width:40px;height:40px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;">&#x1F3D7;</div><div><div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:2px;color:var(--white);">${companyName}</div><div style="font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-top:2px;">SELECT PROJECT</div></div></div><div style="font-size:12px;color:var(--muted);margin-top:10px;">Choose a project to view its dashboard</div></div><div style="width:100%;max-width:420px;padding:0 20px;">${opts}</div>`;
+      document.body.appendChild(overlay);
+      checkPinSession();
+      return;
+    }
+  }
+
   const projectName=lockedProject||'';
   center.innerHTML=`<div class="client-pill">&#x1F3D7;&nbsp;${companyName}${projectName?`&nbsp;<span style="color:rgba(240,174,60,.5)">|</span>&nbsp;<span style="color:var(--accent);font-weight:700">${projectName}</span>`:''}</div>`;
   const base=window.location.href.split('?')[0];
   let url=`${base}?company=${encodeURIComponent(lockedCompany)}`;if(lockedProject)url+=`&project=${encodeURIComponent(lockedProject)}`;
   document.getElementById('share-url-box').textContent=url;document.getElementById('share-section').style.display='block';
   showDashboard();checkPinSession();loadData();
+}
+function selectClientProject(projectName,projectCode){
+  const overlay=document.getElementById('project-select-overlay');
+  if(overlay)overlay.remove();
+  lockedProject=projectName;
+  continueClientInit();
 }
 function onCompanyChange(){
   const cf=document.getElementById('company-filter'),pf=document.getElementById('project-filter');if(!cf||!pf)return;
