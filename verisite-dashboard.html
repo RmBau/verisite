@@ -726,7 +726,16 @@ function checkPinSession(){if(!lockedCompany)return;const lu=parseInt(localStora
 applyPrefsToDOM(loadPrefs());
 loadClients().then(async()=>{await initURL();});
 setInterval(loadData,60000);
-setInterval(loadClients,300000);
+setInapplyPrefsToDOM(loadPrefs());
+loadClients().then(async()=>{await initURL();});
+document.addEventListener('keydown',function(e){
+  const adminActive=document.getElementById('admin-pin-overlay').classList.contains('active');
+  const clientActive=document.getElementById('pin-overlay').classList.contains('active');
+  if(!adminActive&&!clientActive)return;
+  if(e.key>='0'&&e.key<='9'){if(adminActive)adminPinKey(e.key);else pinKey(e.key);}
+  if(e.key==='Backspace'){if(adminActive)adminPinDel();else pinDel();}
+  if(e.key==='Enter'){}
+});terval(loadClients,300000);
 </script>
 </body>
 </html>
