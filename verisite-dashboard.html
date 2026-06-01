@@ -726,16 +726,18 @@ function checkPinSession(){if(!lockedCompany)return;const lu=parseInt(localStora
 applyPrefsToDOM(loadPrefs());
 loadClients().then(async()=>{await initURL();});
 setInterval(loadData,60000);
-setInapplyPrefsToDOM(loadPrefs());
-loadClients().then(async()=>{await initURL();});
+setInterval(loadClients,300000);
 document.addEventListener('keydown',function(e){
-  const adminActive=document.getElementById('admin-pin-overlay').classList.contains('active');
-  const clientActive=document.getElementById('pin-overlay').classList.contains('active');
+  const adminOverlay=document.getElementById('admin-pin-overlay');
+  const clientOverlay=document.getElementById('pin-overlay');
+  const adminActive=adminOverlay&&adminOverlay.classList.contains('active');
+  const clientActive=clientOverlay&&clientOverlay.classList.contains('active');
   if(!adminActive&&!clientActive)return;
-  if(e.key>='0'&&e.key<='9'){if(adminActive)adminPinKey(e.key);else pinKey(e.key);}
-  if(e.key==='Backspace'){if(adminActive)adminPinDel();else pinDel();}
-  if(e.key==='Enter'){}
-});terval(loadClients,300000);
+  e.preventDefault();
+  const digit=e.key.replace('Numpad','');
+  if(digit>='0'&&digit<='9'){if(adminActive)adminPinKey(digit);else pinKey(digit);}
+  else if(e.key==='Backspace'||e.key==='Delete'){if(adminActive)adminPinDel();else pinDel();}
+},true);
 </script>
 </body>
 </html>
